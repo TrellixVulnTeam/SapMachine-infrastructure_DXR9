@@ -1,0 +1,5 @@
+<sun-web-app>
+  
+  <class-loader delegate="false" />
+  <parameter-encoding default-charset="UTF-8" />
+</sun-web-app>

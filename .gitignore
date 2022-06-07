@@ -1,0 +1,5 @@
+.DS_Store
+**/*.pyc
+**/*.deb
+**/.vscode
+**/jenkins_jobs.ini
