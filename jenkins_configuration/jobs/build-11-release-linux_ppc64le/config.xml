@@ -4,6 +4,9 @@
     agent {
         label "linux_ppc64le"
     }
+    environment {
+        ARTIFACTORY_CREDS = credentials('openjdk-artifactory')
+    }
     stages {
         stage("Init") {
             steps {
@@ -32,6 +35,7 @@
         dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/ppc64le"
         reuseNode true
         label "linux_ppc64le"
+        additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
 
@@ -74,6 +78,7 @@
         dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/ppc64le"
         reuseNode true
         label "linux_ppc64le"
+        additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
 
@@ -82,22 +87,20 @@
                 expression { env.VERIFICATION_RESULT != "2" &amp;&amp; !params.DEVKIT.isEmpty() }
             }
             steps {
-                withCredentials([usernamePassword(credentialsId: 'openjdk-artifactory', usernameVariable: 'ART_USER', passwordVariable: 'ART_PASSWORD')]) {
-                    script {
-                        String[] gav = params.DEVKIT.split(":");
-                        if (gav.length == 3) {
-                            echo "Extracting devkit from GAV coordinates: \"${params.DEVKIT}\"."
-                            sh("SapMachine-Infrastructure/lib/deploy-devkit.sh ${gav[0]} ${gav[1]} ${gav[2]}")
-                            env.DEVKIT_PATH = sh (
-                                script: "cd ${gav[1]}-${gav[2]} &amp;&amp; pwd",
-                                returnStdout: true
-                            ).trim()
-                        } else {
-                            echo "Devkit not in GAV notation, assuming path."
-                            env.DEVKIT_PATH = params.DEVKIT;
-                        }
-                        echo "Devkit Path: ${env.DEVKIT_PATH}"
+                script {
+                    String[] gav = params.DEVKIT.split(":");
+                    if (gav.length == 3) {
+                        echo "Extracting devkit from GAV coordinates: \"${params.DEVKIT}\"."
+                        sh("SapMachine-Infrastructure/lib/deploy-devkit.sh ${gav[0]} ${gav[1]} ${gav[2]}")
+                        env.DEVKIT_PATH = sh (
+                            script: "cd ${gav[1]}-${gav[2]} &amp;&amp; pwd",
+                            returnStdout: true
+                        ).trim()
+                    } else {
+                        echo "Devkit not in GAV notation, assuming path."
+                        env.DEVKIT_PATH = params.DEVKIT;
                     }
+                    echo "Devkit Path: ${env.DEVKIT_PATH}"
                 }
             }
         }
@@ -107,6 +110,7 @@
         dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/ppc64le"
         reuseNode true
         label "linux_ppc64le"
+        additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
 
@@ -130,6 +134,7 @@
         dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/ppc64le"
         reuseNode true
         label "linux_ppc64le"
+        additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
 
@@ -150,6 +155,7 @@
         dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/ppc64le"
         reuseNode true
         label "linux_ppc64le"
+        additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
 
@@ -167,6 +173,7 @@
         dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/ppc64le"
         reuseNode true
         label "linux_ppc64le"
+        additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
 
@@ -197,6 +204,7 @@
         dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/ppc64le"
         reuseNode true
         label "linux_ppc64le"
+        additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
 
@@ -228,6 +236,7 @@
         dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/ppc64le"
         reuseNode true
         label "linux_ppc64le"
+        additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
 
@@ -479,13 +488,13 @@
         <hudson.model.StringParameterDefinition>
           <name>DEVKIT</name>
           <description>Devkit, could be either a path that locally exists or the GAV coordinates to a tar.gz archive to be downloaded and extracted.</description>
-          <defaultValue />
+          <defaultValue>io.sapmachine.build.devkit.linux-ppc64le:devkit-fedora-gcc:21-8.3.0</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>EXTRA_CONFIGURE_OPTIONS</name>
           <description>Extra configure options passed directly to configure script.</description>
-          <defaultValue>--with-sysroot=/opt/sysroot-sles12-ppc64le --with-stdc++lib=static</defaultValue>
+          <defaultValue>--with-stdc++lib=static</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
