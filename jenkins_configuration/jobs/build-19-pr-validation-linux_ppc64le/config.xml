@@ -26,7 +26,12 @@
         }
         stage("Checkout Infrastructure Repository") {
             steps {
-                checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'SapMachine-Infrastructure']], userRemoteConfigs: [[url: 'https://github.com/SAP/SapMachine-infrastructure.git']]]
+                sh '''#!/bin/bash
+                    set -ex
+                    git init SapMachine-Infrastructure &amp;&amp; cd SapMachine-Infrastructure
+                    git fetch --depth 1 https://github.com/SAP/SapMachine-infrastructure.git master
+                    git checkout --detach FETCH_HEAD
+                '''
             }
         }
         stage("Verify PR") {
@@ -67,9 +72,13 @@
                 expression { env.VERIFICATION_RESULT != "2" }
             }
             steps {
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD']]) {
-                    sh 'SapMachine-Infrastructure/lib/checkout_repo.sh'
-                }
+                sh '''#!/bin/bash
+                    set -ex
+                    git init SapMachine &amp;&amp; cd SapMachine
+                    git remote add origin $SAPMACHINE_GIT_REPOSITORY
+                    git fetch origin $GIT_REF
+                    git checkout --detach FETCH_HEAD
+                '''
             }
         }
         stage('Prepare Devkit') {
@@ -533,7 +542,7 @@
         <hudson.model.StringParameterDefinition>
           <name>EXTRA_CONFIGURE_OPTIONS</name>
           <description>Extra configure options passed directly to configure script.</description>
-          <defaultValue>--with-stdc++lib=static</defaultValue>
+          <defaultValue />
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>

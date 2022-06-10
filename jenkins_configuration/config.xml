@@ -38,7 +38,7 @@
       <instanceCap>6</instanceCap>
       <templates>
         <hudson.plugins.ec2.SlaveTemplate>
-          <ami>ami-076d7df23af5bfe41</ami>
+          <ami>ami-058f41770c27599ca</ami>
           <description>Linux x86_64 Client</description>
           <zone>us-east-1d</zone>
           <securityGroups>JenkinsLinuxSlave</securityGroups>
@@ -47,7 +47,7 @@
           <ebsOptimized>true</ebsOptimized>
           <monitoring>false</monitoring>
           <t2Unlimited>false</t2Unlimited>
-          <labels>linux_x86_64</labels>
+          <labels>linux_x86_64 linux_alpine_x86_64</labels>
           <mode>EXCLUSIVE</mode>
           <initScript />
           <tmpDir />
@@ -156,7 +156,7 @@
           <connectUsingPublicIp>false</connectUsingPublicIp>
         </hudson.plugins.ec2.SlaveTemplate>
         <hudson.plugins.ec2.SlaveTemplate>
-          <ami>ami-001eafa42275b0474</ami>
+          <ami>ami-0f485daf4aca1a0c4</ami>
           <description>Linux aarch64 Client</description>
           <zone>us-east-1d</zone>
           <securityGroups>JenkinsLinuxSlave</securityGroups>
@@ -224,7 +224,7 @@
           <ebsOptimized>true</ebsOptimized>
           <monitoring>false</monitoring>
           <t2Unlimited>false</t2Unlimited>
-          <labels> linux_alpine_x86_64</labels>
+          <labels>ninux_alpine_x86_64</labels>
           <mode>EXCLUSIVE</mode>
           <initScript />
           <tmpDir />
@@ -684,7 +684,21 @@
     <xorMasking>true</xorMasking>
     <hoursValid>2</hoursValid>
   </crumbIssuer>
-  <nodeProperties />
+  <nodeProperties>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+  </nodeProperties>
   <globalNodeProperties />
   <nodeRenameMigrationNeeded>false</nodeRenameMigrationNeeded>
 </hudson>

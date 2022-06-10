@@ -1,36 +1,50 @@
 <hudson.plugins.ec2.EC2Slave plugin="ec2@1.68">
-  <name>EC2 (SapMachine Cloud) - Linux Alpine X86 Client (i-0549099ecdb313d06)</name>
+  <name>EC2 (SapMachine Cloud) - Linux aarch64 Client (i-0654ae08e76adb388)</name>
   <remoteFS>/home/ubuntu/client_home</remoteFS>
   <numExecutors>1</numExecutors>
   <mode>EXCLUSIVE</mode>
   <retentionStrategy class="hudson.plugins.ec2.EC2RetentionStrategy">
-    <nextCheckAfter>1654734716941</nextCheckAfter>
+    <nextCheckAfter>1654821274445</nextCheckAfter>
     <idleTerminationMinutes>10</idleTerminationMinutes>
   </retentionStrategy>
   <launcher class="hudson.plugins.ec2.ssh.EC2UnixLauncher" />
-  <label>linux_alpine_x86_64</label>
-  <nodeProperties />
-  <instanceId>i-0549099ecdb313d06</instanceId>
+  <label>linux_aarch64</label>
+  <nodeProperties>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+  </nodeProperties>
+  <instanceId>i-0654ae08e76adb388</instanceId>
   <initScript />
   <tmpDir />
   <remoteAdmin>ubuntu</remoteAdmin>
-  <templateDescription>Linux Alpine X86 Client</templateDescription>
+  <templateDescription>Linux aarch64 Client</templateDescription>
   <jvmopts />
   <stopOnTerminate>false</stopOnTerminate>
   <idleTerminationMinutes>10</idleTerminationMinutes>
-  <isConnected>false</isConnected>
+  <isConnected>true</isConnected>
   <tags class="linked-list">
     <hudson.plugins.ec2.EC2Tag>
       <name>Name</name>
-      <value>Dynamic Ubuntu 20.04 x86_64 Client</value>
+      <value>Jenkins linux aarch64 client autolaunched</value>
+    </hudson.plugins.ec2.EC2Tag>
+    <hudson.plugins.ec2.EC2Tag>
+      <name>jenkins_slave_type</name>
+      <value>demand_Linux aarch64 Client</value>
     </hudson.plugins.ec2.EC2Tag>
     <hudson.plugins.ec2.EC2Tag>
       <name>jenkins_server_url</name>
       <value>https://ci.sapmachine.io/</value>
-    </hudson.plugins.ec2.EC2Tag>
-    <hudson.plugins.ec2.EC2Tag>
-      <name>jenkins_slave_type</name>
-      <value>demand_Linux Alpine X86 Client</value>
     </hudson.plugins.ec2.EC2Tag>
   </tags>
   <cloudName>ec2-SapMachine Cloud</cloudName>
