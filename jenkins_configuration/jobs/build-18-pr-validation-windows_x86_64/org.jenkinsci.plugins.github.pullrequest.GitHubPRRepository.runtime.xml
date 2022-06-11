@@ -8,13 +8,13 @@
       <int>1141</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
         <number>1141</number>
-        <issueUpdatedAt>2022-06-04 08:02:19.0 UTC</issueUpdatedAt>
+        <issueUpdatedAt>2022-06-10 14:58:25.0 UTC</issueUpdatedAt>
         <title>SapMachine #1124: Vitals: June 22 package</title>
         <body>Still Draft, please ignore
 fixes #1124
 
 </body>
-        <prUpdatedAt>2022-06-04 08:02:19.0 UTC</prUpdatedAt>
+        <prUpdatedAt>2022-06-10 14:58:25.0 UTC</prUpdatedAt>
         <headSha>602e81b59d346d9fb2ee528435c064b931b9aaf8</headSha>
         <headRef>Vitals-June22</headRef>
         <mergeable>true</mergeable>
@@ -22,26 +22,26 @@ fixes #1124
         <userLogin>tstuefe</userLogin>
         <htmlUrl>https://github.com/SAP/SapMachine/pull/1141</htmlUrl>
         <labels />
-        <lastCommentCreatedAt>2022-06-04 08:02:18.0 UTC</lastCommentCreatedAt>
+        <lastCommentCreatedAt>2022-06-10 14:58:25.0 UTC</lastCommentCreatedAt>
         <sourceRepoOwner>tstuefe</sourceRepoOwner>
         <state>OPEN</state>
         <inBadState>false</inBadState>
       </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
     </entry>
     <entry>
-      <int>1145</int>
+      <int>1146</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-        <number>1145</number>
-        <issueUpdatedAt>2022-06-09 12:48:16.0 UTC</issueUpdatedAt>
-        <title>Merge to tag jdk-11.0.16+6</title>
+        <number>1146</number>
+        <issueUpdatedAt>2022-06-11 00:31:59.0 UTC</issueUpdatedAt>
+        <title>Merge to tag jdk-19+26</title>
         <body>please pull</body>
-        <prUpdatedAt>2022-06-09 12:48:16.0 UTC</prUpdatedAt>
-        <headSha>e683d4fc0fa15c5db07f00e7799cabbef74cfe91</headSha>
-        <headRef>pr-jdk-11.0.16+6</headRef>
+        <prUpdatedAt>2022-06-11 00:31:59.0 UTC</prUpdatedAt>
+        <headSha>59b0de6bc7064b39cdc51517dee4f4d96af3efaf</headSha>
+        <headRef>pr-jdk-19+26</headRef>
         <mergeable>true</mergeable>
-        <baseRef>sapmachine11</baseRef>
+        <baseRef>sapmachine</baseRef>
         <userLogin>SapMachine</userLogin>
-        <htmlUrl>https://github.com/SAP/SapMachine/pull/1145</htmlUrl>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1146</htmlUrl>
         <labels />
         <sourceRepoOwner>SAP</sourceRepoOwner>
         <state>OPEN</state>
