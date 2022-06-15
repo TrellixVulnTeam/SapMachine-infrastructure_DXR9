@@ -8,63 +8,49 @@
       <int>1141</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
         <number>1141</number>
-        <issueUpdatedAt>2022-06-11 05:04:26.0 UTC</issueUpdatedAt>
+        <issueUpdatedAt>2022-06-14 14:30:42.0 UTC</issueUpdatedAt>
         <title>SapMachine #1124: Vitals: June 22 package</title>
-        <body>Still Draft, please ignore
-fixes #1124
+        <body># Vitals June 22 update
 
+This is a large bulk patch, containing a number of new features and fixes which have accumulated upstream.
+
+The most important changes are related to the new cgroups support and the new Vitals high memory report facility. A lot of the new code comes from greatly expanded regression tests.
+
+## High Memory Reports
+
+SapMachine now has "high memory reports". They are only loosely connected to Vitals but combined with them in this patch to simplify logistics.
+
+In short, Vitals High Memory Reports are a early warning system to report on raising memory pressure. They are described here [1] and [2] in much more detail.
+
+The implementation lives in os/linux/vitals_linux_himemreport.cpp (since its a Linux-only feature for now).
+
+## container support
+
+Vitals now shows cgroups relevant information if the VM runs inside cgroups (which atm includes systemd). It shows:
+- memory used and memory limit
+- soft limit
+- kernel memory usage
+
+At first I had also included memory+swap usage and limit, but after some consideration I excluded those again, since I did not see these values used in typical container environments and the table became too wide; when in doubt, we can re-add them again.
+
+The cgroup support was tested and works for both cgroup v1 and v2, under Docker, bare metal, and artificially created cgroups.
+
+## A lot more tests
+
+For one, I greatly expanded the value semantical tests, testing each value for reasonability and consistency. The new HiMemReport feature comes with its own series of tests.
+
+fixes #1124
 </body>
-        <prUpdatedAt>2022-06-11 05:04:26.0 UTC</prUpdatedAt>
-        <headSha>602e81b59d346d9fb2ee528435c064b931b9aaf8</headSha>
+        <prUpdatedAt>2022-06-14 14:30:42.0 UTC</prUpdatedAt>
+        <headSha>ef2e41026aa43193d3995df676a190228e8ba718</headSha>
         <headRef>Vitals-June22</headRef>
         <mergeable>true</mergeable>
         <baseRef>sapmachine</baseRef>
         <userLogin>tstuefe</userLogin>
         <htmlUrl>https://github.com/SAP/SapMachine/pull/1141</htmlUrl>
         <labels />
-        <lastCommentCreatedAt>2022-06-11 05:04:26.0 UTC</lastCommentCreatedAt>
+        <lastCommentCreatedAt>2022-06-14 14:12:49.0 UTC</lastCommentCreatedAt>
         <sourceRepoOwner>tstuefe</sourceRepoOwner>
-        <state>OPEN</state>
-        <inBadState>false</inBadState>
-      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-    </entry>
-    <entry>
-      <int>1146</int>
-      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-        <number>1146</number>
-        <issueUpdatedAt>2022-06-13 09:28:38.0 UTC</issueUpdatedAt>
-        <title>Merge to tag jdk-19+26</title>
-        <body>please pull</body>
-        <prUpdatedAt>2022-06-13 09:28:38.0 UTC</prUpdatedAt>
-        <headSha>59b0de6bc7064b39cdc51517dee4f4d96af3efaf</headSha>
-        <headRef>pr-jdk-19+26</headRef>
-        <mergeable>true</mergeable>
-        <baseRef>sapmachine19</baseRef>
-        <userLogin>SapMachine</userLogin>
-        <htmlUrl>https://github.com/SAP/SapMachine/pull/1146</htmlUrl>
-        <labels />
-        <lastCommentCreatedAt>2022-06-11 05:01:34.0 UTC</lastCommentCreatedAt>
-        <sourceRepoOwner>SAP</sourceRepoOwner>
-        <state>OPEN</state>
-        <inBadState>false</inBadState>
-      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-    </entry>
-    <entry>
-      <int>1147</int>
-      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-        <number>1147</number>
-        <issueUpdatedAt>2022-06-13 09:27:45.0 UTC</issueUpdatedAt>
-        <title>Merge to tag jdk-20+1</title>
-        <body>please pull</body>
-        <prUpdatedAt>2022-06-13 09:27:45.0 UTC</prUpdatedAt>
-        <headSha>900d967da52afca9b239d8a58aa81b48b9fe0a78</headSha>
-        <headRef>pr-jdk-20+1</headRef>
-        <mergeable>true</mergeable>
-        <baseRef>sapmachine</baseRef>
-        <userLogin>SapMachine</userLogin>
-        <htmlUrl>https://github.com/SAP/SapMachine/pull/1147</htmlUrl>
-        <labels />
-        <sourceRepoOwner>SAP</sourceRepoOwner>
         <state>OPEN</state>
         <inBadState>false</inBadState>
       </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
