@@ -8,49 +8,189 @@
       <int>1141</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
         <number>1141</number>
-        <issueUpdatedAt>2022-06-14 14:30:42.0 UTC</issueUpdatedAt>
+        <issueUpdatedAt>2022-06-15 08:18:43.0 UTC</issueUpdatedAt>
         <title>SapMachine #1124: Vitals: June 22 package</title>
         <body># Vitals June 22 update
 
-This is a large bulk patch, containing a number of new features and fixes which have accumulated upstream.
-
-The most important changes are related to the new cgroups support and the new Vitals high memory report facility. A lot of the new code comes from greatly expanded regression tests.
+This is a larger patch collection. Contains several new features, fixes and cleanups which have accumulated upstream in my dev branch.
 
 ## High Memory Reports
 
-SapMachine now has "high memory reports". They are only loosely connected to Vitals but combined with them in this patch to simplify logistics.
+SapMachine now has "high memory reports". Briefly, high memory reports are an early warning system for impending memory pressure. Too large to describe it here; please see [1] for more detail.
 
-In short, Vitals High Memory Reports are a early warning system to report on raising memory pressure. They are described here [1] and [2] in much more detail.
+Implementation lives in vitals_linux_himemreport.cpp (its Linux only for now). Note that this feature, albeit running under "Vitals", has little to do with the Vitals proper. It uses an own monitoring thread. The only common code is the proc fs parsing code on Linux.
 
-The implementation lives in os/linux/vitals_linux_himemreport.cpp (since its a Linux-only feature for now).
+## Container support
 
-## container support
+Vitals now shows cgroups relevant information if the VM is containerized (more correclty, if it runs inside a memory cgroup with limits, so that may include systemd-based physical machines). It shows memory usage, memory limit, soft limit, kernel memory usage. It works for both v1 and v2 cgroups.
 
-Vitals now shows cgroups relevant information if the VM runs inside cgroups (which atm includes systemd). It shows:
-- memory used and memory limit
-- soft limit
-- kernel memory usage
+Debated with myself whether to include memory+swap usage and limit, but decided against it, since it rarely is used and its meaning differs between cgroups v1 and v2.
 
-At first I had also included memory+swap usage and limit, but after some consideration I excluded those again, since I did not see these values used in typical container environments and the table became too wide; when in doubt, we can re-add them again.
+Example output:
 
-The cgroup support was tested and works for both cgroup v1 and v2, under Docker, bare metal, and artificially created cgroups.
+```
+...
+      cgroup-lim: cgroup memory limit [cgrp]
+     cgroup-slim: cgroup memory soft limit [cgrp]
+      cgroup-usg: cgroup memory usage [cgrp]
+     cgroup-kusg: cgroup kernel memory usage (cgroup v1 only) [cgrp]
+...
+---------------------------------system---------------------------------
+                                      -----cpu------ ------cgroup-------
+avail comm  crt swap si so p t  tr tb us sy id st gu lim  slim usg  kusg  
+54.3g 19.3g  57   0k  0  0 2 22  1  0  1  0 99  0  0 8.0g      120m   2m
+54.3g 19.3g  57   0k  0  0 2 22  1  0  1  0 99  0  0 8.0g      120m   2m 
+54.3g 19.3g  57   0k  0  0 2 22  1  0  1  0 99  0  0 8.0g      120m   2m
+54.3g 19.3g  57   0k  0  0 2 22  3  0  1  0 99  0  0 8.0g      119m   2m
+54.3g 19.3g  57   0k       2 17  2  0                8.0g       65m   2m
 
-## A lot more tests
+                                                      ^     ^    ^     ^
+```
 
-For one, I greatly expanded the value semantical tests, testing each value for reasonability and consistency. The new HiMemReport feature comes with its own series of tests.
+cgroup support was tested and works for both cgroup v1 and v2, under Docker, bare metal, and in artificially created cgroups.
 
+## NMT value printout
+
+Vitals now shows more NMT values (arbitrarily chosen among the many NMT categories because they came up as questions in support cases with Andreas):
+
+- "gc" : GC overhead that is *not* heap
+- "oth" : aka "other" (name of the NMT category): Outside memory, typically DirectByteBuffer memory
+- "ovh" : Overhead of NMT itself (can be significant)
+
+Example:
+
+```
+...
+         nmt-mlc: Memory malloced by hotspot [nmt]
+         nmt-map: Memory mapped by hotspot [nmt]
+          nmt-gc: NMT "gc" (GC-overhead, malloc and mmap) [nmt]
+         nmt-oth: NMT "other" (typically DBB or Unsafe.allocateMemory) [nmt]
+         nmt-ovh: NMT overhead [nmt]
+...
+-----------------------------------------------jvm------------------------------------------------
+--heap--- ----------meta----------      ---------nmt--------- -----jthr----- --cldg-- ----cls-----
+comm used comm used csc  csu  gctr code mlc map  gc  oth ovh  num nd cr st   num anon num  ld  uld 
+130m   7m   3m   3m 320k 229k  21m   8m 43m 193m 75m  2k 992k  12  1  0 952k  34   31 1341   0   0 
+130m   7m   3m   3m 320k 229k  21m   8m 43m 193m 75m  2k 992k  12  1  0 952k  34   31 1341   0   0 
+130m   7m   3m   3m 320k 229k  21m   8m 43m 193m 75m  2k 992k  12  1  1 952k  34   31 1341   0   0 
+130m   7m   3m   3m 320k 229k  21m   8m 43m 193m 75m  2k 992k  12  1  5 852k  34   31 1341 862   0 
+130m   2m 128k  54k  64k  &lt;1k  21m   7m 41m 189m 75m  0k 223k   9  1    612k   3    0  479         
+                                        
+                                                 ^    ^  ^              
+```
+
+
+## Fixed display of empty columns in Vitals table
+
+Many columns depend on context. E.g. NMT values are shown only if NMT is on, many system values only if the kernel supports them etc. It was confusing for users, since these columns were omitted ("where are my NMT values?"). OTOH, displaying all columns and leaving them empty is a waste of horizontal space.
+
+Vitals now omit columns that have no values, but will still show them in the legend. Additionally, legend clearly marks which columns are context dependend.
+
+Example:
+```
+          cpu-us: CPU user time [host]
+          cpu-sy: CPU system time [host]
+          cpu-id: CPU idle time [host]
+          cpu-st: CPU time stolen [host]
+          cpu-gu: CPU time spent on guest [host]
+      cgroup-lim: cgroup memory limit [cgrp]
+     cgroup-slim: cgroup memory soft limit [cgrp]
+      cgroup-usg: cgroup memory usage [cgrp]
+     cgroup-kusg: cgroup kernel memory usage (cgroup v1 only) [cgrp]
+-----------process------------
+            virt: Virtual size
+         rss-all: Resident set size, total
+        rss-anon: Resident set size, anonymous memory [krn]
+        rss-file: Resident set size, file mappings [krn]
+         rss-shm: Resident set size, shared memory [krn]
+            swdo: Memory swapped out
+       cheap-usd: C-Heap, in-use allocations (may be unavailable if RSS &gt; 4G) [glibc]
+      cheap-free: C-Heap, bytes in free blocks (may be unavailable if RSS &gt; 4G) [glibc]
+...
+   [host]: values are host-global (not containerized).
+   [cgrp]: if containerized or running in systemd slice
+    [krn]: depends on kernel version
+   [glibc]: only shown for glibc-based distros
+  [delta]: values refer to the previous measurement.
+    [nmt]: only shown if NMT is available and activated
+     [cs]: only shown on 64-bit if class space is active
+  [linux]: only on Linux
+```
+
+## Expanded regression tests
+
+Regression tests have been expanded again, a lot this time. Specifically, we now have `VitalsValuesSanityCheck.java`, a test that does sanity checks on all values Vitals prints out. There is a lot of heuristics in there.
+
+The high memory report feature comes with its own set of regression tests (`TestHiMemReportXXX.java`).
+
+
+## Code restructuring
+
+I tried to avoid core refactoring, but some was needed. In particular, on linux, proc fs parsing moved from vitals_linux.cpp to vitals_oswrapper.cpp, into an own buffering helper class. Needed because that layer is now used by the Vitals proper as well as the high memory sampler thread.
+
+## Bug Fixes:
+
+- Fixed a bug that causes VM to crash if we shutdown NMT early (#1148)
+- Fixed names, legend of "processes running" and "processes blocked" columns. These values are really (kernel) threads, not processes.
+- Fixed errors on newer glibc's (&gt;2.24) where `mallinfo2` exists and `mallinfo` is marked as obsolete (we now resolve both functions dynamically).
+- Fixed display of C-heap used memory for 32-bit platforms
+
+## Other things:
+
+- Vitals are now versionized themselves.
+- Vitals now use UL logging, consistently, during initialization (-Xlog:vitals).
+
+fixes #1148
 fixes #1124
 </body>
-        <prUpdatedAt>2022-06-14 14:30:42.0 UTC</prUpdatedAt>
-        <headSha>ef2e41026aa43193d3995df676a190228e8ba718</headSha>
+        <prUpdatedAt>2022-06-15 08:18:43.0 UTC</prUpdatedAt>
+        <headSha>9510eef5d6fdd5045619a3ff2d3cdabceb146141</headSha>
         <headRef>Vitals-June22</headRef>
         <mergeable>true</mergeable>
         <baseRef>sapmachine</baseRef>
         <userLogin>tstuefe</userLogin>
         <htmlUrl>https://github.com/SAP/SapMachine/pull/1141</htmlUrl>
         <labels />
-        <lastCommentCreatedAt>2022-06-14 14:12:49.0 UTC</lastCommentCreatedAt>
+        <lastCommentCreatedAt>2022-06-15 07:24:39.0 UTC</lastCommentCreatedAt>
         <sourceRepoOwner>tstuefe</sourceRepoOwner>
+        <state>OPEN</state>
+        <inBadState>false</inBadState>
+      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+    </entry>
+    <entry>
+      <int>1149</int>
+      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+        <number>1149</number>
+        <issueUpdatedAt>2022-06-16 00:30:35.0 UTC</issueUpdatedAt>
+        <title>Merge to tag jdk-17.0.4+7</title>
+        <body>please pull</body>
+        <prUpdatedAt>2022-06-16 00:30:35.0 UTC</prUpdatedAt>
+        <headSha>84ac0f0de4556472c61a775abd812302765a3395</headSha>
+        <headRef>pr-jdk-17.0.4+7</headRef>
+        <baseRef>sapmachine17</baseRef>
+        <userLogin>SapMachine</userLogin>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1149</htmlUrl>
+        <labels />
+        <sourceRepoOwner>SAP</sourceRepoOwner>
+        <state>OPEN</state>
+        <inBadState>false</inBadState>
+      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+    </entry>
+    <entry>
+      <int>1150</int>
+      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+        <number>1150</number>
+        <issueUpdatedAt>2022-06-16 00:30:51.0 UTC</issueUpdatedAt>
+        <title>Merge to tag jdk-11.0.16+7</title>
+        <body>please pull</body>
+        <prUpdatedAt>2022-06-16 00:30:51.0 UTC</prUpdatedAt>
+        <headSha>1dd942d3541431b21403f39b4cc5943271b59801</headSha>
+        <headRef>pr-jdk-11.0.16+7</headRef>
+        <baseRef>sapmachine11</baseRef>
+        <userLogin>SapMachine</userLogin>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1150</htmlUrl>
+        <labels />
+        <sourceRepoOwner>SAP</sourceRepoOwner>
         <state>OPEN</state>
         <inBadState>false</inBadState>
       </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>

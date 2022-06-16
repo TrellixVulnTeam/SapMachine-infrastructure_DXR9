@@ -1,14 +1,14 @@
 <hudson.plugins.ec2.EC2Slave plugin="ec2@1.68">
-  <name>EC2 (SapMachine Cloud) - Linux aarch64 Client (i-0d418a1f5127a9757)</name>
-  <remoteFS>/home/ubuntu/client_home</remoteFS>
+  <name>EC2 (SapMachine Cloud) - Windows Client (i-09ddc0816e7764bbe)</name>
+  <remoteFS>C:\jenkins_work</remoteFS>
   <numExecutors>1</numExecutors>
   <mode>EXCLUSIVE</mode>
   <retentionStrategy class="hudson.plugins.ec2.EC2RetentionStrategy">
-    <nextCheckAfter>1655253155302</nextCheckAfter>
-    <idleTerminationMinutes>10</idleTerminationMinutes>
+    <nextCheckAfter>1655339675293</nextCheckAfter>
+    <idleTerminationMinutes>30</idleTerminationMinutes>
   </retentionStrategy>
   <launcher class="hudson.plugins.ec2.ssh.EC2UnixLauncher" />
-  <label>linux_aarch64</label>
+  <label>windows_x86_64</label>
   <nodeProperties>
     <hudson.slaves.EnvironmentVariablesNodeProperty>
       <envVars serialization="custom">
@@ -24,27 +24,27 @@
       </envVars>
     </hudson.slaves.EnvironmentVariablesNodeProperty>
   </nodeProperties>
-  <instanceId>i-0d418a1f5127a9757</instanceId>
+  <instanceId>i-09ddc0816e7764bbe</instanceId>
   <initScript />
-  <tmpDir />
-  <remoteAdmin>ubuntu</remoteAdmin>
-  <templateDescription>Linux aarch64 Client</templateDescription>
+  <tmpDir>C:\temp</tmpDir>
+  <remoteAdmin>jenkins</remoteAdmin>
+  <templateDescription>Windows Client</templateDescription>
   <jvmopts />
   <stopOnTerminate>false</stopOnTerminate>
-  <idleTerminationMinutes>10</idleTerminationMinutes>
+  <idleTerminationMinutes>30</idleTerminationMinutes>
   <isConnected>true</isConnected>
   <tags class="linked-list">
     <hudson.plugins.ec2.EC2Tag>
-      <name>jenkins_slave_type</name>
-      <value>demand_Linux aarch64 Client</value>
-    </hudson.plugins.ec2.EC2Tag>
-    <hudson.plugins.ec2.EC2Tag>
       <name>Name</name>
-      <value>Jenkins linux aarch64 client autolaunched</value>
+      <value>Dynamic Windows Client</value>
     </hudson.plugins.ec2.EC2Tag>
     <hudson.plugins.ec2.EC2Tag>
       <name>jenkins_server_url</name>
       <value>https://ci.sapmachine.io/</value>
+    </hudson.plugins.ec2.EC2Tag>
+    <hudson.plugins.ec2.EC2Tag>
+      <name>jenkins_slave_type</name>
+      <value>demand_Windows Client</value>
     </hudson.plugins.ec2.EC2Tag>
   </tags>
   <cloudName>ec2-SapMachine Cloud</cloudName>
@@ -60,5 +60,5 @@
   <metadataEndpointEnabled>true</metadataEndpointEnabled>
   <metadataTokensRequired>false</metadataTokensRequired>
   <metadataHopsLimit>1</metadataHopsLimit>
-  <launchTimeout>2147483647</launchTimeout>
+  <launchTimeout>600</launchTimeout>
 </hudson.plugins.ec2.EC2Slave>

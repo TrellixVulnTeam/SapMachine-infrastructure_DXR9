@@ -1,10 +1,10 @@
 <hudson.plugins.ec2.EC2Slave plugin="ec2@1.68">
-  <name>EC2 (SapMachine Cloud) - Windows Client (i-000f01feaf507e2df)</name>
+  <name>EC2 (SapMachine Cloud) - Windows Client (i-02e51ff0277bc722e)</name>
   <remoteFS>C:\jenkins_work</remoteFS>
   <numExecutors>1</numExecutors>
   <mode>EXCLUSIVE</mode>
   <retentionStrategy class="hudson.plugins.ec2.EC2RetentionStrategy">
-    <nextCheckAfter>1655253275241</nextCheckAfter>
+    <nextCheckAfter>1655339675241</nextCheckAfter>
     <idleTerminationMinutes>30</idleTerminationMinutes>
   </retentionStrategy>
   <launcher class="hudson.plugins.ec2.ssh.EC2UnixLauncher" />
@@ -24,7 +24,7 @@
       </envVars>
     </hudson.slaves.EnvironmentVariablesNodeProperty>
   </nodeProperties>
-  <instanceId>i-000f01feaf507e2df</instanceId>
+  <instanceId>i-02e51ff0277bc722e</instanceId>
   <initScript />
   <tmpDir>C:\temp</tmpDir>
   <remoteAdmin>jenkins</remoteAdmin>
