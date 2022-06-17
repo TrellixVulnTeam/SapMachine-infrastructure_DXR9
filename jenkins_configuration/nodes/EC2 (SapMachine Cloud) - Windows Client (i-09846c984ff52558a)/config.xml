@@ -1,14 +1,14 @@
 <hudson.plugins.ec2.EC2Slave plugin="ec2@1.68">
-  <name>EC2 (SapMachine Cloud) - Linux x86_64 Client (i-00f8024708ebc49b4)</name>
-  <remoteFS>/home/ubuntu/client_home</remoteFS>
+  <name>EC2 (SapMachine Cloud) - Windows Client (i-09846c984ff52558a)</name>
+  <remoteFS>C:\jenkins_work</remoteFS>
   <numExecutors>1</numExecutors>
   <mode>EXCLUSIVE</mode>
   <retentionStrategy class="hudson.plugins.ec2.EC2RetentionStrategy">
-    <nextCheckAfter>1655339555361</nextCheckAfter>
-    <idleTerminationMinutes>10</idleTerminationMinutes>
+    <nextCheckAfter>1655426135241</nextCheckAfter>
+    <idleTerminationMinutes>30</idleTerminationMinutes>
   </retentionStrategy>
   <launcher class="hudson.plugins.ec2.ssh.EC2UnixLauncher" />
-  <label>linux_x86_64 linux_alpine_x86_64</label>
+  <label>windows_x86_64</label>
   <nodeProperties>
     <hudson.slaves.EnvironmentVariablesNodeProperty>
       <envVars serialization="custom">
@@ -24,19 +24,19 @@
       </envVars>
     </hudson.slaves.EnvironmentVariablesNodeProperty>
   </nodeProperties>
-  <instanceId>i-00f8024708ebc49b4</instanceId>
+  <instanceId>i-09846c984ff52558a</instanceId>
   <initScript />
-  <tmpDir />
-  <remoteAdmin>ubuntu</remoteAdmin>
-  <templateDescription>Linux x86_64 Client</templateDescription>
+  <tmpDir>C:\temp</tmpDir>
+  <remoteAdmin>jenkins</remoteAdmin>
+  <templateDescription>Windows Client</templateDescription>
   <jvmopts />
   <stopOnTerminate>false</stopOnTerminate>
-  <idleTerminationMinutes>10</idleTerminationMinutes>
+  <idleTerminationMinutes>30</idleTerminationMinutes>
   <isConnected>true</isConnected>
   <tags class="linked-list">
     <hudson.plugins.ec2.EC2Tag>
       <name>jenkins_slave_type</name>
-      <value>demand_Linux x86_64 Client</value>
+      <value>demand_Windows Client</value>
     </hudson.plugins.ec2.EC2Tag>
     <hudson.plugins.ec2.EC2Tag>
       <name>jenkins_server_url</name>
@@ -44,7 +44,7 @@
     </hudson.plugins.ec2.EC2Tag>
     <hudson.plugins.ec2.EC2Tag>
       <name>Name</name>
-      <value>Dynamic Linux x86_64 Client</value>
+      <value>Dynamic Windows Client</value>
     </hudson.plugins.ec2.EC2Tag>
   </tags>
   <cloudName>ec2-SapMachine Cloud</cloudName>
@@ -57,8 +57,9 @@
   </amiType>
   <maxTotalUses>-1</maxTotalUses>
   <tenancy>Default</tenancy>
+  <instanceType>m5.4xlarge</instanceType>
   <metadataEndpointEnabled>true</metadataEndpointEnabled>
   <metadataTokensRequired>false</metadataTokensRequired>
   <metadataHopsLimit>1</metadataHopsLimit>
-  <launchTimeout>2147483647</launchTimeout>
+  <launchTimeout>600</launchTimeout>
 </hudson.plugins.ec2.EC2Slave>
