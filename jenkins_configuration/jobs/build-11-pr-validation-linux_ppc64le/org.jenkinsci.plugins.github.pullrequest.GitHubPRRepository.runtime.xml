@@ -28,11 +28,13 @@
       <int>1141</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
         <number>1141</number>
-        <issueUpdatedAt>2022-06-15 08:18:43.0 UTC</issueUpdatedAt>
+        <issueUpdatedAt>2022-06-17 15:39:45.0 UTC</issueUpdatedAt>
         <title>SapMachine #1124: Vitals: June 22 package</title>
         <body># Vitals June 22 update
 
 This is a larger patch collection. Contains several new features, fixes and cleanups which have accumulated upstream in my dev branch.
+
+(Note: a (still) bare-boned documentation exists now at https://github.com/SAP/SapMachine/wiki/SapMachine-Vitals).
 
 ## High Memory Reports
 
@@ -160,18 +162,22 @@ I tried to avoid core refactoring, but some was needed. In particular, on linux,
 - Vitals are now versionized themselves.
 - Vitals now use UL logging, consistently, during initialization (-Xlog:vitals).
 
+[1] https://github.com/SAP/SapMachine/wiki/SapMachine-High-Memory-Reports
+[2] [Vitals Documentation](https://github.com/SAP/SapMachine/wiki/SapMachine-Vitals)
+
+
 fixes #1148
 fixes #1124
 </body>
-        <prUpdatedAt>2022-06-15 08:18:43.0 UTC</prUpdatedAt>
-        <headSha>9510eef5d6fdd5045619a3ff2d3cdabceb146141</headSha>
+        <prUpdatedAt>2022-06-17 15:39:45.0 UTC</prUpdatedAt>
+        <headSha>4941ffff33891ce9ff97740b3cfae0985470c81e</headSha>
         <headRef>Vitals-June22</headRef>
         <mergeable>true</mergeable>
         <baseRef>sapmachine</baseRef>
         <userLogin>tstuefe</userLogin>
         <htmlUrl>https://github.com/SAP/SapMachine/pull/1141</htmlUrl>
         <labels />
-        <lastCommentCreatedAt>2022-06-15 07:24:39.0 UTC</lastCommentCreatedAt>
+        <lastCommentCreatedAt>2022-06-17 12:36:19.0 UTC</lastCommentCreatedAt>
         <sourceRepoOwner>tstuefe</sourceRepoOwner>
         <state>OPEN</state>
         <inBadState>false</inBadState>
