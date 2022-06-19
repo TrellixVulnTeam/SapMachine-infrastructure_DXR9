@@ -28,17 +28,17 @@
       <int>1141</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
         <number>1141</number>
-        <issueUpdatedAt>2022-06-17 15:39:45.0 UTC</issueUpdatedAt>
+        <issueUpdatedAt>2022-06-18 04:53:56.0 UTC</issueUpdatedAt>
         <title>SapMachine #1124: Vitals: June 22 package</title>
         <body># Vitals June 22 update
 
 This is a larger patch collection. Contains several new features, fixes and cleanups which have accumulated upstream in my dev branch.
 
-(Note: a (still) bare-boned documentation exists now at https://github.com/SAP/SapMachine/wiki/SapMachine-Vitals).
+(Note: a documentation for the Vitals now exists at https://github.com/SAP/SapMachine/wiki/SapMachine-Vitals).
 
 ## High Memory Reports
 
-SapMachine now has "high memory reports". Briefly, high memory reports are an early warning system for impending memory pressure. Too large to describe it here; please see [1] for more detail.
+SapMachine now has "high memory reports". Briefly, high memory reports are an early warning system for impending memory pressure. Too large to describe it here; please see https://github.com/SAP/SapMachine/wiki/SapMachine-High-Memory-Reports for more detail.
 
 Implementation lives in vitals_linux_himemreport.cpp (its Linux only for now). Note that this feature, albeit running under "Vitals", has little to do with the Vitals proper. It uses an own monitoring thread. The only common code is the proc fs parsing code on Linux.
 
@@ -169,7 +169,7 @@ I tried to avoid core refactoring, but some was needed. In particular, on linux,
 fixes #1148
 fixes #1124
 </body>
-        <prUpdatedAt>2022-06-17 15:39:45.0 UTC</prUpdatedAt>
+        <prUpdatedAt>2022-06-18 04:53:56.0 UTC</prUpdatedAt>
         <headSha>4941ffff33891ce9ff97740b3cfae0985470c81e</headSha>
         <headRef>Vitals-June22</headRef>
         <mergeable>true</mergeable>
