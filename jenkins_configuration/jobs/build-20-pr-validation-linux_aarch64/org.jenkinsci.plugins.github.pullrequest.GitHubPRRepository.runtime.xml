@@ -167,13 +167,13 @@ fixes #1124
       <int>1151</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
         <number>1151</number>
-        <issueUpdatedAt>2022-06-17 00:31:42.0 UTC</issueUpdatedAt>
+        <issueUpdatedAt>2022-06-22 09:37:19.0 UTC</issueUpdatedAt>
         <title>Merge to tag jdk-20+2</title>
         <body>please pull</body>
-        <prUpdatedAt>2022-06-17 00:31:42.0 UTC</prUpdatedAt>
-        <headSha>fe807217a79753f84c00432e7451c17baa6645c5</headSha>
+        <prUpdatedAt>2022-06-22 09:37:19.0 UTC</prUpdatedAt>
+        <headSha>2d271e2301ebd3ac533932a32ffa7b34754a2d75</headSha>
         <headRef>pr-jdk-20+2</headRef>
-        <mergeable>false</mergeable>
+        <mergeable>true</mergeable>
         <baseRef>sapmachine</baseRef>
         <userLogin>SapMachine</userLogin>
         <htmlUrl>https://github.com/SAP/SapMachine/pull/1151</htmlUrl>
