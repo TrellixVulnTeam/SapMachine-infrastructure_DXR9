@@ -1,10 +1,10 @@
 <hudson.plugins.ec2.EC2Slave plugin="ec2@1.68">
-  <name>EC2 (SapMachine Cloud) - Linux x86_64 Client (i-04589dcf7d2502345)</name>
+  <name>EC2 (SapMachine Cloud) - Linux x86_64 Client (i-0fed7ba0487eadbd8)</name>
   <remoteFS>/home/ubuntu/client_home</remoteFS>
   <numExecutors>1</numExecutors>
   <mode>EXCLUSIVE</mode>
   <retentionStrategy class="hudson.plugins.ec2.EC2RetentionStrategy">
-    <nextCheckAfter>1656033635240</nextCheckAfter>
+    <nextCheckAfter>1656117110940</nextCheckAfter>
     <idleTerminationMinutes>10</idleTerminationMinutes>
   </retentionStrategy>
   <launcher class="hudson.plugins.ec2.ssh.EC2UnixLauncher" />
@@ -23,47 +23,8 @@
         </tree-map>
       </envVars>
     </hudson.slaves.EnvironmentVariablesNodeProperty>
-    <hudson.slaves.EnvironmentVariablesNodeProperty>
-      <envVars serialization="custom">
-        <unserializable-parents />
-        <tree-map>
-          <default>
-            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
-          </default>
-          <int>1</int>
-          <string>MAVEN_OPTS</string>
-          <string />
-        </tree-map>
-      </envVars>
-    </hudson.slaves.EnvironmentVariablesNodeProperty>
-    <hudson.slaves.EnvironmentVariablesNodeProperty>
-      <envVars serialization="custom">
-        <unserializable-parents />
-        <tree-map>
-          <default>
-            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
-          </default>
-          <int>1</int>
-          <string>MAVEN_OPTS</string>
-          <string />
-        </tree-map>
-      </envVars>
-    </hudson.slaves.EnvironmentVariablesNodeProperty>
-    <hudson.slaves.EnvironmentVariablesNodeProperty>
-      <envVars serialization="custom">
-        <unserializable-parents />
-        <tree-map>
-          <default>
-            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
-          </default>
-          <int>1</int>
-          <string>MAVEN_OPTS</string>
-          <string />
-        </tree-map>
-      </envVars>
-    </hudson.slaves.EnvironmentVariablesNodeProperty>
   </nodeProperties>
-  <instanceId>i-04589dcf7d2502345</instanceId>
+  <instanceId>i-0fed7ba0487eadbd8</instanceId>
   <initScript />
   <tmpDir />
   <remoteAdmin>ubuntu</remoteAdmin>
@@ -74,12 +35,12 @@
   <isConnected>true</isConnected>
   <tags class="linked-list">
     <hudson.plugins.ec2.EC2Tag>
-      <name>jenkins_server_url</name>
-      <value>https://ci.sapmachine.io/</value>
-    </hudson.plugins.ec2.EC2Tag>
-    <hudson.plugins.ec2.EC2Tag>
       <name>Name</name>
       <value>Dynamic Linux x86_64 Client</value>
+    </hudson.plugins.ec2.EC2Tag>
+    <hudson.plugins.ec2.EC2Tag>
+      <name>jenkins_server_url</name>
+      <value>https://ci.sapmachine.io/</value>
     </hudson.plugins.ec2.EC2Tag>
     <hudson.plugins.ec2.EC2Tag>
       <name>jenkins_slave_type</name>
@@ -96,7 +57,6 @@
   </amiType>
   <maxTotalUses>-1</maxTotalUses>
   <tenancy>Default</tenancy>
-  <instanceType>m5.4xlarge</instanceType>
   <metadataEndpointEnabled>true</metadataEndpointEnabled>
   <metadataTokensRequired>false</metadataTokensRequired>
   <metadataHopsLimit>1</metadataHopsLimit>

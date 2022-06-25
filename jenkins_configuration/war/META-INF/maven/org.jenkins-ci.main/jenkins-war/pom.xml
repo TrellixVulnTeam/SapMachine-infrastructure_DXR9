@@ -2,7 +2,7 @@
   <ns0:modelVersion>4.0.0</ns0:modelVersion>
   <ns0:groupId>org.jenkins-ci.main</ns0:groupId>
   <ns0:artifactId>jenkins-war</ns0:artifactId>
-  <ns0:version>2.332.3</ns0:version>
+  <ns0:version>2.346.1</ns0:version>
   <ns0:packaging>war</ns0:packaging>
   <ns0:name>Jenkins war</ns0:name>
   <ns0:description>Creates a war file. Also includes additional static web resources, such as images, CSS, JavaScript, and some HTML files.</ns0:description>
@@ -54,11 +54,11 @@
       <ns0:archive>http://jenkinsci.361315.n4.nabble.com/Jenkins-ja-f361157.html</ns0:archive>
     </ns0:mailingList>
   </ns0:mailingLists>
-  <ns0:scm>
-    <ns0:connection>scm:git:git://github.com/jenkinsci/jenkins.git/jenkins-war</ns0:connection>
-    <ns0:developerConnection>scm:git:ssh://git@github.com/jenkinsci/jenkins.git/jenkins-war</ns0:developerConnection>
-    <ns0:tag>jenkins-2.332.3</ns0:tag>
-    <ns0:url>https://github.com/jenkinsci/jenkins/jenkins-war</ns0:url>
+  <ns0:scm child.scm.connection.inherit.append.path="false" child.scm.developerConnection.inherit.append.path="false" child.scm.url.inherit.append.path="false">
+    <ns0:connection>scm:git:https://github.com/jenkinsci/jenkins.git</ns0:connection>
+    <ns0:developerConnection>scm:git:git@github.com:jenkinsci/jenkins.git</ns0:developerConnection>
+    <ns0:tag>jenkins-2.346.1</ns0:tag>
+    <ns0:url>https://github.com/jenkinsci/jenkins</ns0:url>
   </ns0:scm>
   <ns0:issueManagement>
     <ns0:system>jira</ns0:system>
@@ -80,17 +80,27 @@
   </ns0:distributionManagement>
   <ns0:dependencies>
     <ns0:dependency>
-      <ns0:groupId>org.jenkins-ci</ns0:groupId>
-      <ns0:artifactId>executable-war</ns0:artifactId>
-      <ns0:version>2.3</ns0:version>
-      <ns0:scope>provided</ns0:scope>
+      <ns0:groupId>org.jenkins-ci.main</ns0:groupId>
+      <ns0:artifactId>cli</ns0:artifactId>
+      <ns0:version>2.346.1</ns0:version>
+      <ns0:scope>compile</ns0:scope>
+    </ns0:dependency>
+    <ns0:dependency>
+      <ns0:groupId>org.jenkins-ci.main</ns0:groupId>
+      <ns0:artifactId>remoting</ns0:artifactId>
+      <ns0:version>4.13.2</ns0:version>
+      <ns0:scope>compile</ns0:scope>
     </ns0:dependency>
     <ns0:dependency>
       <ns0:groupId>org.jenkins-ci.main</ns0:groupId>
       <ns0:artifactId>jenkins-core</ns0:artifactId>
-      <ns0:version>2.332.3</ns0:version>
+      <ns0:version>2.346.1</ns0:version>
       <ns0:scope>compile</ns0:scope>
       <ns0:exclusions>
+        <ns0:exclusion>
+          <ns0:groupId>com.google.code.findbugs</ns0:groupId>
+          <ns0:artifactId>jsr305</ns0:artifactId>
+        </ns0:exclusion>
         <ns0:exclusion>
           <ns0:groupId>javax.servlet.jsp</ns0:groupId>
           <ns0:artifactId>javax.servlet.jsp-api</ns0:artifactId>
@@ -99,40 +109,12 @@
           <ns0:groupId>org.kohsuke.metainf-services</ns0:groupId>
           <ns0:artifactId>metainf-services</ns0:artifactId>
         </ns0:exclusion>
-        <ns0:exclusion>
-          <ns0:groupId>com.google.code.findbugs</ns0:groupId>
-          <ns0:artifactId>jsr305</ns0:artifactId>
-        </ns0:exclusion>
       </ns0:exclusions>
-    </ns0:dependency>
-    <ns0:dependency>
-      <ns0:groupId>org.jenkins-ci.main</ns0:groupId>
-      <ns0:artifactId>remoting</ns0:artifactId>
-      <ns0:version>4.13</ns0:version>
-      <ns0:scope>compile</ns0:scope>
-    </ns0:dependency>
-    <ns0:dependency>
-      <ns0:groupId>org.jenkins-ci.main</ns0:groupId>
-      <ns0:artifactId>cli</ns0:artifactId>
-      <ns0:version>2.332.3</ns0:version>
-      <ns0:scope>compile</ns0:scope>
     </ns0:dependency>
     <ns0:dependency>
       <ns0:groupId>org.jenkins-ci.modules</ns0:groupId>
       <ns0:artifactId>instance-identity</ns0:artifactId>
       <ns0:version>2.2</ns0:version>
-      <ns0:scope>compile</ns0:scope>
-    </ns0:dependency>
-    <ns0:dependency>
-      <ns0:groupId>org.jenkins-ci.modules</ns0:groupId>
-      <ns0:artifactId>slave-installer</ns0:artifactId>
-      <ns0:version>1.7</ns0:version>
-      <ns0:scope>compile</ns0:scope>
-    </ns0:dependency>
-    <ns0:dependency>
-      <ns0:groupId>org.jenkins-ci.modules</ns0:groupId>
-      <ns0:artifactId>windows-slave-installer</ns0:artifactId>
-      <ns0:version>2.0</ns0:version>
       <ns0:scope>compile</ns0:scope>
     </ns0:dependency>
     <ns0:dependency>
@@ -143,8 +125,8 @@
     </ns0:dependency>
     <ns0:dependency>
       <ns0:groupId>org.jenkins-ci.modules</ns0:groupId>
-      <ns0:artifactId>upstart-slave-installer</ns0:artifactId>
-      <ns0:version>1.1</ns0:version>
+      <ns0:artifactId>slave-installer</ns0:artifactId>
+      <ns0:version>1.7</ns0:version>
       <ns0:scope>compile</ns0:scope>
     </ns0:dependency>
     <ns0:dependency>
@@ -154,10 +136,28 @@
       <ns0:scope>compile</ns0:scope>
     </ns0:dependency>
     <ns0:dependency>
+      <ns0:groupId>org.jenkins-ci.modules</ns0:groupId>
+      <ns0:artifactId>upstart-slave-installer</ns0:artifactId>
+      <ns0:version>1.1</ns0:version>
+      <ns0:scope>compile</ns0:scope>
+    </ns0:dependency>
+    <ns0:dependency>
+      <ns0:groupId>org.jenkins-ci.modules</ns0:groupId>
+      <ns0:artifactId>windows-slave-installer</ns0:artifactId>
+      <ns0:version>2.0</ns0:version>
+      <ns0:scope>compile</ns0:scope>
+    </ns0:dependency>
+    <ns0:dependency>
       <ns0:groupId>org.slf4j</ns0:groupId>
       <ns0:artifactId>slf4j-jdk14</ns0:artifactId>
-      <ns0:version>1.7.33</ns0:version>
+      <ns0:version>1.7.36</ns0:version>
       <ns0:scope>compile</ns0:scope>
+    </ns0:dependency>
+    <ns0:dependency>
+      <ns0:groupId>org.jenkins-ci</ns0:groupId>
+      <ns0:artifactId>executable-war</ns0:artifactId>
+      <ns0:version>2.4.1</ns0:version>
+      <ns0:scope>provided</ns0:scope>
     </ns0:dependency>
     <ns0:dependency>
       <ns0:groupId>javax.servlet</ns0:groupId>

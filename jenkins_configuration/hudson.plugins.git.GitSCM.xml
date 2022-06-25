@@ -1,4 +1,4 @@
-<hudson.plugins.git.GitSCM_-DescriptorImpl plugin="git@4.10.1">
+<hudson.plugins.git.GitSCM_-DescriptorImpl plugin="git@4.11.3">
   <globalConfigName />
   <globalConfigEmail />
   <createAccountBasedOnEmail>false</createAccountBasedOnEmail>

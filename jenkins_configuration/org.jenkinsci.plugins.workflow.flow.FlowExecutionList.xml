@@ -1,22 +1,22 @@
 <list>
   <flow-owner plugin="workflow-job@1186.v8def1a_5f3944">
-    <job>build-19-pr-validation-linux_alpine_x86_64</job>
-    <id>36</id>
+    <job>build-20-release-linux_aarch64</job>
+    <id>2</id>
   </flow-owner>
   <flow-owner plugin="workflow-job@1186.v8def1a_5f3944">
-    <job>build-19-pr-validation-linux_ppc64le</job>
-    <id>65</id>
+    <job>build-20-release-linux_ppc64le</job>
+    <id>2</id>
   </flow-owner>
   <flow-owner plugin="workflow-job@1186.v8def1a_5f3944">
-    <job>build-19-pr-validation-linux_aarch64</job>
-    <id>65</id>
+    <job>build-20-release-macos_x86_64</job>
+    <id>2</id>
   </flow-owner>
   <flow-owner plugin="workflow-job@1186.v8def1a_5f3944">
-    <job>build-19-pr-validation-macos_x86_64</job>
-    <id>70</id>
+    <job>build-20-release-windows_x86_64</job>
+    <id>3</id>
   </flow-owner>
   <flow-owner plugin="workflow-job@1186.v8def1a_5f3944">
     <job>jenkins-configuration-backup</job>
-    <id>369</id>
+    <id>370</id>
   </flow-owner>
 </list>

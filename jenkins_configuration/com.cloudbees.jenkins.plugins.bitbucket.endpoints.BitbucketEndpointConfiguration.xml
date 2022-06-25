@@ -1,4 +1,4 @@
-<com.cloudbees.jenkins.plugins.bitbucket.endpoints.BitbucketEndpointConfiguration plugin="cloudbees-bitbucket-branch-source@734.v2f848c5e6ea2">
+<com.cloudbees.jenkins.plugins.bitbucket.endpoints.BitbucketEndpointConfiguration plugin="cloudbees-bitbucket-branch-source@773.v4b_9b_005b_562b_">
   <endpoints>
     <com.cloudbees.jenkins.plugins.bitbucket.endpoints.BitbucketCloudEndpoint>
       <manageHooks>false</manageHooks>

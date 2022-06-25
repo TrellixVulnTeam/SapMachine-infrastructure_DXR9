@@ -28,12 +28,13 @@
       <int>1154</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
         <number>1154</number>
-        <issueUpdatedAt>2022-06-24 00:30:11.0 UTC</issueUpdatedAt>
+        <issueUpdatedAt>2022-06-24 12:29:25.0 UTC</issueUpdatedAt>
         <title>Merge to tag jdk-19+28</title>
         <body>please pull</body>
-        <prUpdatedAt>2022-06-24 00:30:11.0 UTC</prUpdatedAt>
+        <prUpdatedAt>2022-06-24 12:29:25.0 UTC</prUpdatedAt>
         <headSha>6037ccdd50acd5424a46120028738b811dff064a</headSha>
         <headRef>pr-jdk-19+28</headRef>
+        <mergeable>true</mergeable>
         <baseRef>sapmachine19</baseRef>
         <userLogin>SapMachine</userLogin>
         <htmlUrl>https://github.com/SAP/SapMachine/pull/1154</htmlUrl>
@@ -47,7 +48,7 @@
       <int>1141</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
         <number>1141</number>
-        <issueUpdatedAt>2022-06-23 18:52:58.0 UTC</issueUpdatedAt>
+        <issueUpdatedAt>2022-06-24 14:48:03.0 UTC</issueUpdatedAt>
         <title>SapMachine #1124: Vitals: June 22 package</title>
         <body># Vitals June 22 update
 
@@ -188,7 +189,7 @@ I tried to avoid core refactoring, but some was needed. In particular, on linux,
 fixes #1148
 fixes #1124
 </body>
-        <prUpdatedAt>2022-06-23 18:52:58.0 UTC</prUpdatedAt>
+        <prUpdatedAt>2022-06-24 14:48:03.0 UTC</prUpdatedAt>
         <headSha>4941ffff33891ce9ff97740b3cfae0985470c81e</headSha>
         <headRef>Vitals-June22</headRef>
         <mergeable>true</mergeable>
@@ -196,28 +197,8 @@ fixes #1124
         <userLogin>tstuefe</userLogin>
         <htmlUrl>https://github.com/SAP/SapMachine/pull/1141</htmlUrl>
         <labels />
-        <lastCommentCreatedAt>2022-06-23 04:34:24.0 UTC</lastCommentCreatedAt>
+        <lastCommentCreatedAt>2022-06-24 14:48:03.0 UTC</lastCommentCreatedAt>
         <sourceRepoOwner>tstuefe</sourceRepoOwner>
-        <state>OPEN</state>
-        <inBadState>false</inBadState>
-      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-    </entry>
-    <entry>
-      <int>1151</int>
-      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-        <number>1151</number>
-        <issueUpdatedAt>2022-06-23 11:57:35.0 UTC</issueUpdatedAt>
-        <title>Merge to tag jdk-20+2</title>
-        <body>please pull</body>
-        <prUpdatedAt>2022-06-23 11:57:35.0 UTC</prUpdatedAt>
-        <headSha>2f2c0c19ed7c2f3e62abeada2560a17bb25de93f</headSha>
-        <headRef>pr-jdk-20+2</headRef>
-        <mergeable>true</mergeable>
-        <baseRef>sapmachine</baseRef>
-        <userLogin>SapMachine</userLogin>
-        <htmlUrl>https://github.com/SAP/SapMachine/pull/1151</htmlUrl>
-        <labels />
-        <sourceRepoOwner>SAP</sourceRepoOwner>
         <state>OPEN</state>
         <inBadState>false</inBadState>
       </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>

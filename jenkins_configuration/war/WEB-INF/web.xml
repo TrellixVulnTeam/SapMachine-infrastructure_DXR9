@@ -1,5 +1,5 @@
 <ns0:web-app xmlns:ns0="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1" metadata-complete="true">
-  <ns0:display-name>Jenkins v2.332.3</ns0:display-name>
+  <ns0:display-name>Jenkins v2.346.1</ns0:display-name>
   <ns0:description>Build management system</ns0:description>
 
   <ns0:servlet>
@@ -146,14 +146,6 @@
       <ns0:form-error-page>/loginError</ns0:form-error-page>
     </ns0:form-login-config>
   </ns0:login-config>
-
-
-  
-  <ns0:env-entry>
-    <ns0:env-entry-name>HUDSON_HOME</ns0:env-entry-name>
-    <ns0:env-entry-type>java.lang.String</ns0:env-entry-type>
-    <ns0:env-entry-value />
-  </ns0:env-entry>
 
   
   <ns0:mime-mapping>

@@ -1,4 +1,4 @@
-<org.jenkinsci.plugins.docker.workflow.declarative.GlobalConfig plugin="docker-workflow@1.26">
+<org.jenkinsci.plugins.docker.workflow.declarative.GlobalConfig plugin="docker-workflow@1.28">
   <dockerLabel />
-  <registry plugin="docker-commons@1.17" />
+  <registry plugin="docker-commons@1.19" />
 </org.jenkinsci.plugins.docker.workflow.declarative.GlobalConfig>

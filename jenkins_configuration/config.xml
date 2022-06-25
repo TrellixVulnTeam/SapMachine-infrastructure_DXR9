@@ -8,7 +8,7 @@
     <string>jenkins.security.s2m.MasterKillSwitchWarning</string>
     <string>jenkins.diagnostics.ControllerExecutorsAgents</string>
   </disabledAdministrativeMonitors>
-  <version>2.332.3</version>
+  <version>2.346.1</version>
   <numExecutors>4</numExecutors>
   <mode>EXCLUSIVE</mode>
   <useSecurity>true</useSecurity>
@@ -38,7 +38,7 @@
       <instanceCap>6</instanceCap>
       <templates>
         <hudson.plugins.ec2.SlaveTemplate>
-          <ami>ami-058f41770c27599ca</ami>
+          <ami>ami-01219152c8e77b3eb</ami>
           <description>Linux x86_64 Client</description>
           <zone>us-east-1d</zone>
           <securityGroups>JenkinsLinuxSlave</securityGroups>
@@ -97,7 +97,7 @@
           <connectUsingPublicIp>false</connectUsingPublicIp>
         </hudson.plugins.ec2.SlaveTemplate>
         <hudson.plugins.ec2.SlaveTemplate>
-          <ami>ami-0116e4a6a88d8f130</ami>
+          <ami>ami-028305d7df15006f5</ami>
           <description>Windows Client</description>
           <zone>us-east-1d</zone>
           <securityGroups>JenkinsWindowsClient</securityGroups>
@@ -156,7 +156,7 @@
           <connectUsingPublicIp>false</connectUsingPublicIp>
         </hudson.plugins.ec2.SlaveTemplate>
         <hudson.plugins.ec2.SlaveTemplate>
-          <ami>ami-0f485daf4aca1a0c4</ami>
+          <ami>ami-0b4db7333293c4875</ami>
           <description>Linux aarch64 Client</description>
           <zone>us-east-1d</zone>
           <securityGroups>JenkinsLinuxSlave</securityGroups>
@@ -187,65 +187,6 @@
             <hudson.plugins.ec2.EC2Tag>
               <name>Name</name>
               <value>Jenkins linux aarch64 client autolaunched</value>
-            </hudson.plugins.ec2.EC2Tag>
-          </tags>
-          <connectionStrategy>PRIVATE_IP</connectionStrategy>
-          <hostKeyVerificationStrategy>OFF</hostKeyVerificationStrategy>
-          <associatePublicIp>true</associatePublicIp>
-          <amiType class="hudson.plugins.ec2.UnixData">
-            <rootCommandPrefix />
-            <slaveCommandPrefix />
-            <slaveCommandSuffix />
-            <sshPort>22</sshPort>
-            <bootDelay />
-          </amiType>
-          <launchTimeout>2147483647</launchTimeout>
-          <connectBySSHProcess>false</connectBySSHProcess>
-          <maxTotalUses>-1</maxTotalUses>
-          <nodeProperties />
-          <nextSubnet>0</nextSubnet>
-          <tenancy>Default</tenancy>
-          <ebsEncryptRootVolume>DEFAULT</ebsEncryptRootVolume>
-          <metadataEndpointEnabled>true</metadataEndpointEnabled>
-          <metadataTokensRequired>false</metadataTokensRequired>
-          <metadataHopsLimit>1</metadataHopsLimit>
-          <amiOwners />
-          <amiUsers />
-          <usePrivateDnsName>false</usePrivateDnsName>
-          <connectUsingPublicIp>false</connectUsingPublicIp>
-        </hudson.plugins.ec2.SlaveTemplate>
-        <hudson.plugins.ec2.SlaveTemplate>
-          <ami>ami-03159fc154008f989</ami>
-          <description>Linux Alpine X86 Client</description>
-          <zone>us-east-1d</zone>
-          <securityGroups>JenkinsLinuxSlave</securityGroups>
-          <remoteFS>/home/ubuntu/client_home</remoteFS>
-          <type>M54xlarge</type>
-          <ebsOptimized>true</ebsOptimized>
-          <monitoring>false</monitoring>
-          <t2Unlimited>false</t2Unlimited>
-          <labels>ninux_alpine_x86_64</labels>
-          <mode>EXCLUSIVE</mode>
-          <initScript />
-          <tmpDir />
-          <userData />
-          <numExecutors>1</numExecutors>
-          <remoteAdmin>ubuntu</remoteAdmin>
-          <jvmopts />
-          <subnetId />
-          <idleTerminationMinutes>10</idleTerminationMinutes>
-          <iamInstanceProfile />
-          <deleteRootOnTermination>false</deleteRootOnTermination>
-          <useEphemeralDevices>false</useEphemeralDevices>
-          <customDeviceMapping />
-          <instanceCap>3</instanceCap>
-          <minimumNumberOfInstances>0</minimumNumberOfInstances>
-          <minimumNumberOfSpareInstances>0</minimumNumberOfSpareInstances>
-          <stopOnTerminate>false</stopOnTerminate>
-          <tags>
-            <hudson.plugins.ec2.EC2Tag>
-              <name>Name</name>
-              <value>Dynamic Ubuntu 20.04 x86_64 Client</value>
             </hudson.plugins.ec2.EC2Tag>
           </tags>
           <connectionStrategy>PRIVATE_IP</connectionStrategy>
@@ -691,6 +632,513 @@
         <tree-map>
           <default>
             <comparator class="java.lang.String$CaseInsensitiveComparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
+          </default>
+          <int>1</int>
+          <string>MAVEN_OPTS</string>
+          <string />
+        </tree-map>
+      </envVars>
+    </hudson.slaves.EnvironmentVariablesNodeProperty>
+    <hudson.slaves.EnvironmentVariablesNodeProperty>
+      <envVars serialization="custom">
+        <unserializable-parents />
+        <tree-map>
+          <default>
+            <comparator class="java.lang.String$CaseInsensitiveComparator" reference="../../../../../hudson.slaves.EnvironmentVariablesNodeProperty/envVars/tree-map/default/comparator" />
           </default>
           <int>1</int>
           <string>MAVEN_OPTS</string>
