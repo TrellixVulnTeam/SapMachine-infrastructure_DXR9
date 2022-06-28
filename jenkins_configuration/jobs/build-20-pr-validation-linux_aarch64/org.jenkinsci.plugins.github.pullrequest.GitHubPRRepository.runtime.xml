@@ -5,30 +5,10 @@
   <sshUrl>git@github.com:SAP/SapMachine.git</sshUrl>
   <pulls class="concurrent-hash-map">
     <entry>
-      <int>1153</int>
-      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-        <number>1153</number>
-        <issueUpdatedAt>2022-06-25 12:28:08.0 UTC</issueUpdatedAt>
-        <title>Merge to tag jdk-20+3</title>
-        <body>please pull</body>
-        <prUpdatedAt>2022-06-25 12:28:08.0 UTC</prUpdatedAt>
-        <headSha>5f50779ee5d9c8882373fea7fe33bbf91d5ee556</headSha>
-        <headRef>pr-jdk-20+3</headRef>
-        <mergeable>true</mergeable>
-        <baseRef>sapmachine</baseRef>
-        <userLogin>SapMachine</userLogin>
-        <htmlUrl>https://github.com/SAP/SapMachine/pull/1153</htmlUrl>
-        <labels />
-        <sourceRepoOwner>SAP</sourceRepoOwner>
-        <state>OPEN</state>
-        <inBadState>false</inBadState>
-      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-    </entry>
-    <entry>
       <int>1141</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
         <number>1141</number>
-        <issueUpdatedAt>2022-06-24 14:48:03.0 UTC</issueUpdatedAt>
+        <issueUpdatedAt>2022-06-27 10:26:45.0 UTC</issueUpdatedAt>
         <title>SapMachine #1124: Vitals: June 22 package</title>
         <body># Vitals June 22 update
 
@@ -169,15 +149,15 @@ I tried to avoid core refactoring, but some was needed. In particular, on linux,
 fixes #1148
 fixes #1124
 </body>
-        <prUpdatedAt>2022-06-24 14:48:03.0 UTC</prUpdatedAt>
-        <headSha>4941ffff33891ce9ff97740b3cfae0985470c81e</headSha>
+        <prUpdatedAt>2022-06-27 10:26:45.0 UTC</prUpdatedAt>
+        <headSha>984a6e5869ae8b43414899bb0661922ad71f7277</headSha>
         <headRef>Vitals-June22</headRef>
-        <mergeable>true</mergeable>
+        <mergeable>false</mergeable>
         <baseRef>sapmachine</baseRef>
         <userLogin>tstuefe</userLogin>
         <htmlUrl>https://github.com/SAP/SapMachine/pull/1141</htmlUrl>
         <labels />
-        <lastCommentCreatedAt>2022-06-24 14:48:03.0 UTC</lastCommentCreatedAt>
+        <lastCommentCreatedAt>2022-06-27 10:26:45.0 UTC</lastCommentCreatedAt>
         <sourceRepoOwner>tstuefe</sourceRepoOwner>
         <state>OPEN</state>
         <inBadState>false</inBadState>
