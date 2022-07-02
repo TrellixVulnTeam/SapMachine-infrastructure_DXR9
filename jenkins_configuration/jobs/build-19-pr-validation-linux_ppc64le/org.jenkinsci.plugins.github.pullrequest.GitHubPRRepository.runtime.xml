@@ -5,31 +5,6 @@
   <sshUrl>git@github.com:SAP/SapMachine.git</sshUrl>
   <pulls class="concurrent-hash-map">
     <entry>
-      <int>1156</int>
-      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-        <number>1156</number>
-        <issueUpdatedAt>2022-06-30 15:09:49.0 UTC</issueUpdatedAt>
-        <title>SapMachine #1124: Vitals: June 22 package (SapMachine 19)</title>
-        <body>Downport of #1124 to SapMachine 19.
-
-Only minor adjustments had to be made, because of the recent splitup of thread.cpp, and other small fish. See c09280fb8c5baa012a1d9cd26e51dfea2fd6938c for all changes from the base patch.
-
-fixes #1124</body>
-        <prUpdatedAt>2022-06-30 15:09:49.0 UTC</prUpdatedAt>
-        <headSha>c09280fb8c5baa012a1d9cd26e51dfea2fd6938c</headSha>
-        <headRef>Vitals-June-22-19</headRef>
-        <mergeable>true</mergeable>
-        <baseRef>sapmachine19</baseRef>
-        <userLogin>tstuefe</userLogin>
-        <htmlUrl>https://github.com/SAP/SapMachine/pull/1156</htmlUrl>
-        <labels />
-        <lastCommentCreatedAt>2022-06-30 15:09:49.0 UTC</lastCommentCreatedAt>
-        <sourceRepoOwner>tstuefe</sourceRepoOwner>
-        <state>OPEN</state>
-        <inBadState>false</inBadState>
-      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-    </entry>
-    <entry>
       <int>1157</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
         <number>1157</number>
@@ -39,6 +14,7 @@ fixes #1124</body>
         <prUpdatedAt>2022-07-01 00:30:11.0 UTC</prUpdatedAt>
         <headSha>7b3bf97760c8daf6c03aaa069660f5a3a3873f8c</headSha>
         <headRef>pr-jdk-20+4</headRef>
+        <mergeable>true</mergeable>
         <baseRef>sapmachine</baseRef>
         <userLogin>SapMachine</userLogin>
         <htmlUrl>https://github.com/SAP/SapMachine/pull/1157</htmlUrl>
@@ -58,11 +34,155 @@ fixes #1124</body>
         <prUpdatedAt>2022-07-01 00:30:22.0 UTC</prUpdatedAt>
         <headSha>cf7154498fffba202b74b41a074f25c657b2e591</headSha>
         <headRef>pr-jdk-19+29</headRef>
+        <mergeable>true</mergeable>
         <baseRef>sapmachine19</baseRef>
         <userLogin>SapMachine</userLogin>
         <htmlUrl>https://github.com/SAP/SapMachine/pull/1158</htmlUrl>
         <labels />
         <sourceRepoOwner>SAP</sourceRepoOwner>
+        <state>OPEN</state>
+        <inBadState>false</inBadState>
+      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+    </entry>
+    <entry>
+      <int>1159</int>
+      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+        <number>1159</number>
+        <issueUpdatedAt>2022-07-01 15:02:14.0 UTC</issueUpdatedAt>
+        <title>SapMachine #1124: Vitals: June 22 package (SapMachine 17)</title>
+        <body>Downport of Vitals June 22 patch to SapMachine 17.
+
+Minor things needed to be patched up, see 0a036dd0f30c69e70664a9962d160a11c2336f2c :
+
+- os::file_exists() missing
+- Platform.isMuslc() in jtreg missing
+- this is before the thread.cpp split, so "threads.cpp" does not exist yet
+
+fixes #1124
+
+</body>
+        <prUpdatedAt>2022-07-01 15:02:14.0 UTC</prUpdatedAt>
+        <headSha>0a036dd0f30c69e70664a9962d160a11c2336f2c</headSha>
+        <headRef>Vitals-June-22-17</headRef>
+        <mergeable>true</mergeable>
+        <baseRef>sapmachine17</baseRef>
+        <userLogin>tstuefe</userLogin>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1159</htmlUrl>
+        <labels />
+        <lastCommentCreatedAt>2022-07-01 15:01:46.0 UTC</lastCommentCreatedAt>
+        <sourceRepoOwner>tstuefe</sourceRepoOwner>
+        <state>OPEN</state>
+        <inBadState>false</inBadState>
+      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+    </entry>
+    <entry>
+      <int>1160</int>
+      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+        <number>1160</number>
+        <issueUpdatedAt>2022-07-01 14:07:14.0 UTC</issueUpdatedAt>
+        <title>SapMachine #1124: Vitals: June 22 package (SapMachine 11)</title>
+        <body>Backport of Vitals June 22 for JDK 11.
+
+Fixes that were necessary see adcd5306ae3d21d06bf786f319fb24208c7608be.
+
+Those fixes are:
+- Cannot use C++11 enum struct
+- os::naked_sleep() does not exist
+- os::file_exists() missing
+- Platform.isMuslc() in jtreg missing
+- this is before the thread.cpp split, so "threads.cpp" does not exist yet
+- Testwise, jcmd VM.metaspace provides slightly different results, and we have no class loader graph information in vitals, so no "cldg" columns
+
+The rest is small stuff (includes renamed etc)
+
+fixes #1124
+
+</body>
+        <prUpdatedAt>2022-07-01 14:07:14.0 UTC</prUpdatedAt>
+        <headSha>adcd5306ae3d21d06bf786f319fb24208c7608be</headSha>
+        <headRef>Vitals-June-22-11</headRef>
+        <mergeable>true</mergeable>
+        <baseRef>sapmachine11</baseRef>
+        <userLogin>tstuefe</userLogin>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1160</htmlUrl>
+        <labels />
+        <lastCommentCreatedAt>2022-07-01 14:07:13.0 UTC</lastCommentCreatedAt>
+        <sourceRepoOwner>tstuefe</sourceRepoOwner>
+        <state>OPEN</state>
+        <inBadState>false</inBadState>
+      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+    </entry>
+    <entry>
+      <int>1164</int>
+      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+        <number>1164</number>
+        <issueUpdatedAt>2022-07-01 16:02:06.0 UTC</issueUpdatedAt>
+        <title>SapMachine #1163: Switch branch name in 19 to show GHAs</title>
+        <body>Trivial fix to change branch name to make GHAs pop up in "Checks"
+
+fixes #1163
+
+</body>
+        <prUpdatedAt>2022-07-01 16:02:06.0 UTC</prUpdatedAt>
+        <headSha>d4980c2258f5639134e417df7448a0f91fe9410b</headSha>
+        <headRef>sapmachine19-branch-submit-yaml</headRef>
+        <mergeable>true</mergeable>
+        <baseRef>sapmachine19</baseRef>
+        <userLogin>tstuefe</userLogin>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1164</htmlUrl>
+        <labels />
+        <lastCommentCreatedAt>2022-07-01 15:15:14.0 UTC</lastCommentCreatedAt>
+        <sourceRepoOwner>tstuefe</sourceRepoOwner>
+        <state>OPEN</state>
+        <inBadState>false</inBadState>
+      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+    </entry>
+    <entry>
+      <int>1165</int>
+      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+        <number>1165</number>
+        <issueUpdatedAt>2022-07-01 15:56:59.0 UTC</issueUpdatedAt>
+        <title>SapMachine #1161: SapMachine 17, 11 do not build in minimal</title>
+        <body>Simple build fixes to build in minimal. Problem was the way INCLUDE_NMT macro is used. See comments.
+
+fixes #1161
+
+</body>
+        <prUpdatedAt>2022-07-01 15:56:59.0 UTC</prUpdatedAt>
+        <headSha>245b6735922d4cd07f54b4baed4777af7bb67957</headSha>
+        <headRef>fix-minimal-build</headRef>
+        <mergeable>true</mergeable>
+        <baseRef>sapmachine</baseRef>
+        <userLogin>tstuefe</userLogin>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1165</htmlUrl>
+        <labels />
+        <lastCommentCreatedAt>2022-07-01 15:56:59.0 UTC</lastCommentCreatedAt>
+        <sourceRepoOwner>tstuefe</sourceRepoOwner>
+        <state>OPEN</state>
+        <inBadState>false</inBadState>
+      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+    </entry>
+    <entry>
+      <int>1166</int>
+      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+        <number>1166</number>
+        <issueUpdatedAt>2022-07-01 16:34:50.0 UTC</issueUpdatedAt>
+        <title>SapMachine #1162: Vitals: Initialization should not rely on &amp;= short-circuiting</title>
+        <body>I did use &amp;= in a number of places for brevity, thinking it would short-circuit, but it won't, not in C++.
+
+fixes #1162
+
+</body>
+        <prUpdatedAt>2022-07-01 16:34:50.0 UTC</prUpdatedAt>
+        <headSha>dddd0d561fd8fd004c1522c4c9a99430baf03b5b</headSha>
+        <headRef>fix-vitals-initialization</headRef>
+        <mergeable>true</mergeable>
+        <baseRef>sapmachine</baseRef>
+        <userLogin>tstuefe</userLogin>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1166</htmlUrl>
+        <labels />
+        <lastCommentCreatedAt>2022-07-01 16:34:49.0 UTC</lastCommentCreatedAt>
+        <sourceRepoOwner>tstuefe</sourceRepoOwner>
         <state>OPEN</state>
         <inBadState>false</inBadState>
       </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
