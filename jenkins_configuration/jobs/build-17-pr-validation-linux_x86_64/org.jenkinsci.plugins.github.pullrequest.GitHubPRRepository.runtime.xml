@@ -5,25 +5,32 @@
   <sshUrl>git@github.com:SAP/SapMachine.git</sshUrl>
   <pulls class="concurrent-hash-map">
     <entry>
-      <int>1166</int>
+      <int>1171</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-        <number>1166</number>
-        <issueUpdatedAt>2022-07-04 15:06:08.0 UTC</issueUpdatedAt>
-        <title>SapMachine #1162: Vitals: Initialization should not rely on &amp;= short-circuiting</title>
-        <body>I did use &amp;= in a number of places for brevity, thinking it would short-circuit, but it won't, not in C++.
+        <number>1171</number>
+        <issueUpdatedAt>2022-07-05 14:30:49.0 UTC</issueUpdatedAt>
+        <title>SapMachine #1124: Vitals: June 22 package (SapMachine 18)</title>
+        <body>Backport to SapMachine 18. I originally thought I can leave this out since 19 is around the corner, but seems not.
 
-fixes #1162
+As usual, the 18-specific changes you can find in the second commit: ea21757676876853c558a07290c03e74b442aeff
+
+(in this case, I downported the patch from jdk19, not mainline, so the changes are minimal).
+
+Changes:
+- Platform.isMusl is missing, I re-added it.
+
+fixes #1124
 
 </body>
-        <prUpdatedAt>2022-07-04 15:06:08.0 UTC</prUpdatedAt>
-        <headSha>dddd0d561fd8fd004c1522c4c9a99430baf03b5b</headSha>
-        <headRef>fix-vitals-initialization</headRef>
+        <prUpdatedAt>2022-07-05 14:30:49.0 UTC</prUpdatedAt>
+        <headSha>ea21757676876853c558a07290c03e74b442aeff</headSha>
+        <headRef>Vitals-June22-18</headRef>
         <mergeable>true</mergeable>
-        <baseRef>sapmachine</baseRef>
+        <baseRef>sapmachine18</baseRef>
         <userLogin>tstuefe</userLogin>
-        <htmlUrl>https://github.com/SAP/SapMachine/pull/1166</htmlUrl>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1171</htmlUrl>
         <labels />
-        <lastCommentCreatedAt>2022-07-02 10:20:30.0 UTC</lastCommentCreatedAt>
+        <lastCommentCreatedAt>2022-07-05 14:30:48.0 UTC</lastCommentCreatedAt>
         <sourceRepoOwner>tstuefe</sourceRepoOwner>
         <state>OPEN</state>
         <inBadState>false</inBadState>
