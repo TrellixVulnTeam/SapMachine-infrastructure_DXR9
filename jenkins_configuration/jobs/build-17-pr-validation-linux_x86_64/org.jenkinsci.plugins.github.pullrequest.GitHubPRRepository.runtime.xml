@@ -5,32 +5,100 @@
   <sshUrl>git@github.com:SAP/SapMachine.git</sshUrl>
   <pulls class="concurrent-hash-map">
     <entry>
-      <int>1171</int>
+      <int>1175</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-        <number>1171</number>
-        <issueUpdatedAt>2022-07-05 14:30:49.0 UTC</issueUpdatedAt>
-        <title>SapMachine #1124: Vitals: June 22 package (SapMachine 18)</title>
-        <body>Backport to SapMachine 18. I originally thought I can leave this out since 19 is around the corner, but seems not.
+        <number>1175</number>
+        <issueUpdatedAt>2022-07-06 16:36:18.0 UTC</issueUpdatedAt>
+        <title>SapMachine #1162: Vitals: Initialization should not rely on &amp;= short-circuiting (18)</title>
+        <body>Clean downport to SapMachine 18
 
-As usual, the 18-specific changes you can find in the second commit: ea21757676876853c558a07290c03e74b442aeff
-
-(in this case, I downported the patch from jdk19, not mainline, so the changes are minimal).
-
-Changes:
-- Platform.isMusl is missing, I re-added it.
-
-fixes #1124
+fixes #1162
 
 </body>
-        <prUpdatedAt>2022-07-05 14:30:49.0 UTC</prUpdatedAt>
-        <headSha>ea21757676876853c558a07290c03e74b442aeff</headSha>
-        <headRef>Vitals-June22-18</headRef>
+        <prUpdatedAt>2022-07-06 16:36:18.0 UTC</prUpdatedAt>
+        <headSha>c1eb78c43a1e122805aeaf0e809804b64b528174</headSha>
+        <headRef>SapMachine__1162__Vitals__Initialization_should_not_rely_on____short_circuiting_-18</headRef>
         <mergeable>true</mergeable>
         <baseRef>sapmachine18</baseRef>
         <userLogin>tstuefe</userLogin>
-        <htmlUrl>https://github.com/SAP/SapMachine/pull/1171</htmlUrl>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1175</htmlUrl>
         <labels />
-        <lastCommentCreatedAt>2022-07-05 14:30:48.0 UTC</lastCommentCreatedAt>
+        <lastCommentCreatedAt>2022-07-06 16:35:54.0 UTC</lastCommentCreatedAt>
+        <sourceRepoOwner>tstuefe</sourceRepoOwner>
+        <state>OPEN</state>
+        <inBadState>false</inBadState>
+      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+    </entry>
+    <entry>
+      <int>1177</int>
+      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+        <number>1177</number>
+        <issueUpdatedAt>2022-07-06 17:14:12.0 UTC</issueUpdatedAt>
+        <title>SapMachine #1162: Vitals: Initialization should not rely on &amp;= short-circuiting (19)</title>
+        <body>Clean downport.
+
+fixes #1162
+
+</body>
+        <prUpdatedAt>2022-07-06 17:14:12.0 UTC</prUpdatedAt>
+        <headSha>b1124e3b2c8cadaeb52b0607c60da2bdbc47c97d</headSha>
+        <headRef>SapMachine__1162__Vitals__Initialization_should_not_rely_on____short_circuiting_-19</headRef>
+        <mergeable>true</mergeable>
+        <baseRef>sapmachine19</baseRef>
+        <userLogin>tstuefe</userLogin>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1177</htmlUrl>
+        <labels />
+        <lastCommentCreatedAt>2022-07-06 17:14:11.0 UTC</lastCommentCreatedAt>
+        <sourceRepoOwner>tstuefe</sourceRepoOwner>
+        <state>OPEN</state>
+        <inBadState>false</inBadState>
+      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+    </entry>
+    <entry>
+      <int>1178</int>
+      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+        <number>1178</number>
+        <issueUpdatedAt>2022-07-06 17:56:40.0 UTC</issueUpdatedAt>
+        <title>SapMachine #1162: Vitals: Initialization should not rely on &amp;= short-circuiting (17)</title>
+        <body>Clean downport
+
+fixes #1162
+
+</body>
+        <prUpdatedAt>2022-07-06 17:56:40.0 UTC</prUpdatedAt>
+        <headSha>765fab7e7501ddb134fb6669ec1244e312e97da1</headSha>
+        <headRef>SapMachine__1162__Vitals__Initialization_should_not_rely_on____short_circuiting_-17</headRef>
+        <mergeable>true</mergeable>
+        <baseRef>sapmachine17</baseRef>
+        <userLogin>tstuefe</userLogin>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1178</htmlUrl>
+        <labels />
+        <lastCommentCreatedAt>2022-07-06 17:56:39.0 UTC</lastCommentCreatedAt>
+        <sourceRepoOwner>tstuefe</sourceRepoOwner>
+        <state>OPEN</state>
+        <inBadState>false</inBadState>
+      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+    </entry>
+    <entry>
+      <int>1179</int>
+      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+        <number>1179</number>
+        <issueUpdatedAt>2022-07-06 18:19:05.0 UTC</issueUpdatedAt>
+        <title>SapMachine #1162: Vitals: Initialization should not rely on &amp;= short-circuiting (11)</title>
+        <body>Not a clean downport, since "os::environ" had to be switched to raw "environ". Otherwise identical.
+
+fixes #1162
+
+</body>
+        <prUpdatedAt>2022-07-06 18:19:05.0 UTC</prUpdatedAt>
+        <headSha>0acb5ead1579771dae5c3726c29b2adb20ddb227</headSha>
+        <headRef>SapMachine__1162__Vitals__Initialization_should_not_rely_on____short_circuiting_-11</headRef>
+        <mergeable>true</mergeable>
+        <baseRef>sapmachine11</baseRef>
+        <userLogin>tstuefe</userLogin>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1179</htmlUrl>
+        <labels />
+        <lastCommentCreatedAt>2022-07-06 18:19:05.0 UTC</lastCommentCreatedAt>
         <sourceRepoOwner>tstuefe</sourceRepoOwner>
         <state>OPEN</state>
         <inBadState>false</inBadState>
