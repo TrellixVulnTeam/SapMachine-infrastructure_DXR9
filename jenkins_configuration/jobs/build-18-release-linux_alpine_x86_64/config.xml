@@ -496,7 +496,7 @@
         <hudson.model.StringParameterDefinition>
           <name>EXTRA_CONFIGURE_OPTIONS</name>
           <description>Extra configure options passed directly to configure script.</description>
-          <defaultValue />
+          <defaultValue> </defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
