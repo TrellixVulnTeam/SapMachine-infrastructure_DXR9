@@ -1,30 +1,46 @@
 <list>
   <flow-owner plugin="workflow-job@1189.va_d37a_e9e4eda_">
-    <job>build-20-pr-validation-linux_ppc64le</job>
-    <id>36</id>
+    <job>build-20-release-linux_ppc64le</job>
+    <id>7</id>
   </flow-owner>
   <flow-owner plugin="workflow-job@1189.va_d37a_e9e4eda_">
-    <job>build-18-pr-validation-macos_x86_64</job>
-    <id>105</id>
-  </flow-owner>
-  <flow-owner plugin="workflow-job@1189.va_d37a_e9e4eda_">
-    <job>build-18-pr-validation-windows_x86_64</job>
-    <id>96</id>
-  </flow-owner>
-  <flow-owner plugin="workflow-job@1189.va_d37a_e9e4eda_">
-    <job>build-18-pr-validation-linux_ppc64le</job>
-    <id>94</id>
-  </flow-owner>
-  <flow-owner plugin="workflow-job@1189.va_d37a_e9e4eda_">
-    <job>build-jmc-macos_aarch64</job>
+    <job>build-20-release-linux_aarch64</job>
     <id>5</id>
   </flow-owner>
   <flow-owner plugin="workflow-job@1189.va_d37a_e9e4eda_">
-    <job>build-jmc-macos_x86_64</job>
-    <id>4</id>
+    <job>build-20-release-macos_x86_64</job>
+    <id>5</id>
+  </flow-owner>
+  <flow-owner plugin="workflow-job@1189.va_d37a_e9e4eda_">
+    <job>build-20-release-windows_x86_64</job>
+    <id>7</id>
+  </flow-owner>
+  <flow-owner plugin="workflow-job@1189.va_d37a_e9e4eda_">
+    <job>build-20-release-macos_aarch64</job>
+    <id>5</id>
+  </flow-owner>
+  <flow-owner plugin="workflow-job@1189.va_d37a_e9e4eda_">
+    <job>build-19-release-linux_ppc64le</job>
+    <id>33</id>
+  </flow-owner>
+  <flow-owner plugin="workflow-job@1189.va_d37a_e9e4eda_">
+    <job>build-19-release-linux_aarch64</job>
+    <id>34</id>
+  </flow-owner>
+  <flow-owner plugin="workflow-job@1189.va_d37a_e9e4eda_">
+    <job>build-19-release-macos_aarch64</job>
+    <id>33</id>
+  </flow-owner>
+  <flow-owner plugin="workflow-job@1189.va_d37a_e9e4eda_">
+    <job>build-19-release-macos_x86_64</job>
+    <id>39</id>
+  </flow-owner>
+  <flow-owner plugin="workflow-job@1189.va_d37a_e9e4eda_">
+    <job>build-19-release-windows_x86_64</job>
+    <id>33</id>
   </flow-owner>
   <flow-owner plugin="workflow-job@1189.va_d37a_e9e4eda_">
     <job>jenkins-configuration-backup</job>
-    <id>383</id>
+    <id>384</id>
   </flow-owner>
 </list>
