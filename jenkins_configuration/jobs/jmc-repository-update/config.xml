@@ -1,4 +1,4 @@
-<flow-definition plugin="workflow-job@1189.va_d37a_e9e4eda_">
+<flow-definition plugin="workflow-job@1203.v7b_7023424efe">
   <actions>
     <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@2.2097.v33db_b_de764b_e" />
     <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@2.2097.v33db_b_de764b_e">
@@ -8,7 +8,7 @@
       <options />
     </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
   </actions>
-  <description>Update JMC repository from OpenJDK, tag and build JMC releases and create JMC merge PRs.&lt;!-- Managed by Jenkins Job Builder --&gt;</description>
+  <description>Update JMC repository from OpenJDK upstream and create merge PRs.&lt;!-- Managed by Jenkins Job Builder --&gt;</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty>
@@ -30,8 +30,8 @@
           <defaultValue>true</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
-          <name>TAG_BUILD_AND_MERGE</name>
-          <description>Tag new JMC releases, build them and create JMC merge PRs.</description>
+          <name>MERGE_UPSTREAM</name>
+          <description>Create merge PRs.</description>
           <defaultValue>true</defaultValue>
         </hudson.model.BooleanParameterDefinition>
       </parameterDefinitions>
@@ -44,7 +44,7 @@
       </triggers>
     </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
   </properties>
-  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2725.v7b_c717eb_12ce">
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2746.v0da_83a_332669">
     <script>pipeline {
     agent {
         label "repository"
@@ -52,7 +52,12 @@
     stages {
         stage("Checkout Infrastructure Repository") {
             steps {
-                checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'SapMachine-Infrastructure']], userRemoteConfigs: [[url: 'https://github.com/SAP/SapMachine-infrastructure.git']]]
+                sh '''#!/bin/bash
+                    set -ex
+                    git init SapMachine-Infrastructure &amp;&amp; cd SapMachine-Infrastructure
+                    git fetch --depth 1 https://github.com/SAP/SapMachine-infrastructure.git master
+                    git checkout --detach FETCH_HEAD
+                '''
             }
         }
         stage('Update SapMachine JMC Repository') {
@@ -69,22 +74,46 @@
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD')]) {
-                    sh("SapMachine-Infrastructure/lib/jmc/update_repo.sh")
+                    sh "SapMachine-Infrastructure/lib/jmc/update_repo.sh"
                 }
             }
         }
         stage("Checkout SapMachine JMC Repository") {
             when {
-                expression { params.TAG_BUILD_AND_MERGE == true }
+                expression { params.MERGE_UPSTREAM == true }
             }
             steps {
-                checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: "*/sap"]], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'sapjmc']], userRemoteConfigs: [[url: 'https://github.com/SAP/jmc.git']]]
+                sh '''#!/bin/bash
+                    set -ex
+                    if [ ! -d jmc ]; then
+                      git clone -b sap https://github.com/SAP/jmc.git jmc
+                      cd jmc
+                      git remote add upstream https://github.com/openjdk/jmc.git
+                      git fetch upstream
+                      git checkout -b master upstream/master
+                      git checkout -b jmc8 upstream/jmc8
+                    else
+                      cd jmc
+                    fi
+                    git checkout sap
+                    git pull
+                '''
+            }
+        }
+        stage("Merge from Upstream") {
+            when {
+                expression { params.MERGE_UPSTREAM == true }
+            }
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD')]) {
+                    sh "cd jmc &amp;&amp; python3 ../SapMachine-Infrastructure/lib/jmc/merge_from_upstream.py"
+                }
             }
         }
     }
 }
 </script>
-    <sandbox>false</sandbox>
+    <sandbox>true</sandbox>
   </definition>
   <disabled>false</disabled>
 </flow-definition>

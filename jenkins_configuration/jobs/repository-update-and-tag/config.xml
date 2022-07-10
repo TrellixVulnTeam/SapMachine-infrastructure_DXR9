@@ -1,4 +1,4 @@
-<flow-definition plugin="workflow-job@1189.va_d37a_e9e4eda_">
+<flow-definition plugin="workflow-job@1203.v7b_7023424efe">
   <actions>
     <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@2.2097.v33db_b_de764b_e" />
     <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@2.2097.v33db_b_de764b_e">
@@ -44,7 +44,7 @@
       </triggers>
     </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
   </properties>
-  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2725.v7b_c717eb_12ce">
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2746.v0da_83a_332669">
     <script>pipeline {
     agent {
         label "repository"
@@ -52,7 +52,12 @@
     stages {
         stage("Checkout Infrastructure Repository") {
             steps {
-                checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'SapMachine-Infrastructure']], userRemoteConfigs: [[url: 'https://github.com/SAP/SapMachine-infrastructure.git']]]
+                sh '''#!/bin/bash
+                    set -ex
+                    git init SapMachine-Infrastructure &amp;&amp; cd SapMachine-Infrastructure
+                    git fetch --depth 1 https://github.com/SAP/SapMachine-infrastructure.git master
+                    git checkout --detach FETCH_HEAD
+                '''
             }
         }
         stage('Update SapMachine Repository') {

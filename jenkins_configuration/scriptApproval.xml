@@ -780,6 +780,7 @@
     <string>7fc570d82e54b8abadf1614cfcec2cc536229b2c</string>
     <string>7fcec6e50754ca92f1c4001bfe79c8938c8ab242</string>
     <string>80b02d22fde38a3aed56a1524e12a7741bc308ad</string>
+    <string>80de794f7d90e6f5604bcf1f1d1e13cdf960520f</string>
     <string>80e35b981381645839fc0c40d419a145db6e7fd4</string>
     <string>80ffb75368191ce91d3340dd32f5c19437ad32d2</string>
     <string>8139d5c07008d93f63a3c106c70b80808a3fd92a</string>
@@ -1239,6 +1240,7 @@
     <string>c592ef746e751d904ff3e9116c1c4a69bc50f022</string>
     <string>c5a2635a20fef1440e1b99cbf226592812016506</string>
     <string>c5d55b6aad737b09a55a79ec0ad04e1f5c1677cc</string>
+    <string>c5f58cc2eea22020a95e716aa3f34a46c28ebf08</string>
     <string>c62fc72fc12230dcd9f97e03828b13a1f8c970aa</string>
     <string>c632d36c6d45a6e21f4b33cbdaefbdf40c22cfc2</string>
     <string>c64e6d04a0deec990991da32202dc8cc77409030</string>
@@ -1534,6 +1536,7 @@
     <string>f7b8cb6663c1de53eb9e5a6c652402a29503255f</string>
     <string>f87aec21dcb899d57d409e14842f7353940a59b4</string>
     <string>f88a1045571517031a00329bf1bda50baa4d5c06</string>
+    <string>f897d9db812197b66b8cd5594a9e1658dc2dafc0</string>
     <string>f8cd664c9097d3b3148271e496834abf9bfc8b90</string>
     <string>f8e6bdb538662c5f0d173f4c5cf6983567b6a3a4</string>
     <string>f8e738f5db0694c77b5af1ffb1c7ee78a6298fb2</string>
@@ -15353,6 +15356,669 @@
       <context />
       <script>pipeline {
     agent {
+        label "linux_x86_64"
+    }
+    stages {
+        stage("Init") {
+            steps {
+                cleanWs()
+            }
+        }
+        stage("Checkout Infrastructure Repository") {
+            steps {
+                checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'SapMachine-Infrastructure']], userRemoteConfigs: [[url: 'https://github.com/SAP/SapMachine-infrastructure.git']]]
+            }
+        }
+        stage("Checkout JMC Repository") {
+            steps {
+                checkout changelog: true, poll: false, scm: [$class: 'GitSCM', branches: [[name: "*/${params.GIT_BRANCH_OR_TAG}"]], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'jmc']], userRemoteConfigs: [[url: "${params.JMC_GIT_REPOSITORY}"]]]
+            }
+        }
+        stage ('Download Prerequisites'){
+            steps {
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD']]) {
+                    sh "python3 SapMachine-Infrastructure/lib/download_boot_jdk.py -m ${params.BUILD_JDK} -d `pwd`"
+                }
+            }
+        }
+        stage("Build and Basic Tests") {
+            agent {
+    dockerfile {
+        dir "SapMachine-Infrastructure/dockerfiles/jmc/x86_64"
+        reuseNode true
+        label "linux_x86_64"
+    }
+}
+
+            environment {
+                BUILD_JDK = "${WORKSPACE}/boot_jdk"
+                JAVA_HOME = "${WORKSPACE}/boot_jdk"
+            }
+            steps {
+                sh 'SapMachine-Infrastructure/lib/jmc/build.sh'
+            }
+        }
+        stage("Test") {
+            agent {
+    dockerfile {
+        dir "SapMachine-Infrastructure/dockerfiles/jmc/x86_64"
+        reuseNode true
+        label "linux_x86_64"
+    }
+}
+
+            when {
+                expression { params.TEST == true }
+            }
+            environment {
+                BUILD_JDK = "${WORKSPACE}/boot_jdk"
+                JAVA_HOME = "${WORKSPACE}/boot_jdk"
+            }
+            steps {
+                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
+                    sh 'SapMachine-Infrastructure/lib/jmc/test.sh'
+                }
+            }
+        }
+        stage('Archive') {
+            steps {
+                script {
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.gz'
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.zip'
+                }
+            }
+        }
+    }
+    post {
+        success {
+            cleanWs()
+        }
+    }
+}
+</script>
+      <language>groovy</language>
+    </pendingScript>
+    <pendingScript>
+      <context />
+      <script>pipeline {
+    agent {
+        label "macos_aarch64"
+    }
+    stages {
+        stage("Init") {
+            steps {
+                cleanWs()
+            }
+        }
+        stage("Checkout Infrastructure Repository") {
+            steps {
+                checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'SapMachine-Infrastructure']], userRemoteConfigs: [[url: 'https://github.com/SAP/SapMachine-infrastructure.git']]]
+            }
+        }
+        stage("Checkout JMC Repository") {
+            steps {
+                checkout changelog: true, poll: false, scm: [$class: 'GitSCM', branches: [[name: "*/${params.GIT_BRANCH_OR_TAG}"]], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'jmc']], userRemoteConfigs: [[url: "${params.JMC_GIT_REPOSITORY}"]]]
+            }
+        }
+        stage ('Download Prerequisites'){
+            steps {
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD']]) {
+                    sh "python3 SapMachine-Infrastructure/lib/download_boot_jdk.py -m ${params.BUILD_JDK} -d `pwd`"
+                }
+            }
+        }
+        stage("Build and Basic Tests") {
+            
+            environment {
+                BUILD_JDK = "${WORKSPACE}/boot_jdk"
+                JAVA_HOME = "${WORKSPACE}/boot_jdk"
+            }
+            steps {
+                sh 'SapMachine-Infrastructure/lib/jmc/build.sh'
+            }
+        }
+        stage("Test") {
+            
+            when {
+                expression { params.TEST == true }
+            }
+            environment {
+                BUILD_JDK = "${WORKSPACE}/boot_jdk"
+                JAVA_HOME = "${WORKSPACE}/boot_jdk"
+            }
+            steps {
+                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
+                    sh 'SapMachine-Infrastructure/lib/jmc/test.sh'
+                }
+            }
+        }
+        stage('Archive') {
+            steps {
+                script {
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.gz'
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.zip'
+                }
+            }
+        }
+    }
+    post {
+        success {
+            cleanWs()
+        }
+    }
+}
+</script>
+      <language>groovy</language>
+    </pendingScript>
+    <pendingScript>
+      <context />
+      <script>pipeline {
+    agent {
+        label "macos_x86_64"
+    }
+    stages {
+        stage("Init") {
+            steps {
+                cleanWs()
+            }
+        }
+        stage("Checkout Infrastructure Repository") {
+            steps {
+                checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'SapMachine-Infrastructure']], userRemoteConfigs: [[url: 'https://github.com/SAP/SapMachine-infrastructure.git']]]
+            }
+        }
+        stage("Checkout JMC Repository") {
+            steps {
+                checkout changelog: true, poll: false, scm: [$class: 'GitSCM', branches: [[name: "*/${params.GIT_BRANCH_OR_TAG}"]], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'jmc']], userRemoteConfigs: [[url: "${params.JMC_GIT_REPOSITORY}"]]]
+            }
+        }
+        stage ('Download Prerequisites'){
+            steps {
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD']]) {
+                    sh "python3 SapMachine-Infrastructure/lib/download_boot_jdk.py -m ${params.BUILD_JDK} -d `pwd`"
+                }
+            }
+        }
+        stage("Build and Basic Tests") {
+            
+            environment {
+                BUILD_JDK = "${WORKSPACE}/boot_jdk"
+                JAVA_HOME = "${WORKSPACE}/boot_jdk"
+            }
+            steps {
+                sh 'SapMachine-Infrastructure/lib/jmc/build.sh'
+            }
+        }
+        stage("Test") {
+            
+            when {
+                expression { params.TEST == true }
+            }
+            environment {
+                BUILD_JDK = "${WORKSPACE}/boot_jdk"
+                JAVA_HOME = "${WORKSPACE}/boot_jdk"
+            }
+            steps {
+                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
+                    sh 'SapMachine-Infrastructure/lib/jmc/test.sh'
+                }
+            }
+        }
+        stage('Archive') {
+            steps {
+                script {
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.gz'
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.zip'
+                }
+            }
+        }
+    }
+    post {
+        success {
+            cleanWs()
+        }
+    }
+}
+</script>
+      <language>groovy</language>
+    </pendingScript>
+    <pendingScript>
+      <context />
+      <script>pipeline {
+    agent {
+        label "windows_x86_64"
+    }
+    stages {
+        stage("Init") {
+            steps {
+                cleanWs()
+            }
+        }
+        stage("Checkout Infrastructure Repository") {
+            steps {
+                checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'SapMachine-Infrastructure']], userRemoteConfigs: [[url: 'https://github.com/SAP/SapMachine-infrastructure.git']]]
+            }
+        }
+        stage("Checkout JMC Repository") {
+            steps {
+                checkout changelog: true, poll: false, scm: [$class: 'GitSCM', branches: [[name: "*/${params.GIT_BRANCH_OR_TAG}"]], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'jmc']], userRemoteConfigs: [[url: "${params.JMC_GIT_REPOSITORY}"]]]
+            }
+        }
+        stage ('Download Prerequisites'){
+            steps {
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD']]) {
+                    sh "python3 SapMachine-Infrastructure/lib/download_boot_jdk.py -m ${params.BUILD_JDK} -d `pwd`"
+                }
+            }
+        }
+        stage("Build and Basic Tests") {
+            
+            environment {
+                BUILD_JDK = "${WORKSPACE}/boot_jdk"
+                JAVA_HOME = "${WORKSPACE}/boot_jdk"
+            }
+            steps {
+                sh 'SapMachine-Infrastructure/lib/jmc/build.sh'
+            }
+        }
+        stage("Test") {
+            
+            when {
+                expression { params.TEST == true }
+            }
+            environment {
+                BUILD_JDK = "${WORKSPACE}/boot_jdk"
+                JAVA_HOME = "${WORKSPACE}/boot_jdk"
+            }
+            steps {
+                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
+                    sh 'SapMachine-Infrastructure/lib/jmc/test.sh'
+                }
+            }
+        }
+        stage('Archive') {
+            steps {
+                script {
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.gz'
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.zip'
+                }
+            }
+        }
+    }
+    post {
+        success {
+            cleanWs()
+        }
+    }
+}
+</script>
+      <language>groovy</language>
+    </pendingScript>
+    <pendingScript>
+      <context />
+      <script>pipeline {
+    agent {
+        label "linux_x86_64"
+    }
+    stages {
+        stage("Init") {
+            steps {
+                cleanWs()
+            }
+        }
+        stage("Checkout Infrastructure Repository") {
+            steps {
+                sh '''#!/bin/bash
+                    set -ex
+                    git init SapMachine-Infrastructure &amp;&amp; cd SapMachine-Infrastructure
+                    git fetch --depth 1 https://github.com/SAP/SapMachine-infrastructure.git master
+                    git checkout --detach FETCH_HEAD
+                '''
+            }
+        }
+        stage("Checkout SapMachine Repository") {
+            steps {
+                sh '''#!/bin/bash
+                    set -ex
+                    git init jmc &amp;&amp; cd jmc
+                    git remote add origin $JMC_GIT_REPOSITORY
+                    git fetch origin $GIT_REF
+                    git checkout --detach FETCH_HEAD
+                '''
+            }
+        }
+        stage ('Download Prerequisites'){
+            agent {
+    dockerfile {
+        dir "SapMachine-Infrastructure/dockerfiles/jmc/x86_64"
+        reuseNode true
+        label "linux_x86_64"
+    }
+}
+
+            steps {
+                // credentials are needed to avoid rate limit exceedance
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD']]) {
+                    sh "python3 SapMachine-Infrastructure/lib/download_boot_jdk.py -m ${params.BUILD_JDK} -d `pwd`"
+                }
+            }
+        }
+        stage("Build and Basic Tests") {
+            agent {
+    dockerfile {
+        dir "SapMachine-Infrastructure/dockerfiles/jmc/x86_64"
+        reuseNode true
+        label "linux_x86_64"
+    }
+}
+
+            environment {
+                BUILD_JDK = "${WORKSPACE}/boot_jdk"
+                JAVA_HOME = "${WORKSPACE}/boot_jdk"
+            }
+            steps {
+                sh 'SapMachine-Infrastructure/lib/jmc/build.sh'
+            }
+        }
+        stage("Test") {
+            agent {
+    dockerfile {
+        dir "SapMachine-Infrastructure/dockerfiles/jmc/x86_64"
+        reuseNode true
+        label "linux_x86_64"
+    }
+}
+
+            when {
+                expression { params.TEST == true }
+            }
+            environment {
+                BUILD_JDK = "${WORKSPACE}/boot_jdk"
+                JAVA_HOME = "${WORKSPACE}/boot_jdk"
+            }
+            steps {
+                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
+                    sh 'SapMachine-Infrastructure/lib/jmc/test.sh'
+                }
+            }
+        }
+        stage('Archive') {
+            steps {
+                script {
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.gz'
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.zip'
+                }
+            }
+        }
+    }
+    post {
+        success {
+            cleanWs()
+        }
+    }
+}
+</script>
+      <language>groovy</language>
+    </pendingScript>
+    <pendingScript>
+      <context />
+      <script>pipeline {
+    agent {
+        label "macos_aarch64"
+    }
+    stages {
+        stage("Init") {
+            steps {
+                cleanWs()
+            }
+        }
+        stage("Checkout Infrastructure Repository") {
+            steps {
+                sh '''#!/bin/bash
+                    set -ex
+                    git init SapMachine-Infrastructure &amp;&amp; cd SapMachine-Infrastructure
+                    git fetch --depth 1 https://github.com/SAP/SapMachine-infrastructure.git master
+                    git checkout --detach FETCH_HEAD
+                '''
+            }
+        }
+        stage("Checkout SapMachine Repository") {
+            steps {
+                sh '''#!/bin/bash
+                    set -ex
+                    git init jmc &amp;&amp; cd jmc
+                    git remote add origin $JMC_GIT_REPOSITORY
+                    git fetch origin $GIT_REF
+                    git checkout --detach FETCH_HEAD
+                '''
+            }
+        }
+        stage ('Download Prerequisites'){
+            
+            steps {
+                // credentials are needed to avoid rate limit exceedance
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD']]) {
+                    sh "python3 SapMachine-Infrastructure/lib/download_boot_jdk.py -m ${params.BUILD_JDK} -d `pwd`"
+                }
+            }
+        }
+        stage("Build and Basic Tests") {
+            
+            environment {
+                BUILD_JDK = "${WORKSPACE}/boot_jdk"
+                JAVA_HOME = "${WORKSPACE}/boot_jdk"
+            }
+            steps {
+                sh 'SapMachine-Infrastructure/lib/jmc/build.sh'
+            }
+        }
+        stage("Test") {
+            
+            when {
+                expression { params.TEST == true }
+            }
+            environment {
+                BUILD_JDK = "${WORKSPACE}/boot_jdk"
+                JAVA_HOME = "${WORKSPACE}/boot_jdk"
+            }
+            steps {
+                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
+                    sh 'SapMachine-Infrastructure/lib/jmc/test.sh'
+                }
+            }
+        }
+        stage('Archive') {
+            steps {
+                script {
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.gz'
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.zip'
+                }
+            }
+        }
+    }
+    post {
+        success {
+            cleanWs()
+        }
+    }
+}
+</script>
+      <language>groovy</language>
+    </pendingScript>
+    <pendingScript>
+      <context />
+      <script>pipeline {
+    agent {
+        label "macos_x86_64"
+    }
+    stages {
+        stage("Init") {
+            steps {
+                cleanWs()
+            }
+        }
+        stage("Checkout Infrastructure Repository") {
+            steps {
+                sh '''#!/bin/bash
+                    set -ex
+                    git init SapMachine-Infrastructure &amp;&amp; cd SapMachine-Infrastructure
+                    git fetch --depth 1 https://github.com/SAP/SapMachine-infrastructure.git master
+                    git checkout --detach FETCH_HEAD
+                '''
+            }
+        }
+        stage("Checkout SapMachine Repository") {
+            steps {
+                sh '''#!/bin/bash
+                    set -ex
+                    git init jmc &amp;&amp; cd jmc
+                    git remote add origin $JMC_GIT_REPOSITORY
+                    git fetch origin $GIT_REF
+                    git checkout --detach FETCH_HEAD
+                '''
+            }
+        }
+        stage ('Download Prerequisites'){
+            
+            steps {
+                // credentials are needed to avoid rate limit exceedance
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD']]) {
+                    sh "python3 SapMachine-Infrastructure/lib/download_boot_jdk.py -m ${params.BUILD_JDK} -d `pwd`"
+                }
+            }
+        }
+        stage("Build and Basic Tests") {
+            
+            environment {
+                BUILD_JDK = "${WORKSPACE}/boot_jdk"
+                JAVA_HOME = "${WORKSPACE}/boot_jdk"
+            }
+            steps {
+                sh 'SapMachine-Infrastructure/lib/jmc/build.sh'
+            }
+        }
+        stage("Test") {
+            
+            when {
+                expression { params.TEST == true }
+            }
+            environment {
+                BUILD_JDK = "${WORKSPACE}/boot_jdk"
+                JAVA_HOME = "${WORKSPACE}/boot_jdk"
+            }
+            steps {
+                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
+                    sh 'SapMachine-Infrastructure/lib/jmc/test.sh'
+                }
+            }
+        }
+        stage('Archive') {
+            steps {
+                script {
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.gz'
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.zip'
+                }
+            }
+        }
+    }
+    post {
+        success {
+            cleanWs()
+        }
+    }
+}
+</script>
+      <language>groovy</language>
+    </pendingScript>
+    <pendingScript>
+      <context />
+      <script>pipeline {
+    agent {
+        label "windows_x86_64"
+    }
+    stages {
+        stage("Init") {
+            steps {
+                cleanWs()
+            }
+        }
+        stage("Checkout Infrastructure Repository") {
+            steps {
+                sh '''#!/bin/bash
+                    set -ex
+                    git init SapMachine-Infrastructure &amp;&amp; cd SapMachine-Infrastructure
+                    git fetch --depth 1 https://github.com/SAP/SapMachine-infrastructure.git master
+                    git checkout --detach FETCH_HEAD
+                '''
+            }
+        }
+        stage("Checkout SapMachine Repository") {
+            steps {
+                sh '''#!/bin/bash
+                    set -ex
+                    git init jmc &amp;&amp; cd jmc
+                    git remote add origin $JMC_GIT_REPOSITORY
+                    git fetch origin $GIT_REF
+                    git checkout --detach FETCH_HEAD
+                '''
+            }
+        }
+        stage ('Download Prerequisites'){
+            
+            steps {
+                // credentials are needed to avoid rate limit exceedance
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD']]) {
+                    sh "python3 SapMachine-Infrastructure/lib/download_boot_jdk.py -m ${params.BUILD_JDK} -d `pwd`"
+                }
+            }
+        }
+        stage("Build and Basic Tests") {
+            
+            environment {
+                BUILD_JDK = "${WORKSPACE}/boot_jdk"
+                JAVA_HOME = "${WORKSPACE}/boot_jdk"
+            }
+            steps {
+                sh 'SapMachine-Infrastructure/lib/jmc/build.sh'
+            }
+        }
+        stage("Test") {
+            
+            when {
+                expression { params.TEST == true }
+            }
+            environment {
+                BUILD_JDK = "${WORKSPACE}/boot_jdk"
+                JAVA_HOME = "${WORKSPACE}/boot_jdk"
+            }
+            steps {
+                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
+                    sh 'SapMachine-Infrastructure/lib/jmc/test.sh'
+                }
+            }
+        }
+        stage('Archive') {
+            steps {
+                script {
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.gz'
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.zip'
+                }
+            }
+        }
+    }
+    post {
+        success {
+            cleanWs()
+        }
+    }
+}
+</script>
+      <language>groovy</language>
+    </pendingScript>
+    <pendingScript>
+      <context />
+      <script>pipeline {
+    agent {
         label "repository"
     }
     stages {
@@ -15361,12 +16027,7 @@
                 checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'SapMachine-Infrastructure']], userRemoteConfigs: [[url: 'https://github.com/SAP/SapMachine-infrastructure.git']]]
             }
         }
-        stage("Checkout Repository") {
-            steps {
-                checkout changelog: true, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/sap']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'async-profiler']], userRemoteConfigs: [[url: 'https://github.com/SAP/async-profiler.git']]]
-            }
-        }
-        stage('Merge') {
+        stage('Update SapMachine JMC Repository') {
             agent {
                 dockerfile {
                     dir "SapMachine-Infrastructure/dockerfiles/infrastructure"
@@ -15374,787 +16035,33 @@
                     label "repository"
                 }
             }
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD')]) {
-                    script {
-                        env.ASYNC_PROF_BUILD_REQUIRED = sh(
-                                script: "SapMachine-Infrastructure/lib/merge_async_prof.sh",
-                                returnStatus: true
-                        )
-                    }
-                }
-            }
-        }
-        stage('Check Release') {
-            agent {
-                dockerfile {
-                    dir "SapMachine-Infrastructure/dockerfiles/infrastructure"
-                    reuseNode true
-                    label "repository"
-                }
+            when {
+                beforeAgent true
+                expression { params.UPDATE_REPOSITORY == true }
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD')]) {
-                    script {
-                        env.ASYNC_PROF_RELEASE_TAG = sh(
-                                script: "python3 SapMachine-Infrastructure/lib/async_check_release.py",
-                                returnStdout: true
-                        )
-                    }
+                    sh("SapMachine-Infrastructure/lib/jmc/update_repo.sh")
                 }
             }
         }
-        stage ('Trigger Snapshot Builds') {
+        stage("Checkout SapMachine JMC Repository") {
             when {
-                expression { env.ASYNC_PROF_BUILD_REQUIRED != "1" }
+                expression { params.MERGE_UPSTREAM == true }
             }
             steps {
-                parallel (
-                    linux_aarch64: {
-                        build job: 'build-async-profiler-official-snapshot-linux_aarch64', parameters: [string(name: 'ASYNCPROF_GIT_BRANCH', value: 'sap')]
-                    },
-                    linux_ppc64le: {
-                        build job: 'build-async-profiler-official-snapshot-linux_ppc64le', parameters: [string(name: 'ASYNCPROF_GIT_BRANCH', value: 'sap')]
-                    },
-                    linux_x86_64: {
-                        build job: 'build-async-profiler-official-snapshot-linux_x86_64', parameters: [string(name: 'ASYNCPROF_GIT_BRANCH', value: 'sap')]
-                    },
-                    macos_x86_64: {
-                        build job: 'build-async-profiler-official-snapshot-macos_x86_64', parameters: [string(name: 'ASYNCPROF_GIT_BRANCH', value: 'sap')]
-                    },
-                    macos_aarch64: {
-                        build job: 'build-async-profiler-official-snapshot-macos_aarch64', parameters: [string(name: 'ASYNCPROF_GIT_BRANCH', value: 'sap')]
-                    },
-                    failFast: false
-                )
+                checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: "*/sap"]], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'sapjmc']], userRemoteConfigs: [[url: 'https://github.com/SAP/jmc.git']]]
             }
         }
-        stage ('Trigger Release Builds') {
+        stage("Merge from Upstream") {
             when {
-                expression { env.ASYNC_PROF_RELEASE_TAG != "No new releases" }
+                expression { params.MERGE_UPSTREAM == true }
             }
             steps {
-                parallel (
-                    linux_aarch64: {
-                        build job: 'build-async-profiler-official-release-linux_aarch64', parameters: [string(name: 'ASYNCPROF_GIT_BRANCH', value: 'sap'), string(name: 'GIT_TAG_NAME', value: env.ASYNC_PROF_RELEASE_TAG), [$class: 'BooleanParameterValue', name: 'RELEASE', value: 'true']]
-                    },
-                    linux_ppc64le: {
-                        build job: 'build-async-profiler-official-release-linux_ppc64le', parameters: [string(name: 'ASYNCPROF_GIT_BRANCH', value: 'sap'), string(name: 'GIT_TAG_NAME', value: env.ASYNC_PROF_RELEASE_TAG), [$class: 'BooleanParameterValue', name: 'RELEASE', value: 'true']]
-                    },
-                    linux_x86_64: {
-                        build job: 'build-async-profiler-official-release-linux_x86_64', parameters: [string(name: 'ASYNCPROF_GIT_BRANCH', value: 'sap'), string(name: 'GIT_TAG_NAME', value: env.ASYNC_PROF_RELEASE_TAG), [$class: 'BooleanParameterValue', name: 'RELEASE', value: 'true']]
-                    },
-                    macos_x86_64: {
-                        build job: 'build-async-profiler-official-release-macos_x86_64', parameters: [string(name: 'ASYNCPROF_GIT_BRANCH', value: 'sap'), string(name: 'GIT_TAG_NAME', value: env.ASYNC_PROF_RELEASE_TAG), [$class: 'BooleanParameterValue', name: 'RELEASE', value: 'true']]
-                    },
-                    macos_aarch64: {
-                        build job: 'build-async-profiler-official-release-macos_aarch64', parameters: [string(name: 'ASYNCPROF_GIT_BRANCH', value: 'sap'), string(name: 'GIT_TAG_NAME', value: env.ASYNC_PROF_RELEASE_TAG), [$class: 'BooleanParameterValue', name: 'RELEASE', value: 'true']]
-                    },
-                    failFast: false
-                )
-            }
-        }
-    }
-}
-</script>
-      <language>groovy</language>
-    </pendingScript>
-    <pendingScript>
-      <context />
-      <script>pipeline {
-    agent {
-        label 'macos_x86_64'
-    }
-    stages {
-        stage("Checkout Infrastructure Repository") {
-            steps {
-                checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'SapMachine-Infrastructure']], userRemoteConfigs: [[credentialsId: 'SapMachine-github', url: 'https://github.com/SAP/SapMachine-infrastructure.git']]]
-            }
-        }
-        stage('Copy Upstream Artifacts') {
-            steps {
-                copyArtifacts filter: 'INTEL_JDK_TGZ, INTEL_JRE_TGZ, INTEL_JDK_DMG, INTEL_JRE_DMG, INTEL_SYMBOLS, AARCH_JDK_TGZ, AARCH_JRE_TGZ, AARCH_JDK_DMG, AARCH_JRE_DMG, AARCH_SYMBOLS', projectName: 'osx-upload', selector: upstream()
-            }
-        }
-        stage('Deploy') {
-            steps {
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD']]) {
-                    sh "SapMachine-Infrastructure/lib/publish_multi_target_osx.sh"
+                withCredentials([usernamePassword(credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD')]) {
+                    sh("SapMachine-Infrastructure/lib/jmc/merge_from_upstream.py")
                 }
             }
-        }
-        stage('Publish Website Data') {
-            steps {
-                build job: 'generate-website-data', propagate: false, wait: false
-            }
-        }
-    }
-    post {
-        always {
-            cleanWs deleteDirs: true, disableDeferredWipeout: true
-        }
-    }
-}
-</script>
-      <language>groovy</language>
-    </pendingScript>
-    <pendingScript>
-      <context />
-      <script>pipeline {
-    agent {
-        label "linux_x86_64"
-    }
-    stages {
-        stage("Init") {
-            steps {
-                cleanWs()
-            }
-        }
-        stage("Checkout Infrastructure Repository") {
-            steps {
-                checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'SapMachine-Infrastructure']], userRemoteConfigs: [[url: 'https://github.com/SAP/SapMachine-infrastructure.git']]]
-            }
-        }
-        stage("Checkout JMC Repository") {
-            steps {
-                checkout changelog: true, poll: false, scm: [$class: 'GitSCM', branches: [[name: "*/${params.GIT_BRANCH_OR_TAG}"]], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'jmc']], userRemoteConfigs: [[url: "${params.JMC_GIT_REPOSITORY}"]]]
-            }
-        }
-        stage ('Download Prerequisites'){
-            steps {
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD']]) {
-                    sh "python3 SapMachine-Infrastructure/lib/download_boot_jdk.py -m ${params.BUILD_JDK} -d `pwd`"
-                }
-            }
-        }
-        stage("Build and Basic Tests") {
-            agent {
-    dockerfile {
-        dir "SapMachine-Infrastructure/dockerfiles/jmc/x86_64"
-        reuseNode true
-        label "linux_x86_64"
-    }
-}
-
-            environment {
-                BUILD_JDK = "${WORKSPACE}/boot_jdk"
-                JAVA_HOME = "${WORKSPACE}/boot_jdk"
-            }
-            steps {
-                sh 'SapMachine-Infrastructure/lib/jmc/build.sh'
-            }
-        }
-        stage("Test") {
-            agent {
-    dockerfile {
-        dir "SapMachine-Infrastructure/dockerfiles/jmc/x86_64"
-        reuseNode true
-        label "linux_x86_64"
-    }
-}
-
-            when {
-                expression { params.TEST == true }
-            }
-            environment {
-                BUILD_JDK = "${WORKSPACE}/boot_jdk"
-                JAVA_HOME = "${WORKSPACE}/boot_jdk"
-            }
-            steps {
-                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
-                    sh 'SapMachine-Infrastructure/lib/jmc/test.sh'
-                }
-            }
-        }
-        stage('Archive') {
-            steps {
-                script {
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.gz'
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.zip'
-                }
-            }
-        }
-    }
-    post {
-        success {
-            cleanWs()
-        }
-    }
-}
-</script>
-      <language>groovy</language>
-    </pendingScript>
-    <pendingScript>
-      <context />
-      <script>pipeline {
-    agent {
-        label "macos_aarch64"
-    }
-    stages {
-        stage("Init") {
-            steps {
-                cleanWs()
-            }
-        }
-        stage("Checkout Infrastructure Repository") {
-            steps {
-                checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'SapMachine-Infrastructure']], userRemoteConfigs: [[url: 'https://github.com/SAP/SapMachine-infrastructure.git']]]
-            }
-        }
-        stage("Checkout JMC Repository") {
-            steps {
-                checkout changelog: true, poll: false, scm: [$class: 'GitSCM', branches: [[name: "*/${params.GIT_BRANCH_OR_TAG}"]], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'jmc']], userRemoteConfigs: [[url: "${params.JMC_GIT_REPOSITORY}"]]]
-            }
-        }
-        stage ('Download Prerequisites'){
-            steps {
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD']]) {
-                    sh "python3 SapMachine-Infrastructure/lib/download_boot_jdk.py -m ${params.BUILD_JDK} -d `pwd`"
-                }
-            }
-        }
-        stage("Build and Basic Tests") {
-            
-            environment {
-                BUILD_JDK = "${WORKSPACE}/boot_jdk"
-                JAVA_HOME = "${WORKSPACE}/boot_jdk"
-            }
-            steps {
-                sh 'SapMachine-Infrastructure/lib/jmc/build.sh'
-            }
-        }
-        stage("Test") {
-            
-            when {
-                expression { params.TEST == true }
-            }
-            environment {
-                BUILD_JDK = "${WORKSPACE}/boot_jdk"
-                JAVA_HOME = "${WORKSPACE}/boot_jdk"
-            }
-            steps {
-                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
-                    sh 'SapMachine-Infrastructure/lib/jmc/test.sh'
-                }
-            }
-        }
-        stage('Archive') {
-            steps {
-                script {
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.gz'
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.zip'
-                }
-            }
-        }
-    }
-    post {
-        success {
-            cleanWs()
-        }
-    }
-}
-</script>
-      <language>groovy</language>
-    </pendingScript>
-    <pendingScript>
-      <context />
-      <script>pipeline {
-    agent {
-        label "macos_x86_64"
-    }
-    stages {
-        stage("Init") {
-            steps {
-                cleanWs()
-            }
-        }
-        stage("Checkout Infrastructure Repository") {
-            steps {
-                checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'SapMachine-Infrastructure']], userRemoteConfigs: [[url: 'https://github.com/SAP/SapMachine-infrastructure.git']]]
-            }
-        }
-        stage("Checkout JMC Repository") {
-            steps {
-                checkout changelog: true, poll: false, scm: [$class: 'GitSCM', branches: [[name: "*/${params.GIT_BRANCH_OR_TAG}"]], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'jmc']], userRemoteConfigs: [[url: "${params.JMC_GIT_REPOSITORY}"]]]
-            }
-        }
-        stage ('Download Prerequisites'){
-            steps {
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD']]) {
-                    sh "python3 SapMachine-Infrastructure/lib/download_boot_jdk.py -m ${params.BUILD_JDK} -d `pwd`"
-                }
-            }
-        }
-        stage("Build and Basic Tests") {
-            
-            environment {
-                BUILD_JDK = "${WORKSPACE}/boot_jdk"
-                JAVA_HOME = "${WORKSPACE}/boot_jdk"
-            }
-            steps {
-                sh 'SapMachine-Infrastructure/lib/jmc/build.sh'
-            }
-        }
-        stage("Test") {
-            
-            when {
-                expression { params.TEST == true }
-            }
-            environment {
-                BUILD_JDK = "${WORKSPACE}/boot_jdk"
-                JAVA_HOME = "${WORKSPACE}/boot_jdk"
-            }
-            steps {
-                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
-                    sh 'SapMachine-Infrastructure/lib/jmc/test.sh'
-                }
-            }
-        }
-        stage('Archive') {
-            steps {
-                script {
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.gz'
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.zip'
-                }
-            }
-        }
-    }
-    post {
-        success {
-            cleanWs()
-        }
-    }
-}
-</script>
-      <language>groovy</language>
-    </pendingScript>
-    <pendingScript>
-      <context />
-      <script>pipeline {
-    agent {
-        label "windows_x86_64"
-    }
-    stages {
-        stage("Init") {
-            steps {
-                cleanWs()
-            }
-        }
-        stage("Checkout Infrastructure Repository") {
-            steps {
-                checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'SapMachine-Infrastructure']], userRemoteConfigs: [[url: 'https://github.com/SAP/SapMachine-infrastructure.git']]]
-            }
-        }
-        stage("Checkout JMC Repository") {
-            steps {
-                checkout changelog: true, poll: false, scm: [$class: 'GitSCM', branches: [[name: "*/${params.GIT_BRANCH_OR_TAG}"]], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'jmc']], userRemoteConfigs: [[url: "${params.JMC_GIT_REPOSITORY}"]]]
-            }
-        }
-        stage ('Download Prerequisites'){
-            steps {
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD']]) {
-                    sh "python3 SapMachine-Infrastructure/lib/download_boot_jdk.py -m ${params.BUILD_JDK} -d `pwd`"
-                }
-            }
-        }
-        stage("Build and Basic Tests") {
-            
-            environment {
-                BUILD_JDK = "${WORKSPACE}/boot_jdk"
-                JAVA_HOME = "${WORKSPACE}/boot_jdk"
-            }
-            steps {
-                sh 'SapMachine-Infrastructure/lib/jmc/build.sh'
-            }
-        }
-        stage("Test") {
-            
-            when {
-                expression { params.TEST == true }
-            }
-            environment {
-                BUILD_JDK = "${WORKSPACE}/boot_jdk"
-                JAVA_HOME = "${WORKSPACE}/boot_jdk"
-            }
-            steps {
-                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
-                    sh 'SapMachine-Infrastructure/lib/jmc/test.sh'
-                }
-            }
-        }
-        stage('Archive') {
-            steps {
-                script {
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.gz'
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.zip'
-                }
-            }
-        }
-    }
-    post {
-        success {
-            cleanWs()
-        }
-    }
-}
-</script>
-      <language>groovy</language>
-    </pendingScript>
-    <pendingScript>
-      <context />
-      <script>pipeline {
-    agent {
-        label "linux_x86_64"
-    }
-    stages {
-        stage("Init") {
-            steps {
-                cleanWs()
-            }
-        }
-        stage("Checkout Infrastructure Repository") {
-            steps {
-                sh '''#!/bin/bash
-                    set -ex
-                    git init SapMachine-Infrastructure &amp;&amp; cd SapMachine-Infrastructure
-                    git fetch --depth 1 https://github.com/SAP/SapMachine-infrastructure.git master
-                    git checkout --detach FETCH_HEAD
-                '''
-            }
-        }
-        stage("Checkout SapMachine Repository") {
-            steps {
-                sh '''#!/bin/bash
-                    set -ex
-                    git init jmc &amp;&amp; cd jmc
-                    git remote add origin $JMC_GIT_REPOSITORY
-                    git fetch origin $GIT_REF
-                    git checkout --detach FETCH_HEAD
-                '''
-            }
-        }
-        stage ('Download Prerequisites'){
-            agent {
-    dockerfile {
-        dir "SapMachine-Infrastructure/dockerfiles/jmc/x86_64"
-        reuseNode true
-        label "linux_x86_64"
-    }
-}
-
-            steps {
-                // credentials are needed to avoid rate limit exceedance
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD']]) {
-                    sh "python3 SapMachine-Infrastructure/lib/download_boot_jdk.py -m ${params.BUILD_JDK} -d `pwd`"
-                }
-            }
-        }
-        stage("Build and Basic Tests") {
-            agent {
-    dockerfile {
-        dir "SapMachine-Infrastructure/dockerfiles/jmc/x86_64"
-        reuseNode true
-        label "linux_x86_64"
-    }
-}
-
-            environment {
-                BUILD_JDK = "${WORKSPACE}/boot_jdk"
-                JAVA_HOME = "${WORKSPACE}/boot_jdk"
-            }
-            steps {
-                sh 'SapMachine-Infrastructure/lib/jmc/build.sh'
-            }
-        }
-        stage("Test") {
-            agent {
-    dockerfile {
-        dir "SapMachine-Infrastructure/dockerfiles/jmc/x86_64"
-        reuseNode true
-        label "linux_x86_64"
-    }
-}
-
-            when {
-                expression { params.TEST == true }
-            }
-            environment {
-                BUILD_JDK = "${WORKSPACE}/boot_jdk"
-                JAVA_HOME = "${WORKSPACE}/boot_jdk"
-            }
-            steps {
-                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
-                    sh 'SapMachine-Infrastructure/lib/jmc/test.sh'
-                }
-            }
-        }
-        stage('Archive') {
-            steps {
-                script {
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.gz'
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.zip'
-                }
-            }
-        }
-    }
-    post {
-        success {
-            cleanWs()
-        }
-    }
-}
-</script>
-      <language>groovy</language>
-    </pendingScript>
-    <pendingScript>
-      <context />
-      <script>pipeline {
-    agent {
-        label "macos_aarch64"
-    }
-    stages {
-        stage("Init") {
-            steps {
-                cleanWs()
-            }
-        }
-        stage("Checkout Infrastructure Repository") {
-            steps {
-                sh '''#!/bin/bash
-                    set -ex
-                    git init SapMachine-Infrastructure &amp;&amp; cd SapMachine-Infrastructure
-                    git fetch --depth 1 https://github.com/SAP/SapMachine-infrastructure.git master
-                    git checkout --detach FETCH_HEAD
-                '''
-            }
-        }
-        stage("Checkout SapMachine Repository") {
-            steps {
-                sh '''#!/bin/bash
-                    set -ex
-                    git init jmc &amp;&amp; cd jmc
-                    git remote add origin $JMC_GIT_REPOSITORY
-                    git fetch origin $GIT_REF
-                    git checkout --detach FETCH_HEAD
-                '''
-            }
-        }
-        stage ('Download Prerequisites'){
-            
-            steps {
-                // credentials are needed to avoid rate limit exceedance
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD']]) {
-                    sh "python3 SapMachine-Infrastructure/lib/download_boot_jdk.py -m ${params.BUILD_JDK} -d `pwd`"
-                }
-            }
-        }
-        stage("Build and Basic Tests") {
-            
-            environment {
-                BUILD_JDK = "${WORKSPACE}/boot_jdk"
-                JAVA_HOME = "${WORKSPACE}/boot_jdk"
-            }
-            steps {
-                sh 'SapMachine-Infrastructure/lib/jmc/build.sh'
-            }
-        }
-        stage("Test") {
-            
-            when {
-                expression { params.TEST == true }
-            }
-            environment {
-                BUILD_JDK = "${WORKSPACE}/boot_jdk"
-                JAVA_HOME = "${WORKSPACE}/boot_jdk"
-            }
-            steps {
-                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
-                    sh 'SapMachine-Infrastructure/lib/jmc/test.sh'
-                }
-            }
-        }
-        stage('Archive') {
-            steps {
-                script {
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.gz'
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.zip'
-                }
-            }
-        }
-    }
-    post {
-        success {
-            cleanWs()
-        }
-    }
-}
-</script>
-      <language>groovy</language>
-    </pendingScript>
-    <pendingScript>
-      <context />
-      <script>pipeline {
-    agent {
-        label "macos_x86_64"
-    }
-    stages {
-        stage("Init") {
-            steps {
-                cleanWs()
-            }
-        }
-        stage("Checkout Infrastructure Repository") {
-            steps {
-                sh '''#!/bin/bash
-                    set -ex
-                    git init SapMachine-Infrastructure &amp;&amp; cd SapMachine-Infrastructure
-                    git fetch --depth 1 https://github.com/SAP/SapMachine-infrastructure.git master
-                    git checkout --detach FETCH_HEAD
-                '''
-            }
-        }
-        stage("Checkout SapMachine Repository") {
-            steps {
-                sh '''#!/bin/bash
-                    set -ex
-                    git init jmc &amp;&amp; cd jmc
-                    git remote add origin $JMC_GIT_REPOSITORY
-                    git fetch origin $GIT_REF
-                    git checkout --detach FETCH_HEAD
-                '''
-            }
-        }
-        stage ('Download Prerequisites'){
-            
-            steps {
-                // credentials are needed to avoid rate limit exceedance
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD']]) {
-                    sh "python3 SapMachine-Infrastructure/lib/download_boot_jdk.py -m ${params.BUILD_JDK} -d `pwd`"
-                }
-            }
-        }
-        stage("Build and Basic Tests") {
-            
-            environment {
-                BUILD_JDK = "${WORKSPACE}/boot_jdk"
-                JAVA_HOME = "${WORKSPACE}/boot_jdk"
-            }
-            steps {
-                sh 'SapMachine-Infrastructure/lib/jmc/build.sh'
-            }
-        }
-        stage("Test") {
-            
-            when {
-                expression { params.TEST == true }
-            }
-            environment {
-                BUILD_JDK = "${WORKSPACE}/boot_jdk"
-                JAVA_HOME = "${WORKSPACE}/boot_jdk"
-            }
-            steps {
-                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
-                    sh 'SapMachine-Infrastructure/lib/jmc/test.sh'
-                }
-            }
-        }
-        stage('Archive') {
-            steps {
-                script {
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.gz'
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.zip'
-                }
-            }
-        }
-    }
-    post {
-        success {
-            cleanWs()
-        }
-    }
-}
-</script>
-      <language>groovy</language>
-    </pendingScript>
-    <pendingScript>
-      <context />
-      <script>pipeline {
-    agent {
-        label "windows_x86_64"
-    }
-    stages {
-        stage("Init") {
-            steps {
-                cleanWs()
-            }
-        }
-        stage("Checkout Infrastructure Repository") {
-            steps {
-                sh '''#!/bin/bash
-                    set -ex
-                    git init SapMachine-Infrastructure &amp;&amp; cd SapMachine-Infrastructure
-                    git fetch --depth 1 https://github.com/SAP/SapMachine-infrastructure.git master
-                    git checkout --detach FETCH_HEAD
-                '''
-            }
-        }
-        stage("Checkout SapMachine Repository") {
-            steps {
-                sh '''#!/bin/bash
-                    set -ex
-                    git init jmc &amp;&amp; cd jmc
-                    git remote add origin $JMC_GIT_REPOSITORY
-                    git fetch origin $GIT_REF
-                    git checkout --detach FETCH_HEAD
-                '''
-            }
-        }
-        stage ('Download Prerequisites'){
-            
-            steps {
-                // credentials are needed to avoid rate limit exceedance
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD']]) {
-                    sh "python3 SapMachine-Infrastructure/lib/download_boot_jdk.py -m ${params.BUILD_JDK} -d `pwd`"
-                }
-            }
-        }
-        stage("Build and Basic Tests") {
-            
-            environment {
-                BUILD_JDK = "${WORKSPACE}/boot_jdk"
-                JAVA_HOME = "${WORKSPACE}/boot_jdk"
-            }
-            steps {
-                sh 'SapMachine-Infrastructure/lib/jmc/build.sh'
-            }
-        }
-        stage("Test") {
-            
-            when {
-                expression { params.TEST == true }
-            }
-            environment {
-                BUILD_JDK = "${WORKSPACE}/boot_jdk"
-                JAVA_HOME = "${WORKSPACE}/boot_jdk"
-            }
-            steps {
-                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
-                    sh 'SapMachine-Infrastructure/lib/jmc/test.sh'
-                }
-            }
-        }
-        stage('Archive') {
-            steps {
-                script {
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.gz'
-                    archiveArtifacts allowEmptyArchive: true, artifacts: 'jmc/target/products/*.zip'
-                }
-            }
-        }
-    }
-    post {
-        success {
-            cleanWs()
         }
     }
 }
