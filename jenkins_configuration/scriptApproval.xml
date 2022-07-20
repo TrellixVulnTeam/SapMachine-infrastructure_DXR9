@@ -706,6 +706,7 @@
     <string>74145a108329ab172223531ae63c3bd2290624e5</string>
     <string>7428b7911ccbeee54ef67ad3aa22fddf5f34ee18</string>
     <string>7455bceb26946765146240b3ae2db8987c05abca</string>
+    <string>7467b6116ba6d58bac4aba867101e39641a2eb72</string>
     <string>7471d58900c01f33a7f315f8e7cab82b5fae25ec</string>
     <string>747cffb8c9c1971e1f3c57345e1d72510258805d</string>
     <string>748c30002735e7a91444925ac6e0c46bc234bbdf</string>
@@ -16071,6 +16072,12 @@
       <language>groovy</language>
     </pendingScript>
   </pendingScripts>
-  <pendingSignatures />
+  <pendingSignatures>
+    <pendingSignature>
+      <context />
+      <signature>staticMethod java.lang.Integer toString int</signature>
+      <dangerous>false</dangerous>
+    </pendingSignature>
+  </pendingSignatures>
   <pendingClasspathEntries />
 </scriptApproval>
