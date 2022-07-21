@@ -1595,7 +1595,9 @@
     <string>ffb4b03273bd9ba693e8d204197e7007b62374ab</string>
     <string>ffe197bcad9c8be0f602152554a73756f9f3ce4f</string>
   </approvedScriptHashes>
-  <approvedSignatures />
+  <approvedSignatures>
+    <string>staticMethod java.lang.Integer toString int</string>
+  </approvedSignatures>
   <aclApprovedSignatures />
   <approvedClasspathEntries />
   <pendingScripts>
@@ -16072,12 +16074,6 @@
       <language>groovy</language>
     </pendingScript>
   </pendingScripts>
-  <pendingSignatures>
-    <pendingSignature>
-      <context />
-      <signature>staticMethod java.lang.Integer toString int</signature>
-      <dangerous>false</dangerous>
-    </pendingSignature>
-  </pendingSignatures>
+  <pendingSignatures />
   <pendingClasspathEntries />
 </scriptApproval>
