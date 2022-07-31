@@ -1,29 +1,4 @@
 <hudson.model.Queue_-State>
-  <counter>3711</counter>
-  <items>
-    <hudson.model.Queue_-BuildableItem>
-      <actions />
-      <id>3695</id>
-      <task class="org.jenkinsci.plugins.workflow.support.steps.ExecutorStepExecution$PlaceholderTask" plugin="workflow-durable-task-step@1174.v73a_9a_17edce0">
-        <context class="org.jenkinsci.plugins.workflow.cps.CpsStepContext" plugin="workflow-cps@2746.v0da_83a_332669">
-          <executionRef class="org.jenkinsci.plugins.workflow.job.WorkflowRun$Owner" plugin="workflow-job@1207.ve6191ff089f8">
-            <job>build-19-release-macos_x86_64</job>
-            <id>42</id>
-          </executionRef>
-          <id>3</id>
-          <bodyHeads />
-          <body class="org.jenkinsci.plugins.workflow.cps.StaticBodyReference" resolves-to="org.jenkinsci.plugins.workflow.cps.HandleBodyReference">
-            <id>1</id>
-          </body>
-          <threadId>0</threadId>
-          <stepDescriptorId>org.jenkinsci.plugins.workflow.support.steps.ExecutorStep</stepDescriptorId>
-        </context>
-        <label>macos_x86_64</label>
-        <runId>build-19-release-macos_x86_64#42</runId>
-      </task>
-      <inQueueSince>1659141022654</inQueueSince>
-      <buildableStartMilliseconds>1659141022667</buildableStartMilliseconds>
-      <isPending>false</isPending>
-    </hudson.model.Queue_-BuildableItem>
-  </items>
+  <counter>3737</counter>
+  <items />
 </hudson.model.Queue_-State>
