@@ -8,7 +8,7 @@
       <options />
     </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
   </actions>
-  <description>This project is generated. Do not modify manually.&lt;!-- Managed by Jenkins Job Builder --&gt;</description>
+  <description>Test CF buildpack data.&lt;!-- Managed by Jenkins Job Builder --&gt;</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty>
@@ -17,7 +17,7 @@
     <jenkins.model.BuildDiscarderProperty>
       <strategy class="hudson.tasks.LogRotator">
         <daysToKeep>-1</daysToKeep>
-        <numToKeep>100</numToKeep>
+        <numToKeep>20</numToKeep>
         <artifactDaysToKeep>-1</artifactDaysToKeep>
         <artifactNumToKeep>-1</artifactNumToKeep>
       </strategy>
@@ -44,7 +44,7 @@
           stage('Test') {
               agent {
                   dockerfile {
-                      label 'linux_x86_64'
+                      label 'cloud_foundry'
                       dir 'SapMachine-Infrastructure/dockerfiles/infrastructure'
                       reuseNode true
                   }
@@ -58,12 +58,12 @@
       }
       post {
           always {
-              cleanWs deleteDirs: true, disableDeferredWipeout: true
+              cleanWs()
           }
       }
   }
 </script>
-    <sandbox>false</sandbox>
+    <sandbox>true</sandbox>
   </definition>
   <disabled>false</disabled>
 </flow-definition>

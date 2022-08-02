@@ -3,5 +3,46 @@
   <githubUrl>https://github.com/SAP/SapMachine</githubUrl>
   <gitUrl>git://github.com/SAP/SapMachine.git</gitUrl>
   <sshUrl>git@github.com:SAP/SapMachine.git</sshUrl>
-  <pulls class="concurrent-hash-map" />
+  <pulls class="concurrent-hash-map">
+    <entry>
+      <int>1212</int>
+      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+        <number>1212</number>
+        <issueUpdatedAt>2022-08-01 18:40:19.0 UTC</issueUpdatedAt>
+        <title>SapMachine #1211: Various Fixes to Vitals and MallocTracer</title>
+        <body>A collection of small fixes. To reduce work, I do them in one patch.
+
+https://github.com/SAP/SapMachine/commit/01ab4db14b03b7bbe34bfb2cf29df74cfe3bb817
+Fix for #1210. Now we skip certain tests on test systems with glibc &gt;= 2.34
+
+https://github.com/SAP/SapMachine/commit/ecfcca05ab84871108fce583cb375f9346f37750
+Fix for #1209. If /proc/meminfo "MemAvailable" is missing (old kernel), we now omit the "syst-avail" column.
+
+https://github.com/SAP/SapMachine/commit/c646c102189fef637577dcb3a367cdc8b7bf8109
+Tracing for #1204. I have no idea what the problem is, maybe this tracing helps.
+
+https://github.com/SAP/SapMachine/commit/2aab7ebb50d5941e283fbae484fde96ec0c9a019
+Fix for #1203 . C-heap size and RSS are unrelated, because C-Heap may contain untouched memory. Fixes test that relies on this assumption.
+
+fixes #1203
+fixes #1209 
+fixes #1210
+fixes #1211
+
+</body>
+        <prUpdatedAt>2022-08-01 18:40:19.0 UTC</prUpdatedAt>
+        <headSha>2aab7ebb50d5941e283fbae484fde96ec0c9a019</headSha>
+        <headRef>vitals-fixes-2022-08-01</headRef>
+        <mergeable>true</mergeable>
+        <baseRef>sapmachine</baseRef>
+        <userLogin>tstuefe</userLogin>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1212</htmlUrl>
+        <labels />
+        <lastCommentCreatedAt>2022-08-01 14:50:58.0 UTC</lastCommentCreatedAt>
+        <sourceRepoOwner>tstuefe</sourceRepoOwner>
+        <state>OPEN</state>
+        <inBadState>false</inBadState>
+      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+    </entry>
+  </pulls>
 </org.jenkinsci.plugins.github.pullrequest.GitHubPRRepository>
