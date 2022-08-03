@@ -8,9 +8,9 @@
       <int>1212</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
         <number>1212</number>
-        <issueUpdatedAt>2022-08-01 18:40:19.0 UTC</issueUpdatedAt>
+        <issueUpdatedAt>2022-08-02 11:37:16.0 UTC</issueUpdatedAt>
         <title>SapMachine #1211: Various Fixes to Vitals and MallocTracer</title>
-        <body>A collection of small fixes. To reduce work, I do them in one patch.
+        <body>A collection of small to tiny fixes. To reduce work, I do them in one patch.
 
 https://github.com/SAP/SapMachine/commit/01ab4db14b03b7bbe34bfb2cf29df74cfe3bb817
 Fix for #1210. Now we skip certain tests on test systems with glibc &gt;= 2.34
@@ -30,7 +30,7 @@ fixes #1210
 fixes #1211
 
 </body>
-        <prUpdatedAt>2022-08-01 18:40:19.0 UTC</prUpdatedAt>
+        <prUpdatedAt>2022-08-02 11:37:16.0 UTC</prUpdatedAt>
         <headSha>2aab7ebb50d5941e283fbae484fde96ec0c9a019</headSha>
         <headRef>vitals-fixes-2022-08-01</headRef>
         <mergeable>true</mergeable>
@@ -38,7 +38,7 @@ fixes #1211
         <userLogin>tstuefe</userLogin>
         <htmlUrl>https://github.com/SAP/SapMachine/pull/1212</htmlUrl>
         <labels />
-        <lastCommentCreatedAt>2022-08-01 14:50:58.0 UTC</lastCommentCreatedAt>
+        <lastCommentCreatedAt>2022-08-02 06:43:10.0 UTC</lastCommentCreatedAt>
         <sourceRepoOwner>tstuefe</sourceRepoOwner>
         <state>OPEN</state>
         <inBadState>false</inBadState>
