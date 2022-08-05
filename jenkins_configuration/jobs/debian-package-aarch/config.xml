@@ -48,7 +48,7 @@
     <script>pipeline {
     agent {
         // will be changed to aarch
-        label 'linux_aarch64'
+        label 'agent-ubuntu-local'
     }
     stages {
         stage("Checkout Infrastructure Repository") {
@@ -65,8 +65,7 @@
             }
             post {
                   success {
-                    sh 'echo WIP: stage Build - post success'
-                    // archiveArtifacts allowEmptyArchive: true, artifacts: "*.deb"
+                    archiveArtifacts allowEmptyArchive: true, artifacts: "*.deb"
                 }
             }
         }

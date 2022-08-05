@@ -5,119 +5,41 @@
   <sshUrl>git@github.com:SAP/SapMachine.git</sshUrl>
   <pulls class="concurrent-hash-map">
     <entry>
-      <int>1216</int>
+      <int>1220</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-        <number>1216</number>
-        <issueUpdatedAt>2022-08-03 21:21:12.0 UTC</issueUpdatedAt>
-        <title>SapMachine #1211: Various Fixes to Vitals and MallocTracer - 11</title>
-        <body>Clean downport
-
-fixes #1203
-fixes #1209
-fixes #1210
-fixes #1211</body>
-        <prUpdatedAt>2022-08-03 21:21:12.0 UTC</prUpdatedAt>
-        <headSha>553666a19f7ace4e56b1bef9fec36c652399323d</headSha>
-        <headRef>SapMachine__1211__Various_Fixes_to_Vitals_and_MallocTracer_-11</headRef>
+        <number>1220</number>
+        <issueUpdatedAt>2022-08-05 00:30:13.0 UTC</issueUpdatedAt>
+        <title>Merge to tag jdk-20+9</title>
+        <body>please pull</body>
+        <prUpdatedAt>2022-08-05 00:30:13.0 UTC</prUpdatedAt>
+        <headSha>13f0f126b9edd7d7c9a556c36fd372ca519ad6f5</headSha>
+        <headRef>pr-jdk-20+9</headRef>
         <mergeable>true</mergeable>
-        <baseRef>sapmachine11</baseRef>
-        <userLogin>tstuefe</userLogin>
-        <htmlUrl>https://github.com/SAP/SapMachine/pull/1216</htmlUrl>
+        <baseRef>sapmachine</baseRef>
+        <userLogin>SapMachine</userLogin>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1220</htmlUrl>
         <labels />
-        <lastCommentCreatedAt>2022-08-03 05:16:15.0 UTC</lastCommentCreatedAt>
-        <sourceRepoOwner>tstuefe</sourceRepoOwner>
+        <sourceRepoOwner>SAP</sourceRepoOwner>
         <state>OPEN</state>
         <inBadState>false</inBadState>
       </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
     </entry>
     <entry>
-      <int>1217</int>
+      <int>1221</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-        <number>1217</number>
-        <issueUpdatedAt>2022-08-03 20:48:17.0 UTC</issueUpdatedAt>
-        <title>SapMachine #1211: Various Fixes to Vitals and MallocTracer - 19</title>
-        <body>Clean downport
-
-fixes #1203
-fixes #1209
-fixes #1210
-fixes #1211</body>
-        <prUpdatedAt>2022-08-03 20:48:17.0 UTC</prUpdatedAt>
-        <headSha>05ae14c9384d22913aef807da5dc110cb9d60b83</headSha>
-        <headRef>SapMachine__1211__Various_Fixes_to_Vitals_and_MallocTracer_-19</headRef>
+        <number>1221</number>
+        <issueUpdatedAt>2022-08-05 00:30:25.0 UTC</issueUpdatedAt>
+        <title>Merge to tag jdk-19+34</title>
+        <body>please pull</body>
+        <prUpdatedAt>2022-08-05 00:30:25.0 UTC</prUpdatedAt>
+        <headSha>e265b2a2918f39a1d9afdb6a473c2d8d657cbb8c</headSha>
+        <headRef>pr-jdk-19+34</headRef>
         <mergeable>true</mergeable>
         <baseRef>sapmachine19</baseRef>
-        <userLogin>tstuefe</userLogin>
-        <htmlUrl>https://github.com/SAP/SapMachine/pull/1217</htmlUrl>
-        <labels />
-        <lastCommentCreatedAt>2022-08-03 05:16:27.0 UTC</lastCommentCreatedAt>
-        <sourceRepoOwner>tstuefe</sourceRepoOwner>
-        <state>OPEN</state>
-        <inBadState>false</inBadState>
-      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-    </entry>
-    <entry>
-      <int>1218</int>
-      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-        <number>1218</number>
-        <issueUpdatedAt>2022-08-04 00:30:37.0 UTC</issueUpdatedAt>
-        <title>Merge to tag jdk-17.0.5+1</title>
-        <body>please pull</body>
-        <prUpdatedAt>2022-08-04 00:30:37.0 UTC</prUpdatedAt>
-        <headSha>64db633e9152dd54296e09963304312c361ad6b2</headSha>
-        <headRef>pr-jdk-17.0.5+1</headRef>
-        <mergeable>false</mergeable>
-        <baseRef>sapmachine17</baseRef>
         <userLogin>SapMachine</userLogin>
-        <htmlUrl>https://github.com/SAP/SapMachine/pull/1218</htmlUrl>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1221</htmlUrl>
         <labels />
         <sourceRepoOwner>SAP</sourceRepoOwner>
-        <state>OPEN</state>
-        <inBadState>false</inBadState>
-      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-    </entry>
-    <entry>
-      <int>1219</int>
-      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-        <number>1219</number>
-        <issueUpdatedAt>2022-08-04 00:30:55.0 UTC</issueUpdatedAt>
-        <title>Merge to tag jdk-11.0.17+1</title>
-        <body>please pull</body>
-        <prUpdatedAt>2022-08-04 00:30:55.0 UTC</prUpdatedAt>
-        <headSha>954d57ae503e5e25c263d662a8e2eba978bd62b2</headSha>
-        <headRef>pr-jdk-11.0.17+1</headRef>
-        <mergeable>false</mergeable>
-        <baseRef>sapmachine11</baseRef>
-        <userLogin>SapMachine</userLogin>
-        <htmlUrl>https://github.com/SAP/SapMachine/pull/1219</htmlUrl>
-        <labels />
-        <sourceRepoOwner>SAP</sourceRepoOwner>
-        <state>OPEN</state>
-        <inBadState>false</inBadState>
-      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-    </entry>
-    <entry>
-      <int>1215</int>
-      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-        <number>1215</number>
-        <issueUpdatedAt>2022-08-03 20:46:47.0 UTC</issueUpdatedAt>
-        <title>SapMachine #1211: Various Fixes to Vitals and MallocTracer - 17</title>
-        <body>Clean downport
-
-fixes #1203
-fixes #1209
-fixes #1210
-fixes #1211</body>
-        <prUpdatedAt>2022-08-03 20:46:47.0 UTC</prUpdatedAt>
-        <headSha>89603c6b2c9bcada8cd9a897bf4306d3dad32472</headSha>
-        <headRef>SapMachine__1211__Various_Fixes_to_Vitals_and_MallocTracer_-17</headRef>
-        <mergeable>true</mergeable>
-        <baseRef>sapmachine17</baseRef>
-        <userLogin>tstuefe</userLogin>
-        <htmlUrl>https://github.com/SAP/SapMachine/pull/1215</htmlUrl>
-        <labels />
-        <lastCommentCreatedAt>2022-08-03 05:16:07.0 UTC</lastCommentCreatedAt>
-        <sourceRepoOwner>tstuefe</sourceRepoOwner>
         <state>OPEN</state>
         <inBadState>false</inBadState>
       </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
