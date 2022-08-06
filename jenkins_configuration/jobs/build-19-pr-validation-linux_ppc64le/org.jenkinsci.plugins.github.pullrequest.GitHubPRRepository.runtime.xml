@@ -14,6 +14,7 @@
         <prUpdatedAt>2022-08-05 00:30:13.0 UTC</prUpdatedAt>
         <headSha>13f0f126b9edd7d7c9a556c36fd372ca519ad6f5</headSha>
         <headRef>pr-jdk-20+9</headRef>
+        <mergeable>true</mergeable>
         <baseRef>sapmachine</baseRef>
         <userLogin>SapMachine</userLogin>
         <htmlUrl>https://github.com/SAP/SapMachine/pull/1220</htmlUrl>
@@ -33,6 +34,7 @@
         <prUpdatedAt>2022-08-05 00:30:25.0 UTC</prUpdatedAt>
         <headSha>e265b2a2918f39a1d9afdb6a473c2d8d657cbb8c</headSha>
         <headRef>pr-jdk-19+34</headRef>
+        <mergeable>true</mergeable>
         <baseRef>sapmachine19</baseRef>
         <userLogin>SapMachine</userLogin>
         <htmlUrl>https://github.com/SAP/SapMachine/pull/1221</htmlUrl>

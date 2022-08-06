@@ -48,7 +48,7 @@
     <script>pipeline {
     agent {
         // will be changed to aarch
-        label 'agent-ubuntu-local'
+        label 'linux_aarch64'
     }
     stages {
         stage("Checkout Infrastructure Repository") {
@@ -60,8 +60,9 @@
             steps {
                 sh 'echo WIP: stage Build'
                 sh 'uname -a'
+                sh 'sudo apt-get -y install dh-make devscripts build-essential lintian'
                 sh 'rm -f *.deb'
-                sh "python3 SapMachine-Infrastructure/lib/make_deb.py --tag=${params.GIT_TAG_NAME} --templates-directory=SapMachine-Infrastructure/debian-templates"
+                sh "python3 SapMachine-Infrastructure/lib/make_deb.py -a linux-aarch64 --tag=${params.GIT_TAG_NAME} --templates-directory=SapMachine-Infrastructure/debian-templates"
             }
             post {
                   success {
