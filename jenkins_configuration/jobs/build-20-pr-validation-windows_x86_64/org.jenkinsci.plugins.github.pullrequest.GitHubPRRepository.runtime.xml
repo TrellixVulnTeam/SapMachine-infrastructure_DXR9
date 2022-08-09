@@ -8,10 +8,10 @@
       <int>1220</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
         <number>1220</number>
-        <issueUpdatedAt>2022-08-06 08:14:24.0 UTC</issueUpdatedAt>
+        <issueUpdatedAt>2022-08-08 08:44:33.0 UTC</issueUpdatedAt>
         <title>Merge to tag jdk-20+9</title>
         <body>please pull</body>
-        <prUpdatedAt>2022-08-06 08:14:24.0 UTC</prUpdatedAt>
+        <prUpdatedAt>2022-08-08 08:44:33.0 UTC</prUpdatedAt>
         <headSha>13f0f126b9edd7d7c9a556c36fd372ca519ad6f5</headSha>
         <headRef>pr-jdk-20+9</headRef>
         <mergeable>true</mergeable>
@@ -28,10 +28,10 @@
       <int>1221</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
         <number>1221</number>
-        <issueUpdatedAt>2022-08-06 08:11:24.0 UTC</issueUpdatedAt>
+        <issueUpdatedAt>2022-08-08 08:45:23.0 UTC</issueUpdatedAt>
         <title>Merge to tag jdk-19+34</title>
         <body>please pull</body>
-        <prUpdatedAt>2022-08-06 08:11:24.0 UTC</prUpdatedAt>
+        <prUpdatedAt>2022-08-08 08:45:23.0 UTC</prUpdatedAt>
         <headSha>e265b2a2918f39a1d9afdb6a473c2d8d657cbb8c</headSha>
         <headRef>pr-jdk-19+34</headRef>
         <mergeable>true</mergeable>

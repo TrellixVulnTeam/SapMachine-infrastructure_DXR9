@@ -47,8 +47,7 @@
   <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2759.v87459c4eea_ca_">
     <script>pipeline {
     agent {
-        // will be changed to aarch
-        label 'linux_aarch64'
+        label 'linux_x86_64'
     }
     stages {
         stage("Checkout Infrastructure Repository") {
@@ -58,14 +57,12 @@
         }
         stage('Build') {
             steps {
-                sh 'echo WIP: stage Build'
-                sh 'uname -a'
-                sh 'sudo apt-get -y install dh-make devscripts build-essential lintian'
                 sh 'rm -f *.deb'
-                sh "python3 SapMachine-Infrastructure/lib/make_deb.py -a linux-aarch64 --tag=${params.GIT_TAG_NAME} --templates-directory=SapMachine-Infrastructure/debian-templates"
+                sh 'sudo apt-get -y install --fix-missing dh-make devscripts build-essential lintian'
+                sh "python3 SapMachine-Infrastructure/lib/make_deb.py --tag=${params.GIT_TAG_NAME} --templates-directory=SapMachine-Infrastructure/debian-templates"
             }
             post {
-                  success {
+                success {
                     archiveArtifacts allowEmptyArchive: true, artifacts: "*.deb"
                 }
             }
@@ -75,10 +72,8 @@
                 expression { params.DEPLOY == true }
             }
             steps {
-                    sh 'echo WIP: stage Deploy'
-                    sh 'uname -a'
-                    // sh "cp -n *.deb /var/pkg/deb/amd64 || true"
-                    // sh "python3 SapMachine-Infrastructure/lib/recreate_deb_repository.py -s -r /var/pkg/deb/amd64"
+                    sh "cp -n *.deb /var/pkg/deb/amd64 || true"
+                    sh "python3 SapMachine-Infrastructure/lib/recreate_deb_repository.py -s -r /var/pkg/deb/amd64"
             }
         }
     }
@@ -88,6 +83,7 @@
         }
     }
 }
+
 </script>
     <sandbox>false</sandbox>
   </definition>
