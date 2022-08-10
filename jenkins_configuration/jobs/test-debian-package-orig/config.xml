@@ -8,7 +8,7 @@
       <options />
     </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
   </actions>
-  <description>WORK IN PROGRESS: packaging of aarch debian packages&lt;!-- Managed by Jenkins Job Builder --&gt;</description>
+  <description>Create a debian package.&lt;!-- Managed by Jenkins Job Builder --&gt;</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <jenkins.model.BuildDiscarderProperty>
@@ -29,7 +29,7 @@
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
           <name>GIT_TAG_NAME</name>
-          <description>The Git tag to create a debian aarch package from.</description>
+          <description>The Git tag to create a debian package from.</description>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
@@ -47,7 +47,7 @@
   <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2759.v87459c4eea_ca_">
     <script>pipeline {
     agent {
-        label 'linux_x86_64'
+        label 'agent-ubuntu-local'
     }
     stages {
         stage("Checkout Infrastructure Repository") {
@@ -57,9 +57,11 @@
         }
         stage('Build') {
             steps {
-                sh 'rm -f *.deb'
-                sh 'sudo apt-get -y install --fix-missing dh-make devscripts build-essential lintian'
-                sh "python3 SapMachine-Infrastructure/lib/make_deb.py --tag=${params.GIT_TAG_NAME} --templates-directory=SapMachine-Infrastructure/debian-templates"
+                sh 'uname -a'
+                sh 'apt list --installed'
+
+                // sh 'rm -f *.deb'
+                // sh "python3 SapMachine-Infrastructure/lib/make_deb.py --tag=${params.GIT_TAG_NAME} --templates-directory=SapMachine-Infrastructure/debian-templates"
             }
             post {
                 success {
@@ -83,7 +85,6 @@
         }
     }
 }
-
 </script>
     <sandbox>false</sandbox>
   </definition>
