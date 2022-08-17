@@ -5,79 +5,19 @@
   <sshUrl>git@github.com:SAP/SapMachine.git</sshUrl>
   <pulls class="concurrent-hash-map">
     <entry>
-      <int>1222</int>
+      <int>1228</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-        <number>1222</number>
-        <issueUpdatedAt>2022-08-11 00:30:43.0 UTC</issueUpdatedAt>
-        <title>Merge to tag jdk-17.0.5+2</title>
+        <number>1228</number>
+        <issueUpdatedAt>2022-08-17 00:30:22.0 UTC</issueUpdatedAt>
+        <title>Merge to tag jdk-19+36</title>
         <body>please pull</body>
-        <prUpdatedAt>2022-08-11 00:30:43.0 UTC</prUpdatedAt>
-        <headSha>f74269cdaa6abcec463be378415049e688d51750</headSha>
-        <headRef>pr-jdk-17.0.5+2</headRef>
-        <mergeable>true</mergeable>
-        <baseRef>sapmachine17</baseRef>
-        <userLogin>SapMachine</userLogin>
-        <htmlUrl>https://github.com/SAP/SapMachine/pull/1222</htmlUrl>
-        <labels />
-        <sourceRepoOwner>SAP</sourceRepoOwner>
-        <state>OPEN</state>
-        <inBadState>false</inBadState>
-      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-    </entry>
-    <entry>
-      <int>1223</int>
-      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-        <number>1223</number>
-        <issueUpdatedAt>2022-08-11 00:30:59.0 UTC</issueUpdatedAt>
-        <title>Merge to tag jdk-11.0.17+2</title>
-        <body>please pull</body>
-        <prUpdatedAt>2022-08-11 00:30:59.0 UTC</prUpdatedAt>
-        <headSha>74daa996b5212deddc19c806b07f7f1f924ce1e6</headSha>
-        <headRef>pr-jdk-11.0.17+2</headRef>
-        <mergeable>true</mergeable>
-        <baseRef>sapmachine11</baseRef>
-        <userLogin>SapMachine</userLogin>
-        <htmlUrl>https://github.com/SAP/SapMachine/pull/1223</htmlUrl>
-        <labels />
-        <sourceRepoOwner>SAP</sourceRepoOwner>
-        <state>OPEN</state>
-        <inBadState>false</inBadState>
-      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-    </entry>
-    <entry>
-      <int>1224</int>
-      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-        <number>1224</number>
-        <issueUpdatedAt>2022-08-12 00:30:06.0 UTC</issueUpdatedAt>
-        <title>Merge to tag jdk-20+10</title>
-        <body>please pull</body>
-        <prUpdatedAt>2022-08-12 00:30:06.0 UTC</prUpdatedAt>
-        <headSha>e4925a3959c319028014437fdb393312bcb3627d</headSha>
-        <headRef>pr-jdk-20+10</headRef>
-        <mergeable>true</mergeable>
-        <baseRef>sapmachine</baseRef>
-        <userLogin>SapMachine</userLogin>
-        <htmlUrl>https://github.com/SAP/SapMachine/pull/1224</htmlUrl>
-        <labels />
-        <sourceRepoOwner>SAP</sourceRepoOwner>
-        <state>OPEN</state>
-        <inBadState>false</inBadState>
-      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-    </entry>
-    <entry>
-      <int>1225</int>
-      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-        <number>1225</number>
-        <issueUpdatedAt>2022-08-12 00:30:17.0 UTC</issueUpdatedAt>
-        <title>Merge to tag jdk-19+35</title>
-        <body>please pull</body>
-        <prUpdatedAt>2022-08-12 00:30:17.0 UTC</prUpdatedAt>
-        <headSha>4c6d22a6cee3d7f1da69e50dddec45158b33e331</headSha>
-        <headRef>pr-jdk-19+35</headRef>
+        <prUpdatedAt>2022-08-17 00:30:22.0 UTC</prUpdatedAt>
+        <headSha>967a28c3d85fdde6d5eb48aa0edd8f7597772469</headSha>
+        <headRef>pr-jdk-19+36</headRef>
         <mergeable>true</mergeable>
         <baseRef>sapmachine19</baseRef>
         <userLogin>SapMachine</userLogin>
-        <htmlUrl>https://github.com/SAP/SapMachine/pull/1225</htmlUrl>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1228</htmlUrl>
         <labels />
         <sourceRepoOwner>SAP</sourceRepoOwner>
         <state>OPEN</state>
