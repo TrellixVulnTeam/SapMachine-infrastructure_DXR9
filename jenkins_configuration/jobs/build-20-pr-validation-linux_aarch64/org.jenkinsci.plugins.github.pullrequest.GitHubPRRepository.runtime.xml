@@ -24,5 +24,28 @@
         <inBadState>false</inBadState>
       </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
     </entry>
+    <entry>
+      <int>1230</int>
+      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+        <number>1230</number>
+        <issueUpdatedAt>2022-08-17 19:39:45.0 UTC</issueUpdatedAt>
+        <title>Merge sapmachine11.0.16.1</title>
+        <body>fixes #1229
+</body>
+        <prUpdatedAt>2022-08-17 19:39:45.0 UTC</prUpdatedAt>
+        <headSha>79d2f5ed2890c227a9a88ff3d65b89241af3ae31</headSha>
+        <headRef>merge-sapmachine11.0.16.1</headRef>
+        <mergeable>true</mergeable>
+        <baseRef>sapmachine11</baseRef>
+        <userEmail>christoph.langer@sap.com</userEmail>
+        <userLogin>RealCLanger</userLogin>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1230</htmlUrl>
+        <labels />
+        <lastCommentCreatedAt>2022-08-17 19:39:45.0 UTC</lastCommentCreatedAt>
+        <sourceRepoOwner>RealCLanger</sourceRepoOwner>
+        <state>OPEN</state>
+        <inBadState>false</inBadState>
+      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+    </entry>
   </pulls>
 </org.jenkinsci.plugins.github.pullrequest.GitHubPRRepository>
