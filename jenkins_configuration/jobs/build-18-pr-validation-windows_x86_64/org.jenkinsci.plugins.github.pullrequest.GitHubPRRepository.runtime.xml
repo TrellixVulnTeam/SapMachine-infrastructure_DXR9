@@ -5,21 +5,20 @@
   <sshUrl>git@github.com:SAP/SapMachine.git</sshUrl>
   <pulls class="concurrent-hash-map">
     <entry>
-      <int>1231</int>
+      <int>1236</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-        <number>1231</number>
-        <issueUpdatedAt>2022-08-19 06:59:28.0 UTC</issueUpdatedAt>
-        <title>Merge to tag jdk-20+11</title>
+        <number>1236</number>
+        <issueUpdatedAt>2022-08-22 20:28:10.0 UTC</issueUpdatedAt>
+        <title>Merge to tag jdk-18.0.2.1+1</title>
         <body>please pull</body>
-        <prUpdatedAt>2022-08-19 06:59:28.0 UTC</prUpdatedAt>
-        <headSha>e8bc87956abc92851de8694c56a78f6ecc546cbd</headSha>
-        <headRef>pr-jdk-20+11</headRef>
+        <prUpdatedAt>2022-08-22 20:28:10.0 UTC</prUpdatedAt>
+        <headSha>ca4c3dac3bc5fc05b225fe3185cde058f10b97cc</headSha>
+        <headRef>pr-jdk-18.0.2.1+1</headRef>
         <mergeable>true</mergeable>
-        <baseRef>sapmachine</baseRef>
+        <baseRef>sapmachine18</baseRef>
         <userLogin>SapMachine</userLogin>
-        <htmlUrl>https://github.com/SAP/SapMachine/pull/1231</htmlUrl>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1236</htmlUrl>
         <labels />
-        <lastCommentCreatedAt>2022-08-19 06:59:28.0 UTC</lastCommentCreatedAt>
         <sourceRepoOwner>SAP</sourceRepoOwner>
         <state>OPEN</state>
         <inBadState>false</inBadState>
