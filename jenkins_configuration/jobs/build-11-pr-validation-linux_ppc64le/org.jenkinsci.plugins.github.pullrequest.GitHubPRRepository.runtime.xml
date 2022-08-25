@@ -3,5 +3,46 @@
   <githubUrl>https://github.com/SAP/SapMachine</githubUrl>
   <gitUrl>git://github.com/SAP/SapMachine.git</gitUrl>
   <sshUrl>git@github.com:SAP/SapMachine.git</sshUrl>
-  <pulls class="concurrent-hash-map" />
+  <pulls class="concurrent-hash-map">
+    <entry>
+      <int>1239</int>
+      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+        <number>1239</number>
+        <issueUpdatedAt>2022-08-25 00:30:17.0 UTC</issueUpdatedAt>
+        <title>Merge to tag jdk-17.0.5+4</title>
+        <body>please pull</body>
+        <prUpdatedAt>2022-08-25 00:30:17.0 UTC</prUpdatedAt>
+        <headSha>6d2cddf54b9e74fa15bc3579a4c4f9e841c94d12</headSha>
+        <headRef>pr-jdk-17.0.5+4</headRef>
+        <mergeable>true</mergeable>
+        <baseRef>sapmachine17</baseRef>
+        <userLogin>SapMachine</userLogin>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1239</htmlUrl>
+        <labels />
+        <sourceRepoOwner>SAP</sourceRepoOwner>
+        <state>OPEN</state>
+        <inBadState>false</inBadState>
+      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+    </entry>
+    <entry>
+      <int>1240</int>
+      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+        <number>1240</number>
+        <issueUpdatedAt>2022-08-25 00:30:32.0 UTC</issueUpdatedAt>
+        <title>Merge to tag jdk-11.0.17+4</title>
+        <body>please pull</body>
+        <prUpdatedAt>2022-08-25 00:30:32.0 UTC</prUpdatedAt>
+        <headSha>75e4cb38910948634b816e4f4db36b8525d232c8</headSha>
+        <headRef>pr-jdk-11.0.17+4</headRef>
+        <mergeable>true</mergeable>
+        <baseRef>sapmachine11</baseRef>
+        <userLogin>SapMachine</userLogin>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1240</htmlUrl>
+        <labels />
+        <sourceRepoOwner>SAP</sourceRepoOwner>
+        <state>OPEN</state>
+        <inBadState>false</inBadState>
+      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+    </entry>
+  </pulls>
 </org.jenkinsci.plugins.github.pullrequest.GitHubPRRepository>
