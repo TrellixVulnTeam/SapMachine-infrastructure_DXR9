@@ -1,5 +1,5 @@
 <hudson.plugins.ec2.EC2Slave plugin="ec2@1.68">
-  <name>EC2 (SapMachine Cloud) - Windows Client (i-00545b8b38090dcdd)</name>
+  <name>EC2 (SapMachine Cloud) - Windows Client (i-0a084170b670be2e5)</name>
   <remoteFS>C:\jenkins_work</remoteFS>
   <numExecutors>1</numExecutors>
   <mode>EXCLUSIVE</mode>
@@ -10,7 +10,7 @@
   <launcher class="hudson.plugins.ec2.ssh.EC2UnixLauncher" />
   <label>windows_x86_64</label>
   <nodeProperties />
-  <instanceId>i-00545b8b38090dcdd</instanceId>
+  <instanceId>i-0a084170b670be2e5</instanceId>
   <initScript />
   <tmpDir>C:\temp</tmpDir>
   <remoteAdmin>jenkins</remoteAdmin>
@@ -21,12 +21,12 @@
   <isConnected>false</isConnected>
   <tags class="linked-list">
     <hudson.plugins.ec2.EC2Tag>
-      <name>jenkins_server_url</name>
-      <value>https://ci.sapmachine.io/</value>
-    </hudson.plugins.ec2.EC2Tag>
-    <hudson.plugins.ec2.EC2Tag>
       <name>jenkins_slave_type</name>
       <value>demand_Windows Client</value>
+    </hudson.plugins.ec2.EC2Tag>
+    <hudson.plugins.ec2.EC2Tag>
+      <name>jenkins_server_url</name>
+      <value>https://ci.sapmachine.io/</value>
     </hudson.plugins.ec2.EC2Tag>
     <hudson.plugins.ec2.EC2Tag>
       <name>Name</name>
