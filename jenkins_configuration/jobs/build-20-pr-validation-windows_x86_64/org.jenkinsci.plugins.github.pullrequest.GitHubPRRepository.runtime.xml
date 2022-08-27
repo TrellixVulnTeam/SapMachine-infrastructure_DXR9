@@ -5,38 +5,13 @@
   <sshUrl>git@github.com:SAP/SapMachine.git</sshUrl>
   <pulls class="concurrent-hash-map">
     <entry>
-      <int>1243</int>
-      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-        <number>1243</number>
-        <issueUpdatedAt>2022-08-25 22:29:46.0 UTC</issueUpdatedAt>
-        <title>SapMachine #1241: Vitals NMT "mlc" value can be too high</title>
-        <body>See issue text #1241 .
-
-fixes #1241 
-fixes #1242 
-</body>
-        <prUpdatedAt>2022-08-25 22:29:46.0 UTC</prUpdatedAt>
-        <headSha>930b1198493c4254876f845504ab65ce8d0f3a72</headSha>
-        <headRef>SapMachine-1241-Vitals-NMT-mlc-can-be-too-high</headRef>
-        <mergeable>true</mergeable>
-        <baseRef>sapmachine</baseRef>
-        <userLogin>tstuefe</userLogin>
-        <htmlUrl>https://github.com/SAP/SapMachine/pull/1243</htmlUrl>
-        <labels />
-        <lastCommentCreatedAt>2022-08-25 10:57:25.0 UTC</lastCommentCreatedAt>
-        <sourceRepoOwner>tstuefe</sourceRepoOwner>
-        <state>OPEN</state>
-        <inBadState>false</inBadState>
-      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-    </entry>
-    <entry>
       <int>1244</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
         <number>1244</number>
-        <issueUpdatedAt>2022-08-26 00:30:10.0 UTC</issueUpdatedAt>
+        <issueUpdatedAt>2022-08-26 09:20:11.0 UTC</issueUpdatedAt>
         <title>Merge to tag jdk-20+12</title>
         <body>please pull</body>
-        <prUpdatedAt>2022-08-26 00:30:10.0 UTC</prUpdatedAt>
+        <prUpdatedAt>2022-08-26 09:20:11.0 UTC</prUpdatedAt>
         <headSha>7b81a9c75d60f6eb2727515bacfffcf7cf15e128</headSha>
         <headRef>pr-jdk-20+12</headRef>
         <mergeable>true</mergeable>
