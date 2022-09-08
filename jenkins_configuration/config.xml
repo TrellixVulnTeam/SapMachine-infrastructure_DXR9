@@ -28,7 +28,7 @@
   <viewsTabBar class="hudson.views.DefaultViewsTabBar" />
   <myViewsTabBar class="hudson.views.DefaultMyViewsTabBar" />
   <clouds>
-    <hudson.plugins.ec2.EC2Cloud plugin="ec2@1.68">
+    <hudson.plugins.ec2.EC2Cloud plugin="ec2@2.0.2">
       <name>ec2-SapMachine Cloud</name>
       <useInstanceProfileForCredentials>false</useInstanceProfileForCredentials>
       <roleArn />
@@ -54,6 +54,7 @@
           <userData />
           <numExecutors>1</numExecutors>
           <remoteAdmin>ubuntu</remoteAdmin>
+          <javaPath>java</javaPath>
           <jvmopts />
           <subnetId />
           <idleTerminationMinutes>2</idleTerminationMinutes>
@@ -113,6 +114,7 @@
           <userData />
           <numExecutors>1</numExecutors>
           <remoteAdmin>jenkins</remoteAdmin>
+          <javaPath>java</javaPath>
           <jvmopts />
           <subnetId />
           <idleTerminationMinutes>2</idleTerminationMinutes>
@@ -172,6 +174,7 @@
           <userData />
           <numExecutors>1</numExecutors>
           <remoteAdmin>ubuntu</remoteAdmin>
+          <javaPath>java</javaPath>
           <jvmopts />
           <subnetId />
           <idleTerminationMinutes>2</idleTerminationMinutes>
