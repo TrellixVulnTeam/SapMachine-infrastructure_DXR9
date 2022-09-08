@@ -1,0 +1,74 @@
+<ns0:project xmlns:ns0="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <ns0:modelVersion>4.0.0</ns0:modelVersion>
+
+  <ns0:parent>
+    <ns0:groupId>org.jenkins-ci.plugins</ns0:groupId>
+    <ns0:artifactId>plugin</ns0:artifactId>
+    <ns0:version>2.9</ns0:version>
+  </ns0:parent>
+
+  <ns0:artifactId>mapdb-api</ns0:artifactId>
+  <ns0:version>1.0.9.0</ns0:version>
+  <ns0:packaging>hpi</ns0:packaging>
+
+  <ns0:name>MapDB API Plugin</ns0:name>
+  <ns0:description>This plugin provides a shared dependency on the MapDB library so that other plugins can co-operate when using this library.</ns0:description>
+  <ns0:url>http://wiki.jenkins-ci.org/display/JENKINS/MapDB+API+Plugin</ns0:url>
+
+  <ns0:licenses>
+    <ns0:license>
+      <ns0:name>The Apache Software License, Version 2.0</ns0:name>
+      <ns0:url>http://www.apache.org/licenses/LICENSE-2.0.txt</ns0:url>
+      <ns0:distribution>repo</ns0:distribution>
+    </ns0:license>
+  </ns0:licenses>
+
+  <ns0:developers>
+    <ns0:developer>
+      <ns0:id>stephenc</ns0:id>
+      <ns0:name>Stephen Connolly</ns0:name>
+      <ns0:roles>
+        <ns0:role>developer</ns0:role>
+      </ns0:roles>
+    </ns0:developer>
+  </ns0:developers>
+
+  <ns0:scm>
+    <ns0:connection>scm:git:git://github.com/jenkinsci/mapdb-api-plugin.git</ns0:connection>
+    <ns0:developerConnection>scm:git:git@github.com:jenkinsci/mapdb-api-plugin.git</ns0:developerConnection>
+    <ns0:url>http://github.com/jenkinsci/mapdb-api-plugin</ns0:url>
+    <ns0:tag>mapdb-api-1.0.9.0</ns0:tag>
+  </ns0:scm>
+
+  <ns0:properties>
+    <ns0:jenkins.version>1.565</ns0:jenkins.version>
+    <ns0:java.level>6</ns0:java.level>
+  </ns0:properties>
+
+  <ns0:repositories>
+       <ns0:repository>
+           <ns0:id>repo.jenkins-ci.org</ns0:id>
+           <ns0:url>https://repo.jenkins-ci.org/public/</ns0:url>
+       </ns0:repository>
+   </ns0:repositories>
+
+   <ns0:pluginRepositories>
+       <ns0:pluginRepository>
+           <ns0:id>repo.jenkins-ci.org</ns0:id>
+           <ns0:url>https://repo.jenkins-ci.org/public/</ns0:url>
+       </ns0:pluginRepository>
+   </ns0:pluginRepositories>
+
+  <ns0:dependencies>
+    
+    <ns0:dependency>
+      <ns0:groupId>org.mapdb</ns0:groupId>
+      <ns0:artifactId>mapdb</ns0:artifactId>
+      <ns0:version>1.0.9</ns0:version>
+    </ns0:dependency>
+    
+    
+    
+  </ns0:dependencies>
+
+</ns0:project>
