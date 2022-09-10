@@ -8,17 +8,18 @@
       <int>1248</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
         <number>1248</number>
-        <issueUpdatedAt>2022-09-09 00:29:59.0 UTC</issueUpdatedAt>
+        <issueUpdatedAt>2022-09-09 15:36:26.0 UTC</issueUpdatedAt>
         <title>Merge to tag jdk-20+14</title>
         <body>please pull</body>
-        <prUpdatedAt>2022-09-09 00:29:59.0 UTC</prUpdatedAt>
-        <headSha>1e031e6a5886fba3009d8e5fa62416fe15a901b6</headSha>
+        <prUpdatedAt>2022-09-09 15:36:26.0 UTC</prUpdatedAt>
+        <headSha>7cf17c861023422c48facf9dac5e313198782b00</headSha>
         <headRef>pr-jdk-20+14</headRef>
-        <mergeable>false</mergeable>
+        <mergeable>true</mergeable>
         <baseRef>sapmachine</baseRef>
         <userLogin>SapMachine</userLogin>
         <htmlUrl>https://github.com/SAP/SapMachine/pull/1248</htmlUrl>
         <labels />
+        <lastCommentCreatedAt>2022-09-09 15:36:26.0 UTC</lastCommentCreatedAt>
         <sourceRepoOwner>SAP</sourceRepoOwner>
         <state>OPEN</state>
         <inBadState>false</inBadState>
