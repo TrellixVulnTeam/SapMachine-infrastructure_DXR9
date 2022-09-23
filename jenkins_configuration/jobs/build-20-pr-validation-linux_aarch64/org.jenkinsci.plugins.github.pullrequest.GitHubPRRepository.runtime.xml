@@ -5,39 +5,19 @@
   <sshUrl>git@github.com:SAP/SapMachine.git</sshUrl>
   <pulls class="concurrent-hash-map">
     <entry>
-      <int>1250</int>
+      <int>1253</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-        <number>1250</number>
-        <issueUpdatedAt>2022-09-22 00:30:20.0 UTC</issueUpdatedAt>
-        <title>Merge to tag jdk-17.0.5+6</title>
+        <number>1253</number>
+        <issueUpdatedAt>2022-09-23 00:30:17.0 UTC</issueUpdatedAt>
+        <title>Merge to tag jdk-20+16</title>
         <body>please pull</body>
-        <prUpdatedAt>2022-09-22 00:30:20.0 UTC</prUpdatedAt>
-        <headSha>6bc6980a7d975dbe06b319bf6ac9625749663060</headSha>
-        <headRef>pr-jdk-17.0.5+6</headRef>
+        <prUpdatedAt>2022-09-23 00:30:17.0 UTC</prUpdatedAt>
+        <headSha>711e2520adf87b8c285db07ff485fe4f6d0c349b</headSha>
+        <headRef>pr-jdk-20+16</headRef>
         <mergeable>true</mergeable>
-        <baseRef>sapmachine17</baseRef>
+        <baseRef>sapmachine</baseRef>
         <userLogin>SapMachine</userLogin>
-        <htmlUrl>https://github.com/SAP/SapMachine/pull/1250</htmlUrl>
-        <labels />
-        <sourceRepoOwner>SAP</sourceRepoOwner>
-        <state>OPEN</state>
-        <inBadState>false</inBadState>
-      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-    </entry>
-    <entry>
-      <int>1251</int>
-      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-        <number>1251</number>
-        <issueUpdatedAt>2022-09-22 00:30:36.0 UTC</issueUpdatedAt>
-        <title>Merge to tag jdk-11.0.17+6</title>
-        <body>please pull</body>
-        <prUpdatedAt>2022-09-22 00:30:36.0 UTC</prUpdatedAt>
-        <headSha>e9ba915905afa1535e288802765f59b52538f73c</headSha>
-        <headRef>pr-jdk-11.0.17+6</headRef>
-        <mergeable>true</mergeable>
-        <baseRef>sapmachine11</baseRef>
-        <userLogin>SapMachine</userLogin>
-        <htmlUrl>https://github.com/SAP/SapMachine/pull/1251</htmlUrl>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1253</htmlUrl>
         <labels />
         <sourceRepoOwner>SAP</sourceRepoOwner>
         <state>OPEN</state>
