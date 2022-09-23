@@ -536,41 +536,32 @@
                         }}
                     }}
                 }}
+                stage('Build Debian Linux Packages') {{
+                    {docker_agent}
+                    when {{
+                        -> Am Ende muss man hier die Bedingung so anpassen, dass es für Linux x86, Linux ppc64le und linux aarch64 gerufen wird
+                        -> Zum Testen könnte man hier auch mal "params.RELEASE == true" wegnehmen, dann wird das .deb Paket im Build Job mitgebaut, ohne dass es deployed wird
+                        expression {{ env.VERIFICATION_RESULT != "2" && params.PUBLISH == true && params.RELEASE == true && JOB_NAME ==~ /((\S*)(release-linux_x86_64)(\S*))/ }}
+                    }}
+                    steps {{
+                        sh 'rm -f *.deb'  (Braucht man vielleicht hier nicht, der Workspace wird ja sowieso am Anfang gecleaned)
+                        --> kucken, dass man hier die Platform reinreicht
+                        sh "python3 SapMachine-Infrastructure/lib/make_deb.py --tag=${params.GIT_TAG_NAME} --templates-directory=SapMachine-Infrastructure/debian-templates"
+                    }}
+                }}
                 stage('Publish Debian Linux Packages') {{
                     when {{
                         expression {{ env.VERIFICATION_RESULT != "2" && params.PUBLISH == true && params.RELEASE == true && JOB_NAME ==~ /((\S*)(release-linux_x86_64)(\S*))/ }}
                     }}
                     steps {{
-                        build job: 'debian-package', propagate: false, wait: true, parameters:
-                            [
-                                string(name: 'GIT_TAG_NAME', value: env.SAPMACHINE_VERSION),
-                                [$class: 'BooleanParameterValue', name: 'DEPLOY', value: true]
-                            ]
-                    }}
-                }}
-                stage('Build Debian Linux Packages') {{
-                    when {{
-                        expression {{ env.VERIFICATION_RESULT != "2" && params.PUBLISH == true && params.RELEASE == true && JOB_NAME ==~ /((\S*)(release-linux_x86_64)(\S*))/ }}
-                    }}
-                    steps {{
-                        build job: 'build-debian-package', propagate: false, wait: true, parameters:
-                            [
-                                string(name: 'GIT_TAG_NAME', value: env.SAPMACHINE_VERSION),
-                                [$class: 'BooleanParameterValue', name: 'DEPLOY', value: true],
-                                string(name: 'JOB_NAME', value: JOB_NAME)
-                            ]
-                    }}
-                }}
-                stage('Publish Debian Linux Packages (publish only)') {{
-                    when {{
-                        expression {{ env.VERIFICATION_RESULT != "2" && params.PUBLISH == true && params.RELEASE == true && JOB_NAME ==~ /((\S*)(release-linux_x86_64)(\S*))/ }}
-                    }}
-                    steps {{
+                        -> hier müssen wir vermutlich den (neuen) Job rufen, der das Debian Paket auf dist.sapmachine.io deployed.
+                        -> Spannend ist, wie wir das .deb Paket aus dieser Pipeline da rüber bekommen.
+                        -> Eventuell kann man diese Stage aber auch auf dem 'agent-ubuntu-local' ausführen und direkt das Deploy Skript rufen. Vielleicht sieht er dann das workdir mit dem .deb File.
                         build job: 'publish-debian-package', propagate: false, wait: true, parameters:
                             [
                                 string(name: 'GIT_TAG_NAME', value: env.SAPMACHINE_VERSION),
-                                [$class: 'BooleanParameterValue', name: 'DEPLOY', value: true],
-                                string(name: 'JOB_NAME', value: JOB_NAME)
+                                [$class: 'BooleanParameterValue', name: 'DEPLOY', value: true], <-- brauchen wir nicht. Der soll halt immer deployen, wenn er gerufen wird
+                                string(name: 'JOB_NAME', value: JOB_NAME) <-- ich glaube, wir sollten statt JOB_NAME eher einen Plattform Parameter haben
                             ]
                     }}
                 }}
