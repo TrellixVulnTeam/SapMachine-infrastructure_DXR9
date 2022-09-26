@@ -624,6 +624,7 @@
       <properties class="hudson.model.View$PropertyList" />
       <jobNames>
         <comparator class="java.lang.String$CaseInsensitiveComparator" />
+        <string>test-build-19-release-linux_x86_64</string>
       </jobNames>
       <jobFilters />
       <columns>
