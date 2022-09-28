@@ -627,6 +627,8 @@
         <string>test-build-19-release-linux_aarch64</string>
         <string>test-build-19-release-linux_x86_64</string>
         <string>test-build-debian-package</string>
+        <string>test-build-service-release-19</string>
+        <string>test-pipeline</string>
       </jobNames>
       <jobFilters />
       <columns>
