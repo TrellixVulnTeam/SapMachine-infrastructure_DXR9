@@ -5,37 +5,18 @@
   <sshUrl>git@github.com:SAP/SapMachine.git</sshUrl>
   <pulls class="concurrent-hash-map">
     <entry>
-      <int>1255</int>
+      <int>1257</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-        <number>1255</number>
-        <issueUpdatedAt>2022-09-29 00:30:16.0 UTC</issueUpdatedAt>
-        <title>Merge to tag jdk-17.0.5+7</title>
+        <number>1257</number>
+        <issueUpdatedAt>2022-09-30 00:30:06.0 UTC</issueUpdatedAt>
+        <title>Merge to tag jdk-20+17</title>
         <body>please pull</body>
-        <prUpdatedAt>2022-09-29 00:30:16.0 UTC</prUpdatedAt>
-        <headSha>114f0c400548675bf2ecd2b3dbf10aeecda539d9</headSha>
-        <headRef>pr-jdk-17.0.5+7</headRef>
-        <baseRef>sapmachine17</baseRef>
+        <prUpdatedAt>2022-09-30 00:30:06.0 UTC</prUpdatedAt>
+        <headSha>79ccc791f275be7cfea95ff0ce8cf7361c7f08ad</headSha>
+        <headRef>pr-jdk-20+17</headRef>
+        <baseRef>sapmachine</baseRef>
         <userLogin>SapMachine</userLogin>
-        <htmlUrl>https://github.com/SAP/SapMachine/pull/1255</htmlUrl>
-        <labels />
-        <sourceRepoOwner>SAP</sourceRepoOwner>
-        <state>OPEN</state>
-        <inBadState>false</inBadState>
-      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-    </entry>
-    <entry>
-      <int>1256</int>
-      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-        <number>1256</number>
-        <issueUpdatedAt>2022-09-29 00:30:32.0 UTC</issueUpdatedAt>
-        <title>Merge to tag jdk-11.0.17+7</title>
-        <body>please pull</body>
-        <prUpdatedAt>2022-09-29 00:30:32.0 UTC</prUpdatedAt>
-        <headSha>2f695bbaad2620507e8427610ae988332aaa001c</headSha>
-        <headRef>pr-jdk-11.0.17+7</headRef>
-        <baseRef>sapmachine11</baseRef>
-        <userLogin>SapMachine</userLogin>
-        <htmlUrl>https://github.com/SAP/SapMachine/pull/1256</htmlUrl>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1257</htmlUrl>
         <labels />
         <sourceRepoOwner>SAP</sourceRepoOwner>
         <state>OPEN</state>

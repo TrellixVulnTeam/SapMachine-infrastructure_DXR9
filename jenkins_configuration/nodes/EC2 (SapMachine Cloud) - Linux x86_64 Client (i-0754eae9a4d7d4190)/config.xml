@@ -1,6 +1,6 @@
 <hudson.plugins.ec2.EC2Slave plugin="ec2@2.0.2">
-  <name>EC2 (SapMachine Cloud) - Windows Client (i-0a58deaf4ef3dafe9)</name>
-  <remoteFS>C:\jenkins_work</remoteFS>
+  <name>EC2 (SapMachine Cloud) - Linux x86_64 Client (i-0754eae9a4d7d4190)</name>
+  <remoteFS>/home/ubuntu/client_home</remoteFS>
   <numExecutors>1</numExecutors>
   <mode>EXCLUSIVE</mode>
   <retentionStrategy class="hudson.plugins.ec2.EC2RetentionStrategy">
@@ -8,13 +8,13 @@
     <idleTerminationMinutes>2</idleTerminationMinutes>
   </retentionStrategy>
   <launcher class="hudson.plugins.ec2.ssh.EC2UnixLauncher" />
-  <label>windows_x86_64</label>
+  <label>linux_x86_64 linux_alpine_x86_64</label>
   <nodeProperties />
-  <instanceId>i-0a58deaf4ef3dafe9</instanceId>
+  <instanceId>i-0754eae9a4d7d4190</instanceId>
   <initScript />
-  <tmpDir>C:\temp</tmpDir>
-  <remoteAdmin>jenkins</remoteAdmin>
-  <templateDescription>Windows Client</templateDescription>
+  <tmpDir />
+  <remoteAdmin>ubuntu</remoteAdmin>
+  <templateDescription>Linux x86_64 Client</templateDescription>
   <javaPath>java</javaPath>
   <jvmopts />
   <stopOnTerminate>false</stopOnTerminate>
@@ -22,16 +22,16 @@
   <isConnected>false</isConnected>
   <tags class="linked-list">
     <hudson.plugins.ec2.EC2Tag>
-      <name>jenkins_server_url</name>
-      <value>https://ci.sapmachine.io/</value>
+      <name>jenkins_slave_type</name>
+      <value>demand_Linux x86_64 Client</value>
     </hudson.plugins.ec2.EC2Tag>
     <hudson.plugins.ec2.EC2Tag>
       <name>Name</name>
-      <value>Dynamic Windows Client</value>
+      <value>Dynamic Linux x86_64 Client</value>
     </hudson.plugins.ec2.EC2Tag>
     <hudson.plugins.ec2.EC2Tag>
-      <name>jenkins_slave_type</name>
-      <value>demand_Windows Client</value>
+      <name>jenkins_server_url</name>
+      <value>https://ci.sapmachine.io/</value>
     </hudson.plugins.ec2.EC2Tag>
   </tags>
   <cloudName>ec2-SapMachine Cloud</cloudName>
@@ -47,5 +47,5 @@
   <metadataEndpointEnabled>true</metadataEndpointEnabled>
   <metadataTokensRequired>false</metadataTokensRequired>
   <metadataHopsLimit>1</metadataHopsLimit>
-  <launchTimeout>600</launchTimeout>
+  <launchTimeout>2147483647</launchTimeout>
 </hudson.plugins.ec2.EC2Slave>
