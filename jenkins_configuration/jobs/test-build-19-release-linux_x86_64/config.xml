@@ -516,7 +516,7 @@
 }
             when {
                 // expression { env.VERIFICATION_RESULT != "2" &amp;&amp; params.PUBLISH == true &amp;&amp; params.RELEASE == true &amp;&amp; JOB_NAME ==~ /((\S*)(release-linux_x86_64)(\S*))/ }
-                expression { env.VERIFICATION_RESULT != "2" &amp;&amp; JOB_NAME ==~ /((\S*)(release-linux_(x86_64|aarch64|ppc64le)(\S*))/ }
+                expression { env.VERIFICATION_RESULT != "2" &amp;&amp; JOB_NAME ==~ /((\S*)(release-linux_(x86_64|aarch64|ppc64le)(\S*)))/ }
             }
             steps {
 							   sh 'echo Chris1; env; uname -a; mount'
@@ -528,7 +528,7 @@
         stage('Publish Debian Linux Packages (publish only)') {
             when {
                 // expression { env.VERIFICATION_RESULT != "2" &amp;&amp; params.PUBLISH == true &amp;&amp; params.RELEASE == true &amp;&amp; JOB_NAME ==~ /((\S*)(release-linux_x86_64)(\S*))/ }
-                expression { env.VERIFICATION_RESULT != "2" &amp;&amp; JOB_NAME ==~ /((\S*)(release-linux_(x86_64|aarch64|ppc64le)(\S*))/ }
+                expression { env.VERIFICATION_RESULT != "2" &amp;&amp; JOB_NAME ==~ /((\S*)(release-linux_(x86_64|aarch64|ppc64le)(\S*)))/ }
             }
             steps {
 							   sh 'echo Chris2; env; uname -a; mount'
