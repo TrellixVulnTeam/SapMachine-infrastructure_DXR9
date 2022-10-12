@@ -144,7 +144,7 @@
                 sh '''#!/bin/bash
                     set -ex
                     git init SapMachine-Infrastructure &amp;&amp; cd SapMachine-Infrastructure
-                    git fetch --depth 1 https://github.com/SAP/SapMachine-infrastructure.git master
+                    git fetch --depth 1 https://github.com/chalstrick/SapMachine-infrastructure.git refactorCreateLinuxPackages
                     git checkout --detach FETCH_HEAD
                 '''
             }
