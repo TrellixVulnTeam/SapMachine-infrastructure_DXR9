@@ -509,7 +509,7 @@
             steps {
 							   sh 'echo Chris1; env; uname -a; mount'
                  sh 'rm -f *.deb'  // todo: check if this is needed
-                 sh "python3 -m trace -t --ignore-dir /usr SapMachine-Infrastructure/lib/make_deb.py --tag=${env.SAPMACHINE_VERSION} -a linux_x86 --templates-directory=SapMachine-Infrastructure/debian-templates" // todo: specify a non-hardcoded architecture/platform
+                 sh "python3 -m trace -t --ignore-dir /usr SapMachine-Infrastructure/lib/make_deb.py --tag=${env.SAPMACHINE_VERSION} -a linux-x64 --templates-directory=SapMachine-Infrastructure/debian-templates" // todo: specify a non-hardcoded architecture/platform
 
             }
         }
