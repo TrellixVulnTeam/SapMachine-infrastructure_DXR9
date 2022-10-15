@@ -8,18 +8,87 @@
       <int>1259</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
         <number>1259</number>
-        <issueUpdatedAt>2022-10-14 00:30:00.0 UTC</issueUpdatedAt>
+        <issueUpdatedAt>2022-10-14 15:45:52.0 UTC</issueUpdatedAt>
         <title>Merge to tag jdk-20+19</title>
         <body>please pull</body>
-        <prUpdatedAt>2022-10-14 00:30:00.0 UTC</prUpdatedAt>
-        <headSha>760a260fbbe733a76c18e4d630999c94ac8cfe63</headSha>
+        <prUpdatedAt>2022-10-14 15:45:52.0 UTC</prUpdatedAt>
+        <headSha>94b2329f36586254f87016a58529eb599d37d201</headSha>
         <headRef>pr-jdk-20+19</headRef>
-        <mergeable>false</mergeable>
+        <mergeable>true</mergeable>
         <baseRef>sapmachine</baseRef>
         <userLogin>SapMachine</userLogin>
         <htmlUrl>https://github.com/SAP/SapMachine/pull/1259</htmlUrl>
         <labels />
         <sourceRepoOwner>SAP</sourceRepoOwner>
+        <state>OPEN</state>
+        <inBadState>false</inBadState>
+      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+    </entry>
+    <entry>
+      <int>1261</int>
+      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+        <number>1261</number>
+        <issueUpdatedAt>2022-10-14 16:46:13.0 UTC</issueUpdatedAt>
+        <title>SapMachine (17) #1260: 8294357: (tz) Update Timezone Data to 2022d</title>
+        <body>fixes #1260
+</body>
+        <prUpdatedAt>2022-10-14 16:46:13.0 UTC</prUpdatedAt>
+        <headSha>6410350e7871e6403e8a521ab02ae0b9ec61410f</headSha>
+        <headRef>cherry-pick-8294357-17</headRef>
+        <mergeable>true</mergeable>
+        <baseRef>sapmachine17</baseRef>
+        <userEmail>christoph.langer@sap.com</userEmail>
+        <userLogin>RealCLanger</userLogin>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1261</htmlUrl>
+        <labels />
+        <lastCommentCreatedAt>2022-10-14 16:32:38.0 UTC</lastCommentCreatedAt>
+        <sourceRepoOwner>RealCLanger</sourceRepoOwner>
+        <state>OPEN</state>
+        <inBadState>false</inBadState>
+      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+    </entry>
+    <entry>
+      <int>1262</int>
+      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+        <number>1262</number>
+        <issueUpdatedAt>2022-10-14 16:45:31.0 UTC</issueUpdatedAt>
+        <title>SapMachine (11) #1260: 8294357: (tz) Update Timezone Data to 2022d</title>
+        <body>fixes #1260
+</body>
+        <prUpdatedAt>2022-10-14 16:45:31.0 UTC</prUpdatedAt>
+        <headSha>e5a8e3fcf1bed45f4546da63f627c6ba8217c324</headSha>
+        <headRef>cherry-pick-8294357-11</headRef>
+        <mergeable>true</mergeable>
+        <baseRef>sapmachine11</baseRef>
+        <userEmail>christoph.langer@sap.com</userEmail>
+        <userLogin>RealCLanger</userLogin>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1262</htmlUrl>
+        <labels />
+        <lastCommentCreatedAt>2022-10-14 16:34:07.0 UTC</lastCommentCreatedAt>
+        <sourceRepoOwner>RealCLanger</sourceRepoOwner>
+        <state>OPEN</state>
+        <inBadState>false</inBadState>
+      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+    </entry>
+    <entry>
+      <int>1263</int>
+      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
+        <number>1263</number>
+        <issueUpdatedAt>2022-10-14 17:10:07.0 UTC</issueUpdatedAt>
+        <title>SapMachine (19) #1260: 8294357: (tz) Update Timezone Data to 2022d</title>
+        <body>fixes #1260
+</body>
+        <prUpdatedAt>2022-10-14 17:10:07.0 UTC</prUpdatedAt>
+        <headSha>bec501d036f0240d5076a5e2bc6b9afd35a57865</headSha>
+        <headRef>cherry-pick-8294357-19</headRef>
+        <mergeable>true</mergeable>
+        <baseRef>sapmachine19</baseRef>
+        <userEmail>christoph.langer@sap.com</userEmail>
+        <userLogin>RealCLanger</userLogin>
+        <htmlUrl>https://github.com/SAP/SapMachine/pull/1263</htmlUrl>
+        <labels />
+        <lastCommentCreatedAt>2022-10-14 17:10:07.0 UTC</lastCommentCreatedAt>
+        <sourceRepoOwner>RealCLanger</sourceRepoOwner>
         <state>OPEN</state>
         <inBadState>false</inBadState>
       </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>

@@ -629,6 +629,7 @@
         <string>test-build-debian-package</string>
         <string>test-build-service-release-19</string>
         <string>test-pipeline</string>
+        <string>Test01</string>
       </jobNames>
       <jobFilters />
       <columns>

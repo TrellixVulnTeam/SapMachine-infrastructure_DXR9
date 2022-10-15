@@ -144,7 +144,7 @@
                 sh '''#!/bin/bash
                     set -ex
                     git init SapMachine-Infrastructure &amp;&amp; cd SapMachine-Infrastructure
-                    git fetch --depth 1 https://github.com/SAP/SapMachine-infrastructure.git master
+                    git fetch --depth 1 https://github.com/chalstrick/SapMachine-infrastructure.git refactorCreateLinuxPackages
                     git checkout --detach FETCH_HEAD
                 '''
             }
@@ -495,7 +495,7 @@
         }
         stage('Publish Debian Linux Packages') {
             when {
-                expression { env.VERIFICATION_RESULT != "2" &amp;&amp; params.PUBLISH == true &amp;&amp; params.RELEASE == true &amp;&amp; JOB_NAME ==~ /((\S*)(release-linux_x86_64)(\S*))/ }
+                expression { env.VERIFICATION_RESULT != "2" &amp;&amp; params.PUBLISH == true &amp;&amp; params.RELEASE == true &amp;&amp; JOB_NAME ==~ /((\S*)(release-linux_aarch64)(\S*))/ }
             }
             steps {
                 build job: 'debian-package', propagate: false, wait: true, parameters:
@@ -521,14 +521,14 @@
             steps {
 							   sh 'echo Chris1; env; uname -a; mount'
                  sh 'rm -f *.deb'  // todo: check if this is needed
-                 sh "python3 SapMachine-Infrastructure/lib/make_deb.py --tag=${params.GIT_TAG_NAME} -a linux_aarch64 --templates-directory=SapMachine-Infrastructure/debian-templates" // todo: specify a non-hardcoded architecture/platform
+                 sh "python3 -m trace -t --ignore-dir /usr SapMachine-Infrastructure/lib/make_deb.py --tag=${env.SAPMACHINE_VERSION} -a linux-aarch64 --templates-directory=SapMachine-Infrastructure/debian-templates" // todo: specify a non-hardcoded architecture/platform
 
             }
         }
-        stage('Publish Debian Linux Packages (publish only)') {
+        stage('Publish Debian Linux Packages') {
             when {
                 // expression { env.VERIFICATION_RESULT != "2" &amp;&amp; params.PUBLISH == true &amp;&amp; params.RELEASE == true &amp;&amp; JOB_NAME ==~ /((\S*)(release-linux_x86_64)(\S*))/ }
-                expression { env.VERIFICATION_RESULT != "2" &amp;&amp; JOB_NAME ==~ /((\S*)(release-linux_(x86_64|aarch64|ppc64le)(\S*))/ }
+                expression { env.VERIFICATION_RESULT != "2" &amp;&amp; JOB_NAME ==~ /((\S*)(release-linux_(x86_64|aarch64|ppc64le)(\S*)))/ }
             }
             steps {
 							   sh 'echo Chris2; env; uname -a; mount'

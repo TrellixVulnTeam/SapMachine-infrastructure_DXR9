@@ -1,0 +1,77 @@
+<flow-definition plugin="workflow-job@1232.v5a_4c994312f1">
+  <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@2.2114.v2654ca_721309" />
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@2.2114.v2654ca_721309">
+      <jobProperties />
+      <triggers />
+      <parameters />
+      <options />
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions>
+  <description />
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.jira.JiraProjectProperty plugin="jira@3.8" />
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.7.8">
+      <useBuildBlocker>false</useBuildBlocker>
+      <blockLevel>GLOBAL</blockLevel>
+      <scanQueueFor>DISABLED</scanQueueFor>
+      <blockingJobs />
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
+  </properties>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2759.v87459c4eea_ca_">
+    <script>pipeline {
+    agent {
+        label "linux_x86_64"
+    }
+    environment {
+        ARTIFACTORY_CREDS = credentials('openjdk-artifactory')
+    }
+    stages {
+        stage("Checkout Infrastructure Repository") {
+            steps {
+                sh '''#!/bin/bash
+                    set -ex
+                    git init SapMachine-Infrastructure &amp;&amp; cd SapMachine-Infrastructure
+                    git fetch --depth 1 https://github.com/chalstrick/SapMachine-infrastructure.git refactorCreateLinuxPackages
+                    git checkout --detach FETCH_HEAD
+                '''
+            }
+        }
+        stage('T01') {
+            agent {
+    dockerfile {
+        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/x86_64"
+        reuseNode true
+        label "linux_x86_64"
+        additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
+    }
+}
+            steps {
+                 sh 'echo Chris1; env; uname -a; mount'
+                 sh 'rm -f *.deb'  // todo: check if this is needed
+                 sh "touch touch-test"
+                 sh "dh_make --version"
+            }
+        }
+        stage('T02') {
+            agent {
+                dockerfile {
+                    dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/x86_64"
+                    reuseNode true
+                    label "linux_x86_64"
+                    additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
+                }
+            }
+            steps {
+                sh 'echo Chris2; env; uname -a; mount; ls'
+            }
+        }
+    }
+}
+</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers />
+  <disabled>false</disabled>
+</flow-definition>
