@@ -1,4 +1,147 @@
 <hudson.model.Queue_-State>
-  <counter>3170</counter>
-  <items />
+  <counter>3437</counter>
+  <items>
+    <hudson.model.Queue_-BlockedItem>
+      <actions>
+        <hudson.model.CauseAction>
+          <causeBag class="linked-hash-map">
+            <entry>
+              <org.jenkinsci.plugins.workflow.support.steps.build.BuildUpstreamCause plugin="pipeline-build-step@2.18">
+                <upstreamProject>build-service-release-11</upstreamProject>
+                <upstreamUrl>job/build-service-release-11/</upstreamUrl>
+                <upstreamBuild>18</upstreamBuild>
+                <upstreamCauses>
+                  <hudson.model.Cause_-UserIdCause>
+                    <userId>clanger</userId>
+                  </hudson.model.Cause_-UserIdCause>
+                </upstreamCauses>
+                <nodeId>50</nodeId>
+              </org.jenkinsci.plugins.workflow.support.steps.build.BuildUpstreamCause>
+              <int>1</int>
+            </entry>
+          </causeBag>
+        </hudson.model.CauseAction>
+        <org.jenkinsci.plugins.workflow.support.steps.build.BuildUpstreamNodeAction plugin="pipeline-build-step@2.18">
+          <upstreamNodeId>50</upstreamNodeId>
+          <upstreamRunId>build-service-release-11#18</upstreamRunId>
+        </org.jenkinsci.plugins.workflow.support.steps.build.BuildUpstreamNodeAction>
+        <org.jenkinsci.plugins.workflow.support.steps.build.BuildTriggerAction plugin="pipeline-build-step@2.18">
+          <triggers>
+            <org.jenkinsci.plugins.workflow.support.steps.build.BuildTriggerAction_-Trigger>
+              <context class="org.jenkinsci.plugins.workflow.cps.CpsStepContext" plugin="workflow-cps@2759.v87459c4eea_ca_">
+                <executionRef class="org.jenkinsci.plugins.workflow.job.WorkflowRun$Owner" plugin="workflow-job@1232.v5a_4c994312f1">
+                  <job>build-service-release-11</job>
+                  <id>18</id>
+                </executionRef>
+                <id>50</id>
+                <bodyHeads />
+                <threadId>34</threadId>
+                <stepDescriptorId>org.jenkinsci.plugins.workflow.support.steps.build.BuildTriggerStep</stepDescriptorId>
+              </context>
+              <propagate>false</propagate>
+            </org.jenkinsci.plugins.workflow.support.steps.build.BuildTriggerAction_-Trigger>
+          </triggers>
+        </org.jenkinsci.plugins.workflow.support.steps.build.BuildTriggerAction>
+        <hudson.model.ParametersAction>
+          <safeParameters class="sorted-set" />
+          <parameters>
+            <hudson.model.StringParameterValue>
+              <name>SAPMACHINE_GIT_REPOSITORY</name>
+              <description>The Git repository to use.</description>
+              <value>https://github.com/SAP/SapMachine.git</value>
+            </hudson.model.StringParameterValue>
+            <hudson.model.StringParameterValue>
+              <name>GIT_REF</name>
+              <description>The Git tag, branch or commit to build.</description>
+              <value>sapmachine-11.0.17+8</value>
+            </hudson.model.StringParameterValue>
+            <hudson.model.StringParameterValue>
+              <name>SAPMACHINE_VERSION</name>
+              <description>Either a SapMachine Release Tag or a JDK Major version. If empty, GIT_REF is used.</description>
+              <value />
+            </hudson.model.StringParameterValue>
+            <hudson.model.StringParameterValue>
+              <name>BUILD_NUMBER</name>
+              <description>Sets the version build number explicitly.</description>
+              <value />
+            </hudson.model.StringParameterValue>
+            <hudson.model.StringParameterValue>
+              <name>hotspot_test_groups</name>
+              <description>Select the test group for jtreg hotspot tests. Empty means disabled.</description>
+              <value>:tier1</value>
+            </hudson.model.StringParameterValue>
+            <hudson.model.StringParameterValue>
+              <name>jdk_test_groups</name>
+              <description>Select the test group for jtreg jdk tests. Empty means disabled.</description>
+              <value>:tier1</value>
+            </hudson.model.StringParameterValue>
+            <hudson.model.StringParameterValue>
+              <name>langtools_test_groups</name>
+              <description>Select the test group for jtreg langtools tests. Empty means disabled.</description>
+              <value>"jdk tools lib"</value>
+            </hudson.model.StringParameterValue>
+            <hudson.model.BooleanParameterValue>
+              <name>RUN_TESTS</name>
+              <description>enable/disable jtreg runs</description>
+              <value>true</value>
+            </hudson.model.BooleanParameterValue>
+            <hudson.model.BooleanParameterValue>
+              <name>PUBLISH</name>
+              <description>When set to true, the resulting bundles will be published to GitHub.</description>
+              <value>true</value>
+            </hudson.model.BooleanParameterValue>
+            <hudson.model.BooleanParameterValue>
+              <name>RELEASE</name>
+              <description>When set to true, marks this build as a release build, otherwise as pre-release.</description>
+              <value>false</value>
+            </hudson.model.BooleanParameterValue>
+            <hudson.model.StringParameterValue>
+              <name>SAPMACHINE_ARCHIVE_NAME_PREFIX</name>
+              <description>The prefix of the bundle archive.</description>
+              <value>sapmachine11-linux_x86_64</value>
+            </hudson.model.StringParameterValue>
+            <hudson.model.StringParameterValue>
+              <name>DEVKIT</name>
+              <description>Devkit, could be either a path that locally exists or the GAV coordinates to a tar.gz archive to be downloaded and extracted.</description>
+              <value>io.sapmachine.build.devkit.linux-x64:devkit-fedora-gcc:12-8.3.0.1</value>
+            </hudson.model.StringParameterValue>
+            <hudson.model.StringParameterValue>
+              <name>EXTRA_CONFIGURE_OPTIONS</name>
+              <description>Extra configure options passed directly to configure script.</description>
+              <value> </value>
+            </hudson.model.StringParameterValue>
+          </parameters>
+        </hudson.model.ParametersAction>
+      </actions>
+      <id>3320</id>
+      <task class="org.jenkinsci.plugins.workflow.job.WorkflowJob">build-11-release-linux_x86_64</task>
+      <inQueueSince>1666127725467</inQueueSince>
+      <buildableStartMilliseconds>1666127732356</buildableStartMilliseconds>
+      <outer-class>queue</outer-class>
+    </hudson.model.Queue_-BlockedItem>
+    <hudson.model.Queue_-BuildableItem>
+      <actions />
+      <id>3372</id>
+      <task class="org.jenkinsci.plugins.workflow.support.steps.ExecutorStepExecution$PlaceholderTask" plugin="workflow-durable-task-step@1199.v02b_9244f8064">
+        <context class="org.jenkinsci.plugins.workflow.cps.CpsStepContext" plugin="workflow-cps@2759.v87459c4eea_ca_">
+          <executionRef class="org.jenkinsci.plugins.workflow.job.WorkflowRun$Owner" plugin="workflow-job@1232.v5a_4c994312f1">
+            <job>build-debian-package</job>
+            <id>6</id>
+          </executionRef>
+          <id>3</id>
+          <bodyHeads />
+          <body class="org.jenkinsci.plugins.workflow.cps.StaticBodyReference" resolves-to="org.jenkinsci.plugins.workflow.cps.HandleBodyReference">
+            <id>1</id>
+          </body>
+          <threadId>0</threadId>
+          <stepDescriptorId>org.jenkinsci.plugins.workflow.support.steps.ExecutorStep</stepDescriptorId>
+        </context>
+        <label>linux aarch64</label>
+        <runId>build-debian-package#6</runId>
+      </task>
+      <inQueueSince>1666130283054</inQueueSince>
+      <buildableStartMilliseconds>1666130283055</buildableStartMilliseconds>
+      <isPending>false</isPending>
+    </hudson.model.Queue_-BuildableItem>
+  </items>
 </hudson.model.Queue_-State>
