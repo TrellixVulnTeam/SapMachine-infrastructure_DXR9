@@ -389,7 +389,7 @@
         <hudson.model.BooleanParameterDefinition>
           <name>BUILD_LINUX_ALPINE_X86_64</name>
           <description />
-          <defaultValue>true</defaultValue>
+          <defaultValue>false</defaultValue>
         </hudson.model.BooleanParameterDefinition>
         <hudson.model.BooleanParameterDefinition>
           <name>BUILD_WINDOWS_X86_64</name>
