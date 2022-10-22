@@ -14,6 +14,7 @@
         <prUpdatedAt>2022-10-21 00:29:54.0 UTC</prUpdatedAt>
         <headSha>388a56e4c4278f2a3da31946b15a45f3aee25e58</headSha>
         <headRef>pr-jdk-20+20</headRef>
+        <mergeable>true</mergeable>
         <baseRef>sapmachine</baseRef>
         <userLogin>SapMachine</userLogin>
         <htmlUrl>https://github.com/SAP/SapMachine/pull/1266</htmlUrl>
