@@ -8,10 +8,10 @@
       <int>1266</int>
       <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
         <number>1266</number>
-        <issueUpdatedAt>2022-10-21 00:29:54.0 UTC</issueUpdatedAt>
+        <issueUpdatedAt>2022-10-24 09:20:45.0 UTC</issueUpdatedAt>
         <title>Merge to tag jdk-20+20</title>
         <body>please pull</body>
-        <prUpdatedAt>2022-10-21 00:29:54.0 UTC</prUpdatedAt>
+        <prUpdatedAt>2022-10-24 09:20:45.0 UTC</prUpdatedAt>
         <headSha>388a56e4c4278f2a3da31946b15a45f3aee25e58</headSha>
         <headRef>pr-jdk-20+20</headRef>
         <mergeable>true</mergeable>
