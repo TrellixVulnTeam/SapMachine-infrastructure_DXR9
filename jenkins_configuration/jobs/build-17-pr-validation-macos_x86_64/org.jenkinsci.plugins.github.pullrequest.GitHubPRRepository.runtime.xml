@@ -3,26 +3,5 @@
   <githubUrl>https://github.com/SAP/SapMachine</githubUrl>
   <gitUrl>git://github.com/SAP/SapMachine.git</gitUrl>
   <sshUrl>git@github.com:SAP/SapMachine.git</sshUrl>
-  <pulls class="concurrent-hash-map">
-    <entry>
-      <int>1267</int>
-      <org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-        <number>1267</number>
-        <issueUpdatedAt>2022-10-28 00:29:42.0 UTC</issueUpdatedAt>
-        <title>Merge to tag jdk-20+21</title>
-        <body>please pull</body>
-        <prUpdatedAt>2022-10-28 00:29:42.0 UTC</prUpdatedAt>
-        <headSha>46e6aee0d0b868c4c45b7c25cd3fd951d199b1ed</headSha>
-        <headRef>pr-jdk-20+21</headRef>
-        <mergeable>false</mergeable>
-        <baseRef>sapmachine</baseRef>
-        <userLogin>SapMachine</userLogin>
-        <htmlUrl>https://github.com/SAP/SapMachine/pull/1267</htmlUrl>
-        <labels />
-        <sourceRepoOwner>SAP</sourceRepoOwner>
-        <state>OPEN</state>
-        <inBadState>false</inBadState>
-      </org.jenkinsci.plugins.github.pullrequest.GitHubPRPullRequest>
-    </entry>
-  </pulls>
+  <pulls class="concurrent-hash-map" />
 </org.jenkinsci.plugins.github.pullrequest.GitHubPRRepository>
