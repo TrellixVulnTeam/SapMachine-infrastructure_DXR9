@@ -8,16 +8,16 @@
       <options />
     </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
   </actions>
-  <description>pr-validation build for SapMachine 11 on linux_ppc64le.&lt;!-- Managed by Jenkins Job Builder --&gt;</description>
+  <description>release build for SapMachine 19 on linux_x86_64.&lt;!-- Managed by Jenkins Job Builder --&gt;</description>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty>
-      <abortPrevious>false</abortPrevious>
-    </org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty>
-    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.35.0">
-      <projectUrl>https://github.com/SAP/SapMachine</projectUrl>
-      <displayName />
-    </com.coravy.hudson.plugins.github.GithubProjectProperty>
+    <hudson.plugins.jira.JiraProjectProperty plugin="jira@3.8" />
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.7.8">
+      <useBuildBlocker>false</useBuildBlocker>
+      <blockLevel>GLOBAL</blockLevel>
+      <scanQueueFor>DISABLED</scanQueueFor>
+      <blockingJobs />
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
     <jenkins.model.BuildDiscarderProperty>
       <strategy class="hudson.tasks.LogRotator">
         <daysToKeep>-1</daysToKeep>
@@ -26,48 +26,13 @@
         <artifactNumToKeep>1</artifactNumToKeep>
       </strategy>
     </jenkins.model.BuildDiscarderProperty>
-    <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
-      <triggers>
-        <org.jenkinsci.plugins.github.pullrequest.GitHubPRTrigger plugin="github-pullrequest@0.4.0">
-          <spec>H/1 * * * *</spec>
-          <triggerMode>HEAVY_HOOKS</triggerMode>
-          <cancelQueued>true</cancelQueued>
-          <abortRunning>false</abortRunning>
-          <skipFirstRun>false</skipFirstRun>
-          <repoProviders>
-            <com.github.kostyasha.github.integration.generic.repoprovider.GitHubPluginRepoProvider>
-              <cacheConnection>true</cacheConnection>
-              <manageHooks>true</manageHooks>
-              <repoPermission>ADMIN</repoPermission>
-            </com.github.kostyasha.github.integration.generic.repoprovider.GitHubPluginRepoProvider>
-          </repoProviders>
-          <errorsAction>
-            <description>GitHub Pull Requests Trigger Errors</description>
-            <errors class="java.util.Collections$SynchronizedSet" serialization="custom">
-              <java.util.Collections_-SynchronizedCollection>
-                <default>
-                  <c class="set" />
-                  <mutex class="java.util.Collections$SynchronizedSet" reference="../../.." />
-                </default>
-              </java.util.Collections_-SynchronizedCollection>
-            </errors>
-          </errorsAction>
-          <events>
-            <org.jenkinsci.plugins.github.pullrequest.events.impl.GitHubPRCommitEvent />
-            <org.jenkinsci.plugins.github.pullrequest.events.impl.GitHubPRCommentEvent>
-              <comment>retest this please</comment>
-            </org.jenkinsci.plugins.github.pullrequest.events.impl.GitHubPRCommentEvent>
-            <org.jenkinsci.plugins.github.pullrequest.events.impl.GitHubPROpenEvent />
-          </events>
-          <preStatus>false</preStatus>
-          <branchRestriction>
-            <targetBranchList>
-              <string>sapmachine11</string>
-            </targetBranchList>
-          </branchRestriction>
-        </org.jenkinsci.plugins.github.pullrequest.GitHubPRTrigger>
-      </triggers>
-    </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+    <org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty>
+      <abortPrevious>false</abortPrevious>
+    </org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty>
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.35.0">
+      <projectUrl>https://github.com/SAP/SapMachine/</projectUrl>
+      <displayName />
+    </com.coravy.hudson.plugins.github.GithubProjectProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
@@ -79,37 +44,35 @@
         <hudson.model.StringParameterDefinition>
           <name>GIT_REF</name>
           <description>The Git tag, branch or commit to build.</description>
-          <defaultValue>sapmachine11</defaultValue>
+          <defaultValue>sapmachine19</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>SAPMACHINE_VERSION</name>
           <description>Either a SapMachine Release Tag or a JDK Major version. If empty, GIT_REF is used.</description>
-          <defaultValue />
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>BUILD_NUMBER</name>
           <description>Sets the version build number explicitly.</description>
-          <defaultValue />
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>SAPMACHINE_ARCHIVE_NAME_PREFIX</name>
           <description>The prefix of the bundle archive.</description>
-          <defaultValue>sapmachine11-linux_ppc64le</defaultValue>
+          <defaultValue>sapmachine19-linux_x86_64</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>DEVKIT</name>
           <description>Devkit, could be either a path that locally exists or the GAV coordinates to a tar.gz archive to be downloaded and extracted.</description>
-          <defaultValue>io.sapmachine.build.devkit.linux-ppc64le:devkit-rhel-gcc:7-8.3.0</defaultValue>
+          <defaultValue>io.sapmachine.build.devkit.linux-x64:devkit-fedora-gcc:12-8.3.0.1</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>EXTRA_CONFIGURE_OPTIONS</name>
           <description>Extra configure options passed directly to configure script.</description>
-          <defaultValue> --with-debug-level=fastdebug</defaultValue>
+          <defaultValue> </defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
@@ -147,11 +110,14 @@
         </hudson.model.BooleanParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
+    <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+      <triggers />
+    </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
   </properties>
   <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2759.v87459c4eea_ca_">
     <script>pipeline {
     agent {
-        label "linux_ppc64le"
+        label "linux_x86_64"
     }
     environment {
         ARTIFACTORY_CREDS = credentials('openjdk-artifactory')
@@ -161,7 +127,7 @@
             steps {
                 script {
                     if (JOB_NAME ==~ /((\S*)(pr-validation)(\S*))/) {
-                        setGitHubPullRequestStatus context: "validate-pr-11-linux_ppc64le", state: 'PENDING'
+                        setGitHubPullRequestStatus context: "validate-pr-19-linux_x86_64", state: 'PENDING'
                     }
                     env.VERIFICATION_RESULT = "1"
                     if (params.SAPMACHINE_VERSION.isEmpty()) {
@@ -178,7 +144,7 @@
                 sh '''#!/bin/bash
                     set -ex
                     git init SapMachine-Infrastructure &amp;&amp; cd SapMachine-Infrastructure
-                    git fetch --depth 1 https://github.com/SAP/SapMachine-infrastructure.git master
+                    git fetch --depth 1 https://github.com/chalstrick/SapMachine-infrastructure.git refactorCreateLinuxPackages
                     git checkout --detach FETCH_HEAD
                 '''
             }
@@ -186,9 +152,9 @@
         stage("Verify PR") {
             agent {
     dockerfile {
-        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/ppc64le"
+        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/x86_64"
         reuseNode true
-        label "linux_ppc64le"
+        label "linux_x86_64"
         additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
@@ -198,7 +164,7 @@
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD']]) {
                     script {
                         if (JOB_NAME ==~ /((\S*)(pr-validation)(\S*))/) {
-                            def platform = "linux_ppc64le"
+                            def platform = "linux_x86_64"
                             env.COMMENT = ""
                             if (platform == 'linux_x86_64') {
                                 env.COMMENT = "-c"
@@ -233,9 +199,9 @@
         stage('Prepare Devkit') {
             agent {
     dockerfile {
-        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/ppc64le"
+        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/x86_64"
         reuseNode true
-        label "linux_ppc64le"
+        label "linux_x86_64"
         additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
@@ -265,9 +231,9 @@
         stage('Download Prerequisites') {
             agent {
     dockerfile {
-        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/ppc64le"
+        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/x86_64"
         reuseNode true
-        label "linux_ppc64le"
+        label "linux_x86_64"
         additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
@@ -292,9 +258,9 @@
         stage("Build") {
             agent {
     dockerfile {
-        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/ppc64le"
+        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/x86_64"
         reuseNode true
-        label "linux_ppc64le"
+        label "linux_x86_64"
         additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
@@ -313,9 +279,9 @@
         stage('Copy JTREG') {
             agent {
     dockerfile {
-        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/ppc64le"
+        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/x86_64"
         reuseNode true
-        label "linux_ppc64le"
+        label "linux_x86_64"
         additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
@@ -331,9 +297,9 @@
         stage('Run jtreg hotspot') {
             agent {
     dockerfile {
-        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/ppc64le"
+        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/x86_64"
         reuseNode true
-        label "linux_ppc64le"
+        label "linux_x86_64"
         additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
@@ -362,9 +328,9 @@
         stage('Run jtreg jdk') {
             agent {
     dockerfile {
-        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/ppc64le"
+        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/x86_64"
         reuseNode true
-        label "linux_ppc64le"
+        label "linux_x86_64"
         additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
@@ -394,9 +360,9 @@
         stage('Run jtreg langtools') {
             agent {
     dockerfile {
-        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/ppc64le"
+        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/x86_64"
         reuseNode true
-        label "linux_ppc64le"
+        label "linux_x86_64"
         additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
@@ -510,9 +476,9 @@
         stage('Publish CF Java Buildpack Data') {
             agent {
     dockerfile {
-        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/ppc64le"
+        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/x86_64"
         reuseNode true
-        label "linux_ppc64le"
+        label "linux_x86_64"
         additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
@@ -527,16 +493,39 @@
                 }
             }
         }
-        stage('Publish Debian Linux Packages') {
+        stage('Build Debian Linux Packages') {
+            agent {
+    dockerfile {
+        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/x86_64"
+        reuseNode true
+        label "linux_x86_64"
+        additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
+    }
+}
             when {
-                expression { env.VERIFICATION_RESULT != "2" &amp;&amp; params.PUBLISH == true &amp;&amp; params.RELEASE == true &amp;&amp; JOB_NAME ==~ /((\S*)(release-linux_x86_64)(\S*))/ }
+                // expression { env.VERIFICATION_RESULT != "2" &amp;&amp; params.PUBLISH == true &amp;&amp; params.RELEASE == true &amp;&amp; JOB_NAME ==~ /((\S*)(release-linux_x86_64)(\S*))/ }
+                expression { env.VERIFICATION_RESULT != "2" &amp;&amp; JOB_NAME ==~ /((\S*)(release-linux_(x86_64|aarch64|ppc64le)(\S*)))/ }
             }
             steps {
-                build job: 'debian-package', propagate: false, wait: true, parameters:
-                    [
-                        string(name: 'GIT_TAG_NAME', value: env.SAPMACHINE_VERSION),
-                        [$class: 'BooleanParameterValue', name: 'DEPLOY', value: true]
-                    ]
+							   sh 'echo Chris1; env; uname -a; mount'
+                 sh 'rm -f *.deb'  // todo: check if this is needed
+                 sh "python3 -m trace -t --ignore-dir /usr SapMachine-Infrastructure/lib/make_deb.py --tag=${env.SAPMACHINE_VERSION} -a linux-x64 --templates-directory=SapMachine-Infrastructure/debian-templates" // todo: specify a non-hardcoded architecture/platform
+
+            }
+        }
+        stage('Publish Debian Linux Packages') {
+            when {
+                // expression { env.VERIFICATION_RESULT != "2" &amp;&amp; params.PUBLISH == true &amp;&amp; params.RELEASE == true &amp;&amp; JOB_NAME ==~ /((\S*)(release-linux_x86_64)(\S*))/ }
+                expression { env.VERIFICATION_RESULT != "2" &amp;&amp; JOB_NAME ==~ /((\S*)(release-linux_(x86_64|aarch64|ppc64le)(\S*)))/ }
+            }
+            steps {
+							   sh 'echo Chris2; env; uname -a; mount'
+                 build job: 'publish-debian-package', propagate: false, wait: true, parameters:
+                     [
+                         string(name: 'GIT_TAG_NAME', value: env.SAPMACHINE_VERSION),
+                         [$class: 'BooleanParameterValue', name: 'DEPLOY', value: true],
+                         string(name: 'JOB_NAME', value: JOB_NAME)
+                     ]
             }
         }
         stage('Build and Publish RPM Linux Packages') {
@@ -564,28 +553,28 @@
         aborted {
             script {
                 if (JOB_NAME ==~ /((\S*)(pr-validation)(\S*))/) {
-                    setGitHubPullRequestStatus context: "validate-pr-11-linux_ppc64le", state: 'FAILURE', message: 'job aborted'
+                    setGitHubPullRequestStatus context: "validate-pr-19-linux_x86_64", state: 'FAILURE', message: 'job aborted'
                 }
             }
         }
         failure {
             script {
                 if (JOB_NAME ==~ /((\S*)(pr-validation)(\S*))/) {
-                    setGitHubPullRequestStatus context: "validate-pr-11-linux_ppc64le", state: 'FAILURE', message: 'build failed'
+                    setGitHubPullRequestStatus context: "validate-pr-19-linux_x86_64", state: 'FAILURE', message: 'build failed'
                 }
             }
         }
         unstable {
             script {
                 if (JOB_NAME ==~ /((\S*)(pr-validation)(\S*))/) {
-                    setGitHubPullRequestStatus context: "validate-pr-11-linux_ppc64le", state: 'FAILURE', message: 'tests failed'
+                    setGitHubPullRequestStatus context: "validate-pr-19-linux_x86_64", state: 'FAILURE', message: 'tests failed'
                 }
             }
         }
         success {
             script {
                 if (JOB_NAME ==~ /((\S*)(pr-validation)(\S*))/) {
-                    setGitHubPullRequestStatus context: "validate-pr-11-linux_ppc64le", state: 'SUCCESS'
+                    setGitHubPullRequestStatus context: "validate-pr-19-linux_x86_64", state: 'SUCCESS'
                 }
             }
             cleanWs()
