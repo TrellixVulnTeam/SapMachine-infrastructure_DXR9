@@ -8,7 +8,7 @@
       <options />
     </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
   </actions>
-  <description>release build for SapMachine 19 on linux_x86_64.&lt;!-- Managed by Jenkins Job Builder --&gt;</description>
+  <description>release build for SapMachine 19 on linux_aarch64.&lt;!-- Managed by Jenkins Job Builder --&gt;</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.plugins.jira.JiraProjectProperty plugin="jira@3.8" />
@@ -60,13 +60,13 @@
         <hudson.model.StringParameterDefinition>
           <name>SAPMACHINE_ARCHIVE_NAME_PREFIX</name>
           <description>The prefix of the bundle archive.</description>
-          <defaultValue>sapmachine19-linux_x86_64</defaultValue>
+          <defaultValue>sapmachine19-linux_aarch64</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>DEVKIT</name>
           <description>Devkit, could be either a path that locally exists or the GAV coordinates to a tar.gz archive to be downloaded and extracted.</description>
-          <defaultValue>io.sapmachine.build.devkit.linux-x64:devkit-fedora-gcc:12-8.3.0.1</defaultValue>
+          <defaultValue>io.sapmachine.build.devkit.linux-aarch64:devkit-fedora-gcc:21-8.3.0</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
@@ -117,7 +117,7 @@
   <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2759.v87459c4eea_ca_">
     <script>pipeline {
     agent {
-        label "linux_x86_64"
+        label "linux_aarch64"
     }
     environment {
         ARTIFACTORY_CREDS = credentials('openjdk-artifactory')
@@ -127,7 +127,7 @@
             steps {
                 script {
                     if (JOB_NAME ==~ /((\S*)(pr-validation)(\S*))/) {
-                        setGitHubPullRequestStatus context: "validate-pr-19-linux_x86_64", state: 'PENDING'
+                        setGitHubPullRequestStatus context: "validate-pr-19-linux_aarch64", state: 'PENDING'
                     }
                     env.VERIFICATION_RESULT = "1"
                     if (params.SAPMACHINE_VERSION.isEmpty()) {
@@ -148,13 +148,13 @@
                     git checkout --detach FETCH_HEAD
                 '''
             }
-        }
+        }	
         stage("Verify PR") {
             agent {
     dockerfile {
-        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/x86_64"
+        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_20_04/arm64"
         reuseNode true
-        label "linux_x86_64"
+        label "linux_aarch64"
         additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
@@ -164,7 +164,7 @@
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD']]) {
                     script {
                         if (JOB_NAME ==~ /((\S*)(pr-validation)(\S*))/) {
-                            def platform = "linux_x86_64"
+                            def platform = "linux_aarch64"
                             env.COMMENT = ""
                             if (platform == 'linux_x86_64') {
                                 env.COMMENT = "-c"
@@ -199,9 +199,9 @@
         stage('Prepare Devkit') {
             agent {
     dockerfile {
-        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/x86_64"
+        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_20_04/arm64"
         reuseNode true
-        label "linux_x86_64"
+        label "linux_aarch64"
         additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
@@ -231,9 +231,9 @@
         stage('Download Prerequisites') {
             agent {
     dockerfile {
-        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/x86_64"
+        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_20_04/arm64"
         reuseNode true
-        label "linux_x86_64"
+        label "linux_aarch64"
         additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
@@ -258,9 +258,9 @@
         stage("Build") {
             agent {
     dockerfile {
-        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/x86_64"
+        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_20_04/arm64"
         reuseNode true
-        label "linux_x86_64"
+        label "linux_aarch64"
         additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
@@ -279,9 +279,9 @@
         stage('Copy JTREG') {
             agent {
     dockerfile {
-        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/x86_64"
+        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_20_04/arm64"
         reuseNode true
-        label "linux_x86_64"
+        label "linux_aarch64"
         additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
@@ -297,9 +297,9 @@
         stage('Run jtreg hotspot') {
             agent {
     dockerfile {
-        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/x86_64"
+        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_20_04/arm64"
         reuseNode true
-        label "linux_x86_64"
+        label "linux_aarch64"
         additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
@@ -328,9 +328,9 @@
         stage('Run jtreg jdk') {
             agent {
     dockerfile {
-        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/x86_64"
+        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_20_04/arm64"
         reuseNode true
-        label "linux_x86_64"
+        label "linux_aarch64"
         additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
@@ -360,9 +360,9 @@
         stage('Run jtreg langtools') {
             agent {
     dockerfile {
-        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/x86_64"
+        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_20_04/arm64"
         reuseNode true
-        label "linux_x86_64"
+        label "linux_aarch64"
         additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
@@ -476,9 +476,9 @@
         stage('Publish CF Java Buildpack Data') {
             agent {
     dockerfile {
-        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/x86_64"
+        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_20_04/arm64"
         reuseNode true
-        label "linux_x86_64"
+        label "linux_aarch64"
         additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
@@ -496,9 +496,9 @@
         stage('Build Debian Linux Packages') {
             agent {
     dockerfile {
-        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/x86_64"
+        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_20_04/arm64"
         reuseNode true
-        label "linux_x86_64"
+        label "linux_aarch64"
         additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
@@ -508,7 +508,8 @@
             }
             steps {
                  sh 'rm -f *.deb'  // todo: check if this is needed
-                 sh "python3 -m trace -t --ignore-dir /usr SapMachine-Infrastructure/lib/make_deb.py --tag=${env.SAPMACHINE_VERSION} -a linux-x64 --templates-directory=SapMachine-Infrastructure/debian-templates" // todo: specify a non-hardcoded architecture/platform
+                 sh "python3 SapMachine-Infrastructure/lib/make_deb.py --tag=${env.SAPMACHINE_VERSION} -a linux-aarch64 --templates-directory=SapMachine-Infrastructure/debian-templates" // todo: specify a non-hardcoded architecture/platform
+
             }
         }
         stage('Publish Debian Linux Packages') {
@@ -550,28 +551,28 @@
         aborted {
             script {
                 if (JOB_NAME ==~ /((\S*)(pr-validation)(\S*))/) {
-                    setGitHubPullRequestStatus context: "validate-pr-19-linux_x86_64", state: 'FAILURE', message: 'job aborted'
+                    setGitHubPullRequestStatus context: "validate-pr-19-linux_aarch64", state: 'FAILURE', message: 'job aborted'
                 }
             }
         }
         failure {
             script {
                 if (JOB_NAME ==~ /((\S*)(pr-validation)(\S*))/) {
-                    setGitHubPullRequestStatus context: "validate-pr-19-linux_x86_64", state: 'FAILURE', message: 'build failed'
+                    setGitHubPullRequestStatus context: "validate-pr-19-linux_aarch64", state: 'FAILURE', message: 'build failed'
                 }
             }
         }
         unstable {
             script {
                 if (JOB_NAME ==~ /((\S*)(pr-validation)(\S*))/) {
-                    setGitHubPullRequestStatus context: "validate-pr-19-linux_x86_64", state: 'FAILURE', message: 'tests failed'
+                    setGitHubPullRequestStatus context: "validate-pr-19-linux_aarch64", state: 'FAILURE', message: 'tests failed'
                 }
             }
         }
         success {
             script {
                 if (JOB_NAME ==~ /((\S*)(pr-validation)(\S*))/) {
-                    setGitHubPullRequestStatus context: "validate-pr-19-linux_x86_64", state: 'SUCCESS'
+                    setGitHubPullRequestStatus context: "validate-pr-19-linux_aarch64", state: 'SUCCESS'
                 }
             }
             cleanWs()
