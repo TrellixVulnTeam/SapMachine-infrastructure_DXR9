@@ -11,9 +11,6 @@
             }
         }
         stage('Deploy') {
-            when {
-                expression { params.DEPLOY == true }
-            }
             steps {
                     sh "cp -n *.deb /var/pkg/deb/amd64 || true"
                     sh "python3 SapMachine-Infrastructure/lib/recreate_deb_repository.py -s -r /var/pkg/deb/amd64"
@@ -30,14 +27,14 @@
     <sandbox>false</sandbox>
   </definition>
   <actions />
-  <description>Deploy the debian package.&lt;!-- Managed by Jenkins Job Builder --&gt;</description>
+  <description>This job should deploy a debian package to our package repository. Still WIP.&lt;!-- Managed by Jenkins Job Builder --&gt;</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty />
     <jenkins.model.BuildDiscarderProperty>
       <strategy class="hudson.tasks.LogRotator">
         <daysToKeep>-1</daysToKeep>
-        <numToKeep>100</numToKeep>
+        <numToKeep>20</numToKeep>
         <artifactDaysToKeep>-1</artifactDaysToKeep>
         <artifactNumToKeep>1</artifactNumToKeep>
       </strategy>
@@ -47,17 +44,6 @@
         <hudson.model.StringParameterDefinition>
           <name>GIT_TAG_NAME</name>
           <description>The Git tag to create a debian package from.</description>
-          <defaultValue />
-          <trim>false</trim>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.BooleanParameterDefinition>
-          <name>DEPLOY</name>
-          <description>When set to true, the resulting debian package will be deployed to dist.sapmachine.io.</description>
-          <defaultValue>false</defaultValue>
-        </hudson.model.BooleanParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>JOB_NAME</name>
-          <description>The Job for which we should deploy. Used to differentiate between x86 and aarch.</description>
           <defaultValue />
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>

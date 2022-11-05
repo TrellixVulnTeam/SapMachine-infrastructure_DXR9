@@ -41,14 +41,14 @@
     <sandbox>false</sandbox>
   </definition>
   <actions />
-  <description>Create a debian package.&lt;!-- Managed by Jenkins Job Builder --&gt;</description>
+  <description>The old debian package job - should be obsolete soon.&lt;!-- Managed by Jenkins Job Builder --&gt;</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty />
     <jenkins.model.BuildDiscarderProperty>
       <strategy class="hudson.tasks.LogRotator">
         <daysToKeep>-1</daysToKeep>
-        <numToKeep>100</numToKeep>
+        <numToKeep>20</numToKeep>
         <artifactDaysToKeep>-1</artifactDaysToKeep>
         <artifactNumToKeep>1</artifactNumToKeep>
       </strategy>

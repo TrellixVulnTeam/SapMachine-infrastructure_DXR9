@@ -485,7 +485,11 @@
       <properties class="hudson.model.View$PropertyList" />
       <jobNames>
         <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView/jobNames/comparator" />
+        <string>build-debian-package-linux_aarch64</string>
+        <string>build-debian-package-linux_ppc64le</string>
+        <string>build-debian-package-linux_x86_64</string>
         <string>debian-package</string>
+        <string>deploy-debian-package</string>
         <string>recreate-debian-repository</string>
         <string>rpm-package</string>
       </jobNames>
@@ -601,9 +605,6 @@
       <properties class="hudson.model.View$PropertyList" />
       <jobNames>
         <comparator class="java.lang.String$CaseInsensitiveComparator" />
-        <string>test-build-19-release-linux_aarch64</string>
-        <string>test-build-19-release-linux_x86_64</string>
-        <string>Test01</string>
       </jobNames>
       <jobFilters />
       <columns>
