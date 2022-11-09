@@ -50,9 +50,7 @@
                   }
               }
               steps {
-                  sh '''
-                      python3 SapMachine-Infrastructure/lib/test_cf_buildpack_data.py
-                  '''
+                  sh "python3 SapMachine-Infrastructure/lib/test_cf_buildpack_data.py"
               }
           }
       }

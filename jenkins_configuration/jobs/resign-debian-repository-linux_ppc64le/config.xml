@@ -2,7 +2,7 @@
   <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps">
     <script>pipeline {
     agent {
-        label 'agent-ubuntu-local'
+        label 'agent-local-docker-ubuntu'
     }
     stages {
         stage("Checkout Infrastructure Repository") {
@@ -12,7 +12,9 @@
         }
         stage('Recreate') {
             steps {
-                    sh "python3 SapMachine-Infrastructure/lib/recreate_deb_repository.py -s -r /var/pkg/deb/amd64"
+                lock('RecreateDebRepoLock') {
+                    sh "python3 SapMachine-Infrastructure/lib/recreate_deb_repository.py -s -r /var/pkg/deb/ppc64el"
+                }
             }
         }
     }
@@ -23,10 +25,10 @@
     }
 }
 </script>
-    <sandbox>false</sandbox>
+    <sandbox>true</sandbox>
   </definition>
   <actions />
-  <description>Recreate debian repository.&lt;!-- Managed by Jenkins Job Builder --&gt;</description>
+  <description>Resign debian repository on linux_ppc64le.&lt;!-- Managed by Jenkins Job Builder --&gt;</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty />

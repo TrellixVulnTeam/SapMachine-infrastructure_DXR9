@@ -10,23 +10,8 @@
                 checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'SapMachine-Infrastructure']], userRemoteConfigs: [[credentialsId: 'SapMachine-github', url: 'https://github.com/SAP/SapMachine-infrastructure.git']]]
             }
         }
-        stage('Build') {
+        stage('Recreate') {
             steps {
-                sh 'rm -f *.deb'
-                sh "python3 SapMachine-Infrastructure/lib/make_deb.py --tag=${params.GIT_TAG_NAME} --templates-directory=SapMachine-Infrastructure/debian-templates"
-            }
-            post {
-                success {
-                    archiveArtifacts allowEmptyArchive: true, artifacts: "*.deb"
-                }
-            }
-        }
-        stage('Deploy') {
-            when {
-                expression { params.DEPLOY == true }
-            }
-            steps {
-                sh "cp -n *.deb /var/pkg/deb/amd64 || true"
                 lock('RecreateDebRepoLock') {
                     sh "python3 SapMachine-Infrastructure/lib/recreate_deb_repository.py -s -r /var/pkg/deb/amd64"
                 }
@@ -40,10 +25,10 @@
     }
 }
 </script>
-    <sandbox>false</sandbox>
+    <sandbox>true</sandbox>
   </definition>
   <actions />
-  <description>The old debian package job - should be obsolete soon.&lt;!-- Managed by Jenkins Job Builder --&gt;</description>
+  <description>Resign debian repository on linux_x86_64.&lt;!-- Managed by Jenkins Job Builder --&gt;</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty />
@@ -55,20 +40,5 @@
         <artifactNumToKeep>1</artifactNumToKeep>
       </strategy>
     </jenkins.model.BuildDiscarderProperty>
-    <hudson.model.ParametersDefinitionProperty>
-      <parameterDefinitions>
-        <hudson.model.StringParameterDefinition>
-          <name>GIT_TAG_NAME</name>
-          <description>The Git tag to create a debian package from.</description>
-          <defaultValue />
-          <trim>false</trim>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.BooleanParameterDefinition>
-          <name>DEPLOY</name>
-          <description>When set to true, the resulting debian package will be deployed to dist.sapmachine.io.</description>
-          <defaultValue>false</defaultValue>
-        </hudson.model.BooleanParameterDefinition>
-      </parameterDefinitions>
-    </hudson.model.ParametersDefinitionProperty>
   </properties>
 </flow-definition>

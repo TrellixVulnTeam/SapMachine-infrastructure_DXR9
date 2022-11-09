@@ -5,15 +5,15 @@
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <concurrentBuild>false</concurrentBuild>
-  <assignedNode>built-in</assignedNode>
+  <assignedNode>osxupload</assignedNode>
   <canRoam>false</canRoam>
   <properties>
     <jenkins.model.BuildDiscarderProperty>
       <strategy class="hudson.tasks.LogRotator">
         <daysToKeep>-1</daysToKeep>
-        <numToKeep>100</numToKeep>
+        <numToKeep>30</numToKeep>
         <artifactDaysToKeep>-1</artifactDaysToKeep>
-        <artifactNumToKeep>10</artifactNumToKeep>
+        <artifactNumToKeep>5</artifactNumToKeep>
       </strategy>
     </jenkins.model.BuildDiscarderProperty>
     <hudson.model.ParametersDefinitionProperty>

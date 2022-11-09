@@ -38,7 +38,7 @@
       <instanceCap>12</instanceCap>
       <templates>
         <hudson.plugins.ec2.SlaveTemplate>
-          <ami>ami-03dac8ee3879e6301</ami>
+          <ami>ami-0edba56727ee676f3</ami>
           <description>Linux x86_64 Client</description>
           <zone>us-east-1d</zone>
           <securityGroups>JenkinsLinuxSlave</securityGroups>
@@ -158,7 +158,7 @@
           <connectUsingPublicIp>false</connectUsingPublicIp>
         </hudson.plugins.ec2.SlaveTemplate>
         <hudson.plugins.ec2.SlaveTemplate>
-          <ami>ami-0753eb8ffcb345d5b</ami>
+          <ami>ami-00ed1a6e2f973599a</ami>
           <description>Linux aarch64 Client</description>
           <zone>us-east-1d</zone>
           <securityGroups>JenkinsLinuxSlave</securityGroups>
@@ -485,12 +485,6 @@
       <properties class="hudson.model.View$PropertyList" />
       <jobNames>
         <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView/jobNames/comparator" />
-        <string>build-deploy-debian-package-linux_aarch64</string>
-        <string>build-deploy-debian-package-linux_ppc64le</string>
-        <string>build-deploy-debian-package-linux_x86_64</string>
-        <string>debian-package</string>
-        <string>recreate-debian-repository</string>
-        <string>rpm-package</string>
       </jobNames>
       <jobFilters />
       <columns>
@@ -502,6 +496,7 @@
         <hudson.views.LastDurationColumn />
         <hudson.views.BuildButtonColumn />
       </columns>
+      <includeRegex>(resign-debian-repository-.*|build-deploy-debian-package-.*|debian-package|rpm-package)</includeRegex>
       <recurse>false</recurse>
     </listView>
     <listView>
