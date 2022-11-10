@@ -2,7 +2,7 @@
   <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps">
     <script>pipeline {
     agent {
-        label "linux_ppc64le"
+        label "linux_x86_64"
     }
     environment {
         ARTIFACTORY_CREDS = credentials('openjdk-artifactory')
@@ -16,9 +16,9 @@
         stage('Build') {
             agent {
     dockerfile {
-        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/ppc64le"
+        dir "SapMachine-Infrastructure/dockerfiles/ubuntu_18_04/x86_64"
         reuseNode true
-        label "linux_ppc64le"
+        label "linux_x86_64"
         additionalBuildArgs '--build-arg ARTIFACTORY_CREDS=\"$ARTIFACTORY_CREDS\"'
     }
 }
@@ -26,28 +26,26 @@
             steps {
                 // credentials are needed to avoid rate limit exceedance
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD']]) {
-                    sh "python3 SapMachine-Infrastructure/lib/make_deb.py --tag=${params.GIT_TAG_NAME} --architecture=linux-ppc64le --templates-directory=SapMachine-Infrastructure/debian-templates"
+                    sh "python3 SapMachine-Infrastructure/lib/make_deb.py --tag=${params.GIT_TAG_NAME} --download --architecture=linux-x64"
                 }
-                stash includes: '*.deb', name: 'debPackage'
-                stash includes: 'SapMachine-Infrastructure/**', name: 'infra'
             }
             post {
                 success {
                     archiveArtifacts allowEmptyArchive: true, artifacts: "*.deb"
+                    stash includes: '*.deb', name: 'debPackage'
+                    stash includes: 'SapMachine-Infrastructure/**', name: 'infra'
                 }
             }
         }
-        stage('Deploy') {
+        stage('Publish') {
             agent {
                 label 'agent-local-docker-ubuntu'
             }
             steps {
                 unstash 'infra'
                 unstash 'debPackage'
-                sh "cp -n *.deb /var/pkg/deb/ppc64el || true"
-                lock('RecreateDebRepoLock') {
-                    sh "python3 SapMachine-Infrastructure/lib/recreate_deb_repository.py -s -r /var/pkg/deb/ppc64el"
-                }
+                sh "cp -n *.deb /var/pkg/deb/amd64 || true"
+                sh "python3 SapMachine-Infrastructure/lib/recreate_deb_repository.py -s -r /var/pkg/deb/amd64"
             }
         }
     }
@@ -61,7 +59,7 @@
     <sandbox>true</sandbox>
   </definition>
   <actions />
-  <description>Build a debian package for SapMachine on linux_ppc64le.&lt;!-- Managed by Jenkins Job Builder --&gt;</description>
+  <description>Build a debian package for SapMachine on linux_x86_64.&lt;!-- Managed by Jenkins Job Builder --&gt;</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty />

@@ -26,18 +26,18 @@
             steps {
                 // credentials are needed to avoid rate limit exceedance
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'SapMachine-github', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD']]) {
-                    sh "python3 SapMachine-Infrastructure/lib/make_deb.py --tag=${params.GIT_TAG_NAME} --architecture=linux-aarch64 --templates-directory=SapMachine-Infrastructure/debian-templates"
+                    sh "python3 SapMachine-Infrastructure/lib/make_deb.py --tag=${params.GIT_TAG_NAME} --download --architecture=linux-aarch64"
                 }
-                stash includes: '*.deb', name: 'debPackage'
-                stash includes: 'SapMachine-Infrastructure/**', name: 'infra'
             }
             post {
                 success {
                     archiveArtifacts allowEmptyArchive: true, artifacts: "*.deb"
+                    stash includes: '*.deb', name: 'debPackage'
+                    stash includes: 'SapMachine-Infrastructure/**', name: 'infra'
                 }
             }
         }
-        stage('Deploy') {
+        stage('Publish') {
             agent {
                 label 'agent-local-docker-ubuntu'
             }
@@ -45,9 +45,7 @@
                 unstash 'infra'
                 unstash 'debPackage'
                 sh "cp -n *.deb /var/pkg/deb/arm64 || true"
-                lock('RecreateDebRepoLock') {
-                    sh "python3 SapMachine-Infrastructure/lib/recreate_deb_repository.py -s -r /var/pkg/deb/arm64"
-                }
+                sh "python3 SapMachine-Infrastructure/lib/recreate_deb_repository.py -s -r /var/pkg/deb/arm64"
             }
         }
     }

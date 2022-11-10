@@ -12,9 +12,7 @@
         }
         stage('Recreate') {
             steps {
-                lock('RecreateDebRepoLock') {
-                    sh "python3 SapMachine-Infrastructure/lib/recreate_deb_repository.py -s -r /var/pkg/deb/ppc64el"
-                }
+                sh "python3 SapMachine-Infrastructure/lib/recreate_deb_repository.py -s -r /var/pkg/deb/ppc64el"
             }
         }
     }
